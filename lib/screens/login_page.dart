@@ -16,18 +16,15 @@ class _LoginPageState extends State<LoginPage> {
 
   Future signIn() async {
     try {
-      showDialog(
-          context: context,
-          builder: (context) {
-            return Center(child: CircularProgressIndicator());
-          });
       await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: emailController.text.trim(),
           password: passwordController.text.trim());
-
-      Navigator.of(context).pop();
     } on FirebaseAuthException catch (e) {
-      _showDialog(e.toString());
+      // _showDialog(e.toString());
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('Invalid email or password'),
+        backgroundColor: Colors.red,
+      ));
     }
   }
 
@@ -36,28 +33,6 @@ class _LoginPageState extends State<LoginPage> {
     emailController.dispose();
     passwordController.dispose();
     super.dispose();
-  }
-
-  void _showDialog(String e) {
-    showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text('Error'),
-            content: Text(e),
-            actions: <Widget>[
-              TextButton(
-                  onPressed: () {
-                    _dismissDialog();
-                  },
-                  child: Text('OK')),
-            ],
-          );
-        });
-  }
-
-  _dismissDialog() {
-    Navigator.pop(context);
   }
 
   @override

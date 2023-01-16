@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -14,52 +15,54 @@ class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController repasswordController = TextEditingController();
+  final TextEditingController fullNameController = TextEditingController();
+  final TextEditingController phoneNumberController = TextEditingController();
+  final TextEditingController cccdController = TextEditingController();
+  final TextEditingController addressController = TextEditingController();
 
   @override
   void dispose() {
     emailController.dispose();
     passwordController.dispose();
     repasswordController.dispose();
+    fullNameController.dispose();
+    phoneNumberController.dispose();
+    cccdController.dispose();
+    addressController.dispose();
     super.dispose();
+  }
+
+  Future addUserDetail(String fullName, String phoneNumber, String email,
+      String cccd, String address) async {
+    await FirebaseFirestore.instance.collection('user').add({
+      'fullName': fullName,
+      'phoneNumber': phoneNumber,
+      'email': email,
+      'cccd': cccd,
+      'address': address,
+    });
   }
 
   Future signUp() async {
     try {
-      showDialog(
-          context: context,
-          builder: (context) {
-            return Center(child: CircularProgressIndicator());
-          });
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: emailController.text.trim(),
-          password: passwordController.text.trim());
-
-      Navigator.of(context).pop();
+      if (confirmedPW()) {
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+            email: emailController.text.trim(),
+            password: passwordController.text.trim());
+        addUserDetail(
+            fullNameController.text,
+            phoneNumberController.text.trim(),
+            emailController.text.trim(),
+            cccdController.text.trim(),
+            addressController.text);
+      }
     } on FirebaseAuthException catch (e) {
-      _showDialog(e.toString());
+      // _showDialog(e.toString());
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(e.toString()),
+        backgroundColor: Colors.red,
+      ));
     }
-  }
-
-  void _showDialog(String e) {
-    showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text('Error'),
-            content: Text(e),
-            actions: <Widget>[
-              TextButton(
-                  onPressed: () {
-                    _dismissDialog();
-                  },
-                  child: Text('OK')),
-            ],
-          );
-        });
-  }
-
-  _dismissDialog() {
-    Navigator.pop(context);
   }
 
   bool confirmedPW() {
@@ -84,17 +87,6 @@ class _RegisterPageState extends State<RegisterPage> {
               const SizedBox(
                 height: 40,
               ),
-              Image.asset(
-                'assets/images/appLogo.png',
-                height: 250,
-                width: 250,
-                // fit: BoxFit.fitWidth
-              ),
-
-              const SizedBox(
-                height: 50,
-              ),
-              // welcome back!
               const Center(
                 child: Text(
                   'WELCOME!',
@@ -109,7 +101,122 @@ class _RegisterPageState extends State<RegisterPage> {
                 height: 40,
               ),
 
-              // email textfield
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: TextField(
+                  controller: fullNameController,
+                  cursorColor: const Color(0xff0D324D),
+                  decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                        color: Colors.white,
+                      ),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                        width: 2,
+                        color: Color(0xffE899DC),
+                      ),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    hintText: 'Full name',
+                    fillColor: Colors.grey[200],
+                    filled: true,
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: TextField(
+                  controller: phoneNumberController,
+                  cursorColor: const Color(0xff0D324D),
+                  decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                        color: Colors.white,
+                      ),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                        width: 2,
+                        color: Color(0xffE899DC),
+                      ),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    hintText: 'Phone number',
+                    fillColor: Colors.grey[200],
+                    filled: true,
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: TextField(
+                  controller: cccdController,
+                  cursorColor: const Color(0xff0D324D),
+                  decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                        color: Colors.white,
+                      ),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                        width: 2,
+                        color: Color(0xffE899DC),
+                      ),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    hintText: 'CCCD',
+                    fillColor: Colors.grey[200],
+                    filled: true,
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: TextField(
+                  controller: addressController,
+                  cursorColor: const Color(0xff0D324D),
+                  decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                        color: Colors.white,
+                      ),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                        width: 2,
+                        color: Color(0xffE899DC),
+                      ),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    hintText: 'Address',
+                    fillColor: Colors.grey[200],
+                    filled: true,
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: TextField(
