@@ -25,9 +25,16 @@ class _RegisterPageState extends State<RegisterPage> {
 
   Future signUp() async {
     try {
+      showDialog(
+          context: context,
+          builder: (context) {
+            return Center(child: CircularProgressIndicator());
+          });
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: emailController.text.trim(),
           password: passwordController.text.trim());
+
+      Navigator.of(context).pop();
     } on FirebaseAuthException catch (e) {
       _showDialog(e.toString());
     }

@@ -16,9 +16,16 @@ class _LoginPageState extends State<LoginPage> {
 
   Future signIn() async {
     try {
+      showDialog(
+          context: context,
+          builder: (context) {
+            return Center(child: CircularProgressIndicator());
+          });
       await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: emailController.text.trim(),
           password: passwordController.text.trim());
+
+      Navigator.of(context).pop();
     } on FirebaseAuthException catch (e) {
       _showDialog(e.toString());
     }
