@@ -1,5 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:simple_app/widgets/book_on_home_widget.dart';
+import 'package:simple_app/models/book.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -10,35 +13,84 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final user = FirebaseAuth.instance.currentUser!;
+  List<Book> bookList = [];
+
+  @override
+  void initState() {
+    fetchRecord();
+    super.initState();
+  }
+
+  void fetchRecord() async {
+    var records = await FirebaseFirestore.instance.collection('books').get();
+    mapRecords(records);
+  }
+
+  mapRecords(QuerySnapshot<Map<String, dynamic>> records) {
+    var list = records.docs
+        .map((books) => Book(
+            // id: books['id'],
+            tenSach: books['tenSach'],
+            biaSach: books['biaSach'],
+            tacGia: books['tacGia'],
+            giaBan: books['giaBan'],
+            soTrang: books['soTrang'],
+            loaiBia: books['loaiBia'],
+            theLoai: books['theLoai'],
+            moTa: books['moTa'],
+            yeuThich: books['yeuThich']))
+        .toList();
+    setState(() {
+      bookList = list;
+    });
+  }
+
+  // Future getDocID() async {
+  //   await FirebaseFirestore.instance
+  //       .collection('books')
+  //       .get()
+  //       .then((snapshot) => snapshot.docs.forEach((document) {
+  //             docsID.add(document.reference.id);
+  //           }));
+  // }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // appBar: AppBar(
+      //   title: Text('BookStore'),
+      //   centerTitle: true,
+      //   backgroundColor: Colors.deepPurple,
+      // ),
       body: SafeArea(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text('SigIn as ${user.email!}'),
-              const SizedBox(
-                height: 20,
-              ),
-              MaterialButton(
-                onPressed: () {
-                  FirebaseAuth.instance.signOut();
-                },
-                color: const Color(0xff0CBABA),
-                child: const Text(
-                  'LogOut',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
+        child: Column(
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                FirebaseAuth.instance.signOut();
+              },
+              child: const Text('Logout'),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Expanded(
+              child: GridView.builder(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 5.0,
+                  mainAxisSpacing: 5.0,
+                  childAspectRatio: 3 / 4.5,
                 ),
-              )
-            ],
-          ),
+                itemCount: bookList.length,
+                itemBuilder: ((context, index) {
+                  return BookDetainOnHome(
+                    book: bookList[index],
+                  );
+                }),
+              ),
+            ),
+          ],
         ),
       ),
     );
