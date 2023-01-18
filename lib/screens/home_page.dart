@@ -56,6 +56,9 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    // double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       // appBar: AppBar(
       //   title: Text('BookStore'),
@@ -73,15 +76,12 @@ class _HomePageState extends State<HomePage> {
                     crossAxisCount: 2,
                     crossAxisSpacing: 5.0,
                     mainAxisSpacing: 5.0,
-                    childAspectRatio: 3 / 4.5,
+                    childAspectRatio: 2 / 3,
                   ),
                   itemCount: bookList.length,
                   itemBuilder: ((context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: BookDetainOnHome(
-                        book: bookList[index],
-                      ),
+                    return BookDetainOnHome(
+                      book: bookList[index],
                     );
                   }),
                 ),

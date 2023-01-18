@@ -78,292 +78,294 @@ class _RegisterPageState extends State<RegisterPage> {
     return Scaffold(
       // backgroundColor: const Color(0xff09203F),
       backgroundColor: const Color(0xff0D324D),
-      body: Center(
-        child: SingleChildScrollView(
-          reverse: true,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const SizedBox(
-                height: 40,
-              ),
-              const Center(
-                child: Text(
-                  'WELCOME!',
-                  style: TextStyle(
-                    color: Color(0xffE899DC),
-                    fontSize: 35,
-                    fontWeight: FontWeight.bold,
+      body: SafeArea(
+        child: Center(
+          child: SingleChildScrollView(
+            reverse: true,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(
+                  height: 40,
+                ),
+                const Center(
+                  child: Text(
+                    'WELCOME!',
+                    style: TextStyle(
+                      color: Color(0xffE899DC),
+                      fontSize: 35,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
-              ),
-              const SizedBox(
-                height: 40,
-              ),
-
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: TextField(
-                  controller: fullNameController,
-                  cursorColor: const Color(0xff0D324D),
-                  decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(
-                        color: Colors.white,
-                      ),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(
-                        width: 2,
-                        color: Color(0xffE899DC),
-                      ),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    hintText: 'Full name',
-                    fillColor: Colors.grey[200],
-                    filled: true,
-                  ),
+                const SizedBox(
+                  height: 40,
                 ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
 
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: TextField(
-                  controller: phoneNumberController,
-                  cursorColor: const Color(0xff0D324D),
-                  decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(
-                        color: Colors.white,
-                      ),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(
-                        width: 2,
-                        color: Color(0xffE899DC),
-                      ),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    hintText: 'Phone number',
-                    fillColor: Colors.grey[200],
-                    filled: true,
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: TextField(
-                  controller: cccdController,
-                  cursorColor: const Color(0xff0D324D),
-                  decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(
-                        color: Colors.white,
-                      ),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(
-                        width: 2,
-                        color: Color(0xffE899DC),
-                      ),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    hintText: 'CCCD',
-                    fillColor: Colors.grey[200],
-                    filled: true,
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: TextField(
-                  controller: addressController,
-                  cursorColor: const Color(0xff0D324D),
-                  decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(
-                        color: Colors.white,
-                      ),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(
-                        width: 2,
-                        color: Color(0xffE899DC),
-                      ),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    hintText: 'Address',
-                    fillColor: Colors.grey[200],
-                    filled: true,
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: TextField(
-                  controller: emailController,
-                  cursorColor: const Color(0xff0D324D),
-                  decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(
-                        color: Colors.white,
-                      ),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(
-                        width: 2,
-                        color: Color(0xffE899DC),
-                      ),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    hintText: 'Email',
-                    fillColor: Colors.grey[200],
-                    filled: true,
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-
-              // password textfield
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: TextField(
-                  controller: passwordController,
-                  obscureText: true,
-                  cursorColor: const Color(0xff0D324D),
-                  decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(
-                        color: Colors.white,
-                      ),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(
-                        width: 2,
-                        color: Color(0xffE899DC),
-                      ),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    hintText: 'Password',
-                    fillColor: Colors.grey[200],
-                    filled: true,
-                  ),
-                ),
-              ),
-
-              const SizedBox(
-                height: 10,
-              ),
-
-              // password textfield
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: TextField(
-                  controller: repasswordController,
-                  obscureText: true,
-                  cursorColor: const Color(0xff0D324D),
-                  decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(
-                        color: Colors.white,
-                      ),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(
-                        width: 2,
-                        color: Color(0xffE899DC),
-                      ),
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    hintText: 'Confirm Password',
-                    fillColor: Colors.grey[200],
-                    filled: true,
-                  ),
-                ),
-              ),
-
-              const SizedBox(
-                height: 10,
-              ),
-
-              // login button
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: GestureDetector(
-                  onTap: signUp,
-                  child: Container(
-                    padding: const EdgeInsets.all(15),
-                    decoration: BoxDecoration(
-                        color: const Color(0xff0CBABA),
-                        borderRadius: BorderRadius.circular(12)),
-                    child: const Center(
-                      child: Text(
-                        'Sign Up',
-                        style: TextStyle(
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: TextField(
+                    controller: fullNameController,
+                    cursorColor: const Color(0xff0D324D),
+                    decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(
                           color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
+                        ),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(
+                          width: 2,
+                          color: Color(0xffE899DC),
+                        ),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      hintText: 'Full name',
+                      fillColor: Colors.grey[200],
+                      filled: true,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: TextField(
+                    controller: phoneNumberController,
+                    cursorColor: const Color(0xff0D324D),
+                    decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(
+                          color: Colors.white,
+                        ),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(
+                          width: 2,
+                          color: Color(0xffE899DC),
+                        ),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      hintText: 'Phone number',
+                      fillColor: Colors.grey[200],
+                      filled: true,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: TextField(
+                    controller: cccdController,
+                    cursorColor: const Color(0xff0D324D),
+                    decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(
+                          color: Colors.white,
+                        ),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(
+                          width: 2,
+                          color: Color(0xffE899DC),
+                        ),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      hintText: 'CCCD',
+                      fillColor: Colors.grey[200],
+                      filled: true,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: TextField(
+                    controller: addressController,
+                    cursorColor: const Color(0xff0D324D),
+                    decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(
+                          color: Colors.white,
+                        ),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(
+                          width: 2,
+                          color: Color(0xffE899DC),
+                        ),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      hintText: 'Address',
+                      fillColor: Colors.grey[200],
+                      filled: true,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: TextField(
+                    controller: emailController,
+                    cursorColor: const Color(0xff0D324D),
+                    decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(
+                          color: Colors.white,
+                        ),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(
+                          width: 2,
+                          color: Color(0xffE899DC),
+                        ),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      hintText: 'Email',
+                      fillColor: Colors.grey[200],
+                      filled: true,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+
+                // password textfield
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: TextField(
+                    controller: passwordController,
+                    obscureText: true,
+                    cursorColor: const Color(0xff0D324D),
+                    decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(
+                          color: Colors.white,
+                        ),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(
+                          width: 2,
+                          color: Color(0xffE899DC),
+                        ),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      hintText: 'Password',
+                      fillColor: Colors.grey[200],
+                      filled: true,
+                    ),
+                  ),
+                ),
+
+                const SizedBox(
+                  height: 10,
+                ),
+
+                // password textfield
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: TextField(
+                    controller: repasswordController,
+                    obscureText: true,
+                    cursorColor: const Color(0xff0D324D),
+                    decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(
+                          color: Colors.white,
+                        ),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(
+                          width: 2,
+                          color: Color(0xffE899DC),
+                        ),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      hintText: 'Confirm Password',
+                      fillColor: Colors.grey[200],
+                      filled: true,
+                    ),
+                  ),
+                ),
+
+                const SizedBox(
+                  height: 10,
+                ),
+
+                // login button
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: GestureDetector(
+                    onTap: signUp,
+                    child: Container(
+                      padding: const EdgeInsets.all(15),
+                      decoration: BoxDecoration(
+                          color: const Color(0xff0CBABA),
+                          borderRadius: BorderRadius.circular(12)),
+                      child: const Center(
+                        child: Text(
+                          'Sign Up',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),
                   ),
                 ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
+                const SizedBox(
+                  height: 20,
+                ),
 
-              // sign up option
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    'I\'m a member! ',
-                    style: TextStyle(
-                      color: Color(0xffE899DC),
-                      fontSize: 17,
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: widget.showLoginPage,
-                    child: const Text(
-                      'Login now',
+                // sign up option
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      'I\'m a member! ',
                       style: TextStyle(
-                        color: Color(0xffB0F3F1),
+                        color: Color(0xffE899DC),
                         fontSize: 17,
                       ),
                     ),
-                  )
-                ],
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-            ],
+                    GestureDetector(
+                      onTap: widget.showLoginPage,
+                      child: const Text(
+                        'Login now',
+                        style: TextStyle(
+                          color: Color(0xffB0F3F1),
+                          fontSize: 17,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+              ],
+            ),
           ),
         ),
       ),
