@@ -10,6 +10,8 @@ class BookDetainOnHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+    // double screenHeight = MediaQuery.of(context).size.height;
     num? currency = book!.giaBan;
     final oCcy = NumberFormat('#,##0', 'en_US');
 
@@ -30,14 +32,14 @@ class BookDetainOnHome extends StatelessWidget {
         child: Column(
           children: [
             Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              // mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 const SizedBox(
                   height: 10,
                 ),
                 Container(
-                  height: 150,
-                  width: 150,
+                  height: screenWidth * 0.5,
+                  width: screenWidth * 0.5,
                   child: Image.network(
                     book!.biaSach.toString(),
                     fit: BoxFit.contain,

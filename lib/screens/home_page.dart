@@ -65,6 +65,28 @@ class _HomePageState extends State<HomePage> {
       body: SafeArea(
         child: Column(
           children: [
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: GridView.builder(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 5.0,
+                    mainAxisSpacing: 5.0,
+                    childAspectRatio: 3 / 4.5,
+                  ),
+                  itemCount: bookList.length,
+                  itemBuilder: ((context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: BookDetainOnHome(
+                        book: bookList[index],
+                      ),
+                    );
+                  }),
+                ),
+              ),
+            ),
             ElevatedButton(
               onPressed: () {
                 FirebaseAuth.instance.signOut();
@@ -73,22 +95,6 @@ class _HomePageState extends State<HomePage> {
             ),
             const SizedBox(
               height: 10,
-            ),
-            Expanded(
-              child: GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 5.0,
-                  mainAxisSpacing: 5.0,
-                  childAspectRatio: 3 / 4.5,
-                ),
-                itemCount: bookList.length,
-                itemBuilder: ((context, index) {
-                  return BookDetainOnHome(
-                    book: bookList[index],
-                  );
-                }),
-              ),
             ),
           ],
         ),
