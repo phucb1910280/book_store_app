@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../models/book.dart';
 
-class BookDetainOnHome extends StatelessWidget {
+class BookDetailOnHome extends StatelessWidget {
   final Book? book;
 
-  const BookDetainOnHome({super.key, required this.book});
+  const BookDetailOnHome({super.key, required this.book});
 
   @override
   Widget build(BuildContext context) {
