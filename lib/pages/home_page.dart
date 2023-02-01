@@ -15,17 +15,28 @@ class HomePage extends StatefulWidget {
 
 class HomePageState extends State<HomePage> {
   int selectedIndex = 0;
-  Widget homeScreen = HomeScreen();
-  Widget cartScreen = CartScreen();
-  Widget favScreeen = FavoriteScreen();
-  Widget profileScreen = ProfileScreen();
+  static const List<Widget> page = <Widget>[
+    HomeScreen(),
+    CartScreen(),
+    FavoriteScreen(),
+    ProfileScreen(),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: this.getBody(),
+      body: IndexedStack(
+        index: selectedIndex,
+        children: page,
+      ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.grey[100],
+        backgroundColor: Colors.deepPurple[50],
         type: BottomNavigationBarType.fixed,
         showUnselectedLabels: false,
         showSelectedLabels: true,
@@ -81,28 +92,8 @@ class HomePageState extends State<HomePage> {
             label: "Profile",
           ),
         ],
-        onTap: (int index) {
-          onTapHandler(index);
-        },
+        onTap: _onItemTapped,
       ),
     );
-  }
-
-  Widget getBody() {
-    if (selectedIndex == 0) {
-      return homeScreen;
-    } else if (selectedIndex == 1) {
-      return cartScreen;
-    } else if (selectedIndex == 2) {
-      return favScreeen;
-    } else {
-      return profileScreen;
-    }
-  }
-
-  void onTapHandler(int index) {
-    setState(() {
-      selectedIndex = index;
-    });
   }
 }

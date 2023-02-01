@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:simple_app/widgets/book_on_home_widget.dart';
+import 'package:simple_app/widgets/book_detail_widget.dart';
+import 'package:simple_app/widgets/list_book_widget.dart';
 import 'package:simple_app/models/book.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -71,8 +72,17 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 itemCount: bookList.length,
                 itemBuilder: ((context, index) {
-                  return BookDetailOnHome(
-                    book: bookList[index],
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  BookDetailWidget(book: bookList[index])));
+                    },
+                    child: ListOfBookWidget(
+                      book: bookList[index],
+                    ),
                   );
                 }),
               ),
