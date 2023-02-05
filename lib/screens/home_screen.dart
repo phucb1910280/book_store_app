@@ -50,10 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Image.asset(
-          'assets/images/appLogo.png',
-          height: 40,
-        ),
+        title: const Text('BookStore2'),
         centerTitle: true,
         backgroundColor: Colors.deepPurple,
       ),

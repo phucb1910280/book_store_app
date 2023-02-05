@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../models/book.dart';
@@ -11,9 +13,39 @@ class BookDetailWidget extends StatefulWidget {
 }
 
 class _BookDetailWidgetState extends State<BookDetailWidget> {
-  List<Book> favBookList = [];
+  Future addToCart(int soLuongSp) async {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    var currentUser = auth.currentUser;
+    CollectionReference collectionRef =
+        FirebaseFirestore.instance.collection('userCartItems');
+    return collectionRef.doc(currentUser!.email).collection('items').doc().set({
+      // 'id': widget.book!.id,
+      'tenSP': widget.book!.tenSach,
+      'giaBan': widget.book!.giaBan,
+      'biaSach': widget.book!.biaSach,
+      'soLuong': soLuongSp,
+      // ignore: avoid_print
+    }).then((value) => print('Added to cart!'));
+  }
 
-  void toggleFavIcon() {
+  List<Book> favBookList = [];
+  int soLuong = 1;
+
+  void increaseSL() {
+    setState(() {
+      soLuong++;
+    });
+  }
+
+  void decreaseSL() {
+    if (soLuong > 1) {
+      setState(() {
+        soLuong--;
+      });
+    }
+  }
+
+  void setBookIsFav() {
     setState(() {
       if (widget.book!.yeuThich) {
         widget.book!.yeuThich = false;
@@ -25,6 +57,8 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
 
   @override
   Widget build(BuildContext context) {
+    // int cartCount = context.watch<CartProvider>().cartCount;
+
     return Scaffold(
       body: SafeArea(
         child: ListView(
@@ -81,7 +115,7 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
                             ),
                             child: IconButton(
                               onPressed: () {
-                                toggleFavIcon();
+                                setBookIsFav();
                               },
                               icon: (widget.book!.yeuThich
                                   ? const Icon(
@@ -197,8 +231,58 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
                   ),
                 ],
               ),
-            )
+            ),
           ],
+        ),
+      ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.only(left: 5, right: 5),
+        child: Container(
+          decoration: const BoxDecoration(
+            color: Colors.white,
+          ),
+          child: Row(
+            children: [
+              IconButton(
+                onPressed: () {
+                  decreaseSL();
+                },
+                color: Colors.deepPurple.shade100,
+                icon: const Icon(Icons.remove, color: Colors.deepPurple),
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              SizedBox(
+                  width: 20,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(soLuong.toString()),
+                    ],
+                  )),
+              const SizedBox(
+                width: 10,
+              ),
+              IconButton(
+                onPressed: () {
+                  increaseSL();
+                },
+                color: Colors.deepPurple.shade100,
+                icon: const Icon(
+                  Icons.add,
+                  color: Colors.deepPurple,
+                ),
+              ),
+              Expanded(
+                child: ElevatedButton(
+                    onPressed: () async {
+                      await addToCart(soLuong);
+                    },
+                    child: const Text('Add to cart')),
+              )
+            ],
+          ),
         ),
       ),
     );
