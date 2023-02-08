@@ -17,13 +17,15 @@ class _CartScreenState extends State<CartScreen> {
       appBar: AppBar(
         title: Text('My Cart'),
         centerTitle: true,
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.deepPurple,
       ),
       body: SafeArea(
         child: StreamBuilder(
           stream: FirebaseFirestore.instance
               .collection('userCartItems')
               .doc(FirebaseAuth.instance.currentUser!.email)
-              .collection('items')
+              .collection('cartItems')
               .snapshots(),
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -59,12 +61,12 @@ class CustomeListTile extends StatelessWidget {
     required this.docID,
   }) : super(key: key);
 
-  Future deleteData(String id) async {
+  Future deleteData() async {
     try {
       await FirebaseFirestore.instance
           .collection('userCartItems')
           .doc(FirebaseAuth.instance.currentUser!.email)
-          .collection('items')
+          .collection('cartItems')
           .doc(docID)
           .delete();
     } catch (e) {
@@ -164,7 +166,7 @@ class CustomeListTile extends StatelessWidget {
                         ),
                         IconButton(
                           onPressed: () async {
-                            await deleteData(documentSnapshot['id']);
+                            await deleteData();
                           },
                           icon: const Icon(Icons.delete,
                               color: Colors.deepPurple),

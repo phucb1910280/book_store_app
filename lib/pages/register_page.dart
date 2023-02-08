@@ -77,7 +77,7 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       // backgroundColor: const Color(0xff09203F),
-      backgroundColor: const Color(0xff0D324D),
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
@@ -92,7 +92,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   child: Text(
                     'WELCOME!',
                     style: TextStyle(
-                      color: Color(0xffE899DC),
+                      color: Colors.deepPurple,
                       fontSize: 35,
                       fontWeight: FontWeight.bold,
                     ),
@@ -105,124 +105,8 @@ class _RegisterPageState extends State<RegisterPage> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: TextField(
-                    controller: fullNameController,
-                    cursorColor: const Color(0xff0D324D),
-                    decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                          color: Colors.white,
-                        ),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                          width: 2,
-                          color: Color(0xffE899DC),
-                        ),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      hintText: 'Full name',
-                      fillColor: Colors.grey[200],
-                      filled: true,
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: TextField(
-                    controller: phoneNumberController,
-                    cursorColor: const Color(0xff0D324D),
-                    decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                          color: Colors.white,
-                        ),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                          width: 2,
-                          color: Color(0xffE899DC),
-                        ),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      hintText: 'Phone number',
-                      fillColor: Colors.grey[200],
-                      filled: true,
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: TextField(
-                    controller: cccdController,
-                    cursorColor: const Color(0xff0D324D),
-                    decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                          color: Colors.white,
-                        ),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                          width: 2,
-                          color: Color(0xffE899DC),
-                        ),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      hintText: 'CCCD',
-                      fillColor: Colors.grey[200],
-                      filled: true,
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: TextField(
-                    controller: addressController,
-                    cursorColor: const Color(0xff0D324D),
-                    decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                          color: Colors.white,
-                        ),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                          width: 2,
-                          color: Color(0xffE899DC),
-                        ),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      hintText: 'Address',
-                      fillColor: Colors.grey[200],
-                      filled: true,
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: TextField(
                     controller: emailController,
-                    cursorColor: const Color(0xff0D324D),
+                    cursorColor: Colors.deepPurple,
                     decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(
                         borderSide: const BorderSide(
@@ -233,7 +117,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       focusedBorder: OutlineInputBorder(
                         borderSide: const BorderSide(
                           width: 2,
-                          color: Color(0xffE899DC),
+                          color: Colors.deepPurple,
                         ),
                         borderRadius: BorderRadius.circular(12),
                       ),
@@ -244,7 +128,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                 ),
                 const SizedBox(
-                  height: 10,
+                  height: 20,
                 ),
 
                 // password textfield
@@ -253,7 +137,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   child: TextField(
                     controller: passwordController,
                     obscureText: true,
-                    cursorColor: const Color(0xff0D324D),
+                    cursorColor: Colors.deepPurple,
                     decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(
                         borderSide: const BorderSide(
@@ -264,7 +148,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       focusedBorder: OutlineInputBorder(
                         borderSide: const BorderSide(
                           width: 2,
-                          color: Color(0xffE899DC),
+                          color: Colors.deepPurple,
                         ),
                         borderRadius: BorderRadius.circular(12),
                       ),
@@ -276,7 +160,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
 
                 const SizedBox(
-                  height: 10,
+                  height: 20,
                 ),
 
                 // password textfield
@@ -285,7 +169,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   child: TextField(
                     controller: repasswordController,
                     obscureText: true,
-                    cursorColor: const Color(0xff0D324D),
+                    cursorColor: Colors.deepPurple,
                     decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(
                         borderSide: const BorderSide(
@@ -296,7 +180,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       focusedBorder: OutlineInputBorder(
                         borderSide: const BorderSide(
                           width: 2,
-                          color: Color(0xffE899DC),
+                          color: Colors.deepPurple,
                         ),
                         borderRadius: BorderRadius.circular(12),
                       ),
@@ -308,7 +192,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
 
                 const SizedBox(
-                  height: 10,
+                  height: 20,
                 ),
 
                 // login button
@@ -319,7 +203,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     child: Container(
                       padding: const EdgeInsets.all(15),
                       decoration: BoxDecoration(
-                          color: const Color(0xff0CBABA),
+                          color: Colors.deepPurple,
                           borderRadius: BorderRadius.circular(12)),
                       child: const Center(
                         child: Text(
@@ -345,7 +229,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     const Text(
                       'I\'m a member! ',
                       style: TextStyle(
-                        color: Color(0xffE899DC),
+                        color: Color(0xffA4508B),
                         fontSize: 17,
                       ),
                     ),
@@ -354,7 +238,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       child: const Text(
                         'Login now',
                         style: TextStyle(
-                          color: Color(0xffB0F3F1),
+                          color: Color(0xff5F0A87),
                           fontSize: 17,
                         ),
                       ),

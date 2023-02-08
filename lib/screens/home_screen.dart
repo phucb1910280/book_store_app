@@ -52,7 +52,8 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: const Text('BookStore2'),
         centerTitle: true,
-        backgroundColor: Colors.deepPurple,
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.deepPurple,
       ),
       body: Column(
         children: [

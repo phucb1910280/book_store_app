@@ -39,7 +39,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       // backgroundColor: const Color(0xff09203F),
-      backgroundColor: const Color(0xff0D324D),
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
@@ -47,32 +47,32 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(
-                  height: 40,
-                ),
+                // const SizedBox(
+                //   height: 20,
+                // ),
                 Image.asset(
-                  'assets/images/appLogo.png',
+                  'assets/images/appLogo_02.png',
                   height: 250,
                   width: 250,
                   // fit: BoxFit.fitWidth
                 ),
 
                 const SizedBox(
-                  height: 50,
+                  height: 20,
                 ),
                 // welcome back!
                 const Center(
                   child: Text(
                     'WELCOME BACK!',
                     style: TextStyle(
-                      color: Color(0xffE899DC),
+                      color: Colors.deepPurple,
                       fontSize: 35,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
                 const SizedBox(
-                  height: 40,
+                  height: 20,
                 ),
 
                 // email textfield
@@ -80,7 +80,7 @@ class _LoginPageState extends State<LoginPage> {
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: TextField(
                     controller: emailController,
-                    cursorColor: const Color(0xff0D324D),
+                    cursorColor: Colors.deepPurple,
                     decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(
                         borderSide: const BorderSide(
@@ -102,7 +102,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
                 const SizedBox(
-                  height: 10,
+                  height: 20,
                 ),
 
                 // password textfield
@@ -111,7 +111,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: TextField(
                     controller: passwordController,
                     obscureText: true,
-                    cursorColor: const Color(0xff0D324D),
+                    cursorColor: Colors.deepPurple,
                     decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(
                         borderSide: const BorderSide(
@@ -134,7 +134,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
 
                 const SizedBox(
-                  height: 10,
+                  height: 20,
                 ),
 
                 // login button
@@ -145,7 +145,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: Container(
                       padding: const EdgeInsets.all(15),
                       decoration: BoxDecoration(
-                          color: const Color(0xff0CBABA),
+                          color: Colors.deepPurple,
                           borderRadius: BorderRadius.circular(12)),
                       child: const Center(
                         child: Text(
@@ -171,7 +171,7 @@ class _LoginPageState extends State<LoginPage> {
                     const Text(
                       'Not a member? ',
                       style: TextStyle(
-                        color: Color(0xffE899DC),
+                        color: Color(0xffA4508B),
                         fontSize: 17,
                       ),
                     ),
@@ -180,7 +180,7 @@ class _LoginPageState extends State<LoginPage> {
                       child: const Text(
                         'Register now',
                         style: TextStyle(
-                          color: Color(0xffB0F3F1),
+                          color: Color(0xff5F0A87),
                           fontSize: 17,
                         ),
                       ),

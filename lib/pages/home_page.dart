@@ -36,7 +36,7 @@ class HomePageState extends State<HomePage> {
         children: page,
       ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.deepPurple[50],
+        backgroundColor: Colors.white,
         type: BottomNavigationBarType.fixed,
         showUnselectedLabels: false,
         showSelectedLabels: true,

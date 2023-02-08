@@ -18,7 +18,11 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
     var currentUser = auth.currentUser;
     CollectionReference collectionRef =
         FirebaseFirestore.instance.collection('userCartItems');
-    return collectionRef.doc(currentUser!.email).collection('items').doc().set({
+    return collectionRef
+        .doc(currentUser!.email)
+        .collection('cartItems')
+        .doc()
+        .set({
       // 'id': widget.book!.id,
       'tenSP': widget.book!.tenSach,
       'giaBan': widget.book!.giaBan,
@@ -57,8 +61,6 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
 
   @override
   Widget build(BuildContext context) {
-    // int cartCount = context.watch<CartProvider>().cartCount;
-
     return Scaffold(
       body: SafeArea(
         child: ListView(
@@ -89,7 +91,7 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
                             height: 40,
                             width: 40,
                             decoration: BoxDecoration(
-                              color: Colors.deepPurple[50],
+                              color: Colors.grey[100],
                               borderRadius: BorderRadius.circular(30),
                             ),
                             child: IconButton(
@@ -110,22 +112,15 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
                             height: 40,
                             width: 40,
                             decoration: BoxDecoration(
-                              color: Colors.red[50],
+                              color: Colors.grey[100],
                               borderRadius: BorderRadius.circular(30),
                             ),
                             child: IconButton(
-                              onPressed: () {
-                                setBookIsFav();
-                              },
-                              icon: (widget.book!.yeuThich
-                                  ? const Icon(
-                                      Icons.favorite,
-                                      color: Colors.red,
-                                    )
-                                  : const Icon(
-                                      Icons.favorite_border,
-                                      color: Colors.red,
-                                    )),
+                              onPressed: () {},
+                              icon: const Icon(
+                                Icons.shopping_cart_sharp,
+                                color: Colors.deepPurple,
+                              ),
                             ),
                           ),
                         ),
@@ -153,18 +148,23 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
                   const SizedBox(
                     height: 20,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text(
-                        '${widget.book!.giaBan}₫',
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.red[700],
-                          fontWeight: FontWeight.bold,
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          '${widget.book!.giaBan}₫',
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.red[700],
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-                    ],
+                        ElevatedButton(
+                            onPressed: () {}, child: Text('Add to Favorite')),
+                      ],
+                    ),
                   ),
                   const SizedBox(
                     height: 20,
