@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:simple_app/models/user.dart';
 
 class RegisterPage extends StatefulWidget {
   final VoidCallback showLoginPage;
@@ -16,9 +17,9 @@ class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController repasswordController = TextEditingController();
   final TextEditingController fullNameController = TextEditingController();
-  final TextEditingController phoneNumberController = TextEditingController();
-  final TextEditingController cccdController = TextEditingController();
-  final TextEditingController addressController = TextEditingController();
+  // final TextEditingController phoneNumberController = TextEditingController();
+  // final TextEditingController cccdController = TextEditingController();
+  // final TextEditingController addressController = TextEditingController();
 
   @override
   void dispose() {
@@ -26,21 +27,32 @@ class _RegisterPageState extends State<RegisterPage> {
     passwordController.dispose();
     repasswordController.dispose();
     fullNameController.dispose();
-    phoneNumberController.dispose();
-    cccdController.dispose();
-    addressController.dispose();
+    // phoneNumberController.dispose();
+    // cccdController.dispose();
+    // addressController.dispose();
     super.dispose();
   }
 
   Future addUserDetail(String fullName, String phoneNumber, String email,
       String cccd, String address) async {
-    await FirebaseFirestore.instance.collection('user').add({
-      'fullName': fullName,
-      'phoneNumber': phoneNumber,
-      'email': email,
-      'cccd': cccd,
-      'address': address,
-    });
+    final CollectionReference userRef =
+        FirebaseFirestore.instance.collection('user');
+
+    var currentUser = CurrentUser(
+        fullName: fullName,
+        address: address,
+        cccd: cccd,
+        email: email,
+        phoneNumber: phoneNumber);
+    Map<String, dynamic> userData = currentUser.toJson();
+    await userRef.doc(email).set(userData);
+    //await FirebaseFirestore.instance.collection('user').add({
+    //   'fullName': fullName,
+    //   'phoneNumber': phoneNumber,
+    //   'email': email,
+    //   'cccd': cccd,
+    //   'address': address,
+    // });
   }
 
   Future signUp() async {
@@ -50,14 +62,9 @@ class _RegisterPageState extends State<RegisterPage> {
             email: emailController.text.trim(),
             password: passwordController.text.trim());
         addUserDetail(
-            fullNameController.text,
-            phoneNumberController.text.trim(),
-            emailController.text.trim(),
-            cccdController.text.trim(),
-            addressController.text);
+            fullNameController.text, '', emailController.text.trim(), '', '');
       }
     } on FirebaseAuthException catch (e) {
-      // _showDialog(e.toString());
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text(e.toString()),
         backgroundColor: Colors.red,
@@ -76,7 +83,6 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: const Color(0xff09203F),
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Center(
@@ -100,6 +106,35 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 const SizedBox(
                   height: 40,
+                ),
+
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: TextField(
+                    controller: fullNameController,
+                    cursorColor: Colors.deepPurple,
+                    decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(
+                          color: Colors.white,
+                        ),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(
+                          width: 2,
+                          color: Colors.deepPurple,
+                        ),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      hintText: 'Full name',
+                      fillColor: Colors.grey[200],
+                      filled: true,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
                 ),
 
                 Padding(
