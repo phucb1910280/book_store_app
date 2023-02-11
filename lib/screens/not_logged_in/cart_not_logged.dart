@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../pages/auth_page.dart';
+
 class CartNotLogged extends StatelessWidget {
   const CartNotLogged({super.key});
 
@@ -19,7 +21,14 @@ class CartNotLogged extends StatelessWidget {
           children: [
             const Text('Bạn chưa đăng nhập!'),
             const SizedBox(height: 10),
-            ElevatedButton(onPressed: () {}, child: const Text('Đăng nhập')),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const AuthPage()));
+                },
+                child: const Text('Đăng nhập')),
           ],
         ),
       ),

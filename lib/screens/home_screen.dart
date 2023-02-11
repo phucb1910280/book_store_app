@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_app/widgets/book_detail_widget.dart';
 import 'package:simple_app/widgets/list_book_widget.dart';
@@ -59,12 +58,12 @@ class _HomeScreenState extends State<HomeScreen> {
           // CustomeAppBar(),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
+              padding: const EdgeInsets.only(top: 10, left: 5, right: 5),
               child: GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  crossAxisSpacing: 5.0,
-                  mainAxisSpacing: 5.0,
+                  crossAxisSpacing: 1.0,
+                  mainAxisSpacing: 1.0,
                   childAspectRatio: 2 / 3,
                 ),
                 itemCount: bookList.length,

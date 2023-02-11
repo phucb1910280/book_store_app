@@ -56,7 +56,7 @@ class HomePageState extends State<HomePage> {
               height: 20,
               color: Colors.deepPurple,
             ),
-            label: "Home",
+            label: "Trang chủ",
           ),
           BottomNavigationBarItem(
             icon: Image.asset(
@@ -68,7 +68,7 @@ class HomePageState extends State<HomePage> {
               height: 20,
               color: Colors.deepPurple,
             ),
-            label: "Cart",
+            label: "Giỏ hàng",
           ),
           BottomNavigationBarItem(
             icon: Image.asset(
@@ -80,7 +80,7 @@ class HomePageState extends State<HomePage> {
               height: 20,
               color: Colors.deepPurple,
             ),
-            label: "Favorite",
+            label: "Yêu thích",
           ),
           BottomNavigationBarItem(
             icon: Image.asset(
@@ -92,7 +92,7 @@ class HomePageState extends State<HomePage> {
               height: 20,
               color: Colors.deepPurple,
             ),
-            label: "Profile",
+            label: "Tài khoản",
           ),
         ],
         onTap: _onItemTapped,

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../pages/auth_page.dart';
+
 class FavoriteNotLogged extends StatelessWidget {
   const FavoriteNotLogged({super.key});
 
@@ -18,7 +20,14 @@ class FavoriteNotLogged extends StatelessWidget {
           children: [
             const Text('Bạn chưa đăng nhập!'),
             const SizedBox(height: 10),
-            ElevatedButton(onPressed: () {}, child: const Text('Đăng nhập')),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const AuthPage()));
+                },
+                child: const Text('Đăng nhập')),
           ],
         ),
       ),

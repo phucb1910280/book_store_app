@@ -14,6 +14,7 @@ class FavoriteLogged extends StatelessWidget {
       ),
       body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: const [
             Text('Danh sách rỗng'),
           ],

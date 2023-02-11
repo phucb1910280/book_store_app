@@ -15,7 +15,7 @@ class _CartLoggedState extends State<CartLogged> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Giỏ hàng'),
+        title: const Text('Giỏ hàng của tôi'),
         centerTitle: true,
         backgroundColor: Colors.white,
         foregroundColor: Colors.deepPurple,
