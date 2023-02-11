@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:simple_app/pages/home_page.dart';
 
 class LoginPage extends StatefulWidget {
   final VoidCallback showRegisterPage;
@@ -14,14 +15,24 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-  Future signIn() async {
+  Future login() async {
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: emailController.text.trim(),
           password: passwordController.text.trim());
+      if (FirebaseAuth.instance.currentUser != null) {
+        // ignore: use_build_context_synchronously
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (_) => const HomePage()),
+            (route) => false);
+      }
+      // Navigator.push(
+      //     context, MaterialPageRoute(builder: (_) => const MainPage()));
+      // ignore: unused_catch_clause
     } on FirebaseAuthException catch (e) {
       // _showDialog(e.toString());
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text('Invalid email or password'),
         backgroundColor: Colors.red,
       ));
@@ -141,7 +152,7 @@ class _LoginPageState extends State<LoginPage> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: GestureDetector(
-                    onTap: signIn,
+                    onTap: login,
                     child: Container(
                       padding: const EdgeInsets.all(15),
                       decoration: BoxDecoration(

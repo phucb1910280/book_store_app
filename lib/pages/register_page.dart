@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_app/models/user.dart';
 
+import 'home_page.dart';
+
 class RegisterPage extends StatefulWidget {
   final VoidCallback showLoginPage;
   const RegisterPage({super.key, required this.showLoginPage});
@@ -46,13 +48,6 @@ class _RegisterPageState extends State<RegisterPage> {
         phoneNumber: phoneNumber);
     Map<String, dynamic> userData = currentUser.toJson();
     await userRef.doc(email).set(userData);
-    //await FirebaseFirestore.instance.collection('user').add({
-    //   'fullName': fullName,
-    //   'phoneNumber': phoneNumber,
-    //   'email': email,
-    //   'cccd': cccd,
-    //   'address': address,
-    // });
   }
 
   Future signUp() async {
@@ -63,6 +58,13 @@ class _RegisterPageState extends State<RegisterPage> {
             password: passwordController.text.trim());
         addUserDetail(
             fullNameController.text, '', emailController.text.trim(), '', '');
+        if (FirebaseAuth.instance.currentUser != null) {
+          // ignore: use_build_context_synchronously
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (_) => const HomePage()),
+              (route) => false);
+        }
       }
     } on FirebaseAuthException catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(

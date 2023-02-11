@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:simple_app/screens/cart_screen.dart';
 import 'package:simple_app/screens/favorite_screen.dart';
+import 'package:simple_app/screens/not_logged_in/fav_not_logged.dart';
 import 'package:simple_app/screens/home_screen.dart';
-import 'package:simple_app/screens/profile_screen.dart';
+
+import '../screens/profile_sceen.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -17,6 +19,7 @@ class HomePageState extends State<HomePage> {
   int selectedIndex = 0;
   static const List<Widget> page = <Widget>[
     HomeScreen(),
+    // CartScreen(),
     CartScreen(),
     FavoriteScreen(),
     ProfileScreen(),

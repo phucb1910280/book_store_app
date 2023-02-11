@@ -1,8 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:simple_app/pages/main_page.dart';
-import 'package:simple_app/screens/cart_screen.dart';
+import 'package:simple_app/pages/home_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,7 +22,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.deepPurple,
       ),
-      home: const MainPage(),
+      // home: const MainPage(),
+      home: const HomePage(),
     );
   }
 }

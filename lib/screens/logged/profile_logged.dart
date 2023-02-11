@@ -3,16 +3,25 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_app/models/user.dart';
 
-class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+import '../../pages/home_page.dart';
+
+class ProfileLogged extends StatefulWidget {
+  const ProfileLogged({super.key});
 
   @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
+  State<ProfileLogged> createState() => _ProfileLoggedState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
-  Future<void> _signOut() async {
+class _ProfileLoggedState extends State<ProfileLogged> {
+  Future _signOut() async {
     await FirebaseAuth.instance.signOut();
+    if (FirebaseAuth.instance.currentUser == null) {
+      // ignore: use_build_context_synchronously
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (_) => const HomePage()),
+          (route) => false);
+    }
   }
 
   @override
