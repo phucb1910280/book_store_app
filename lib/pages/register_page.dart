@@ -129,7 +129,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      hintText: 'Full name',
+                      hintText: 'Họ tên',
                       fillColor: Colors.grey[200],
                       filled: true,
                     ),
@@ -189,7 +189,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      hintText: 'Password',
+                      hintText: 'Mật khẩu',
                       fillColor: Colors.grey[200],
                       filled: true,
                     ),
@@ -221,7 +221,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      hintText: 'Confirm Password',
+                      hintText: 'Nhập lại mật khẩu',
                       fillColor: Colors.grey[200],
                       filled: true,
                     ),
@@ -244,7 +244,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           borderRadius: BorderRadius.circular(12)),
                       child: const Center(
                         child: Text(
-                          'Sign Up',
+                          'Đăng ký',
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 20,
@@ -264,7 +264,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text(
-                      'I\'m a member! ',
+                      'Tôi có tài khoản, ',
                       style: TextStyle(
                         color: Color(0xffA4508B),
                         fontSize: 17,
@@ -273,7 +273,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     GestureDetector(
                       onTap: widget.showLoginPage,
                       child: const Text(
-                        'Login now',
+                        'đăng nhập',
                         style: TextStyle(
                           color: Color(0xff5F0A87),
                           fontSize: 17,

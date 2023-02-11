@@ -33,7 +33,7 @@ class _LoginPageState extends State<LoginPage> {
     } on FirebaseAuthException catch (e) {
       // _showDialog(e.toString());
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text('Invalid email or password'),
+        content: Text('Email hoặc mật khẩu không hợp lệ!'),
         backgroundColor: Colors.red,
       ));
     }
@@ -62,28 +62,28 @@ class _LoginPageState extends State<LoginPage> {
                 //   height: 20,
                 // ),
                 Image.asset(
-                  'assets/images/appLogo_02.png',
-                  height: 250,
-                  width: 250,
+                  'assets/images/appLogo_03.png',
+                  height: 210,
+                  width: 340,
                   // fit: BoxFit.fitWidth
                 ),
 
+                // const SizedBox(
+                //   height: 20,
+                // ),
+                // // welcome back!
+                // const Center(
+                //   child: Text(
+                //     'WELCOME BACK!',
+                //     style: TextStyle(
+                //       color: Colors.deepPurple,
+                //       fontSize: 35,
+                //       fontWeight: FontWeight.bold,
+                //     ),
+                //   ),
+                // ),
                 const SizedBox(
-                  height: 20,
-                ),
-                // welcome back!
-                const Center(
-                  child: Text(
-                    'WELCOME BACK!',
-                    style: TextStyle(
-                      color: Colors.deepPurple,
-                      fontSize: 35,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 20,
+                  height: 50,
                 ),
 
                 // email textfield
@@ -137,7 +137,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      hintText: 'Password',
+                      hintText: 'Mật khẩu',
                       fillColor: Colors.grey[200],
                       filled: true,
                     ),
@@ -160,7 +160,7 @@ class _LoginPageState extends State<LoginPage> {
                           borderRadius: BorderRadius.circular(12)),
                       child: const Center(
                         child: Text(
-                          'Login',
+                          'Đăng nhập',
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 20,
@@ -180,7 +180,7 @@ class _LoginPageState extends State<LoginPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text(
-                      'Not a member? ',
+                      'Chưa có tài khoản? ',
                       style: TextStyle(
                         color: Color(0xffA4508B),
                         fontSize: 17,
@@ -189,7 +189,7 @@ class _LoginPageState extends State<LoginPage> {
                     GestureDetector(
                       onTap: widget.showRegisterPage,
                       child: const Text(
-                        'Register now',
+                        'Đăng ký ngay',
                         style: TextStyle(
                           color: Color(0xff5F0A87),
                           fontSize: 17,

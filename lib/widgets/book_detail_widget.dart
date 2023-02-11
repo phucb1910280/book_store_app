@@ -32,6 +32,24 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
     }).then((value) => print('Added to cart!'));
   }
 
+  Future addToFav(int soLuongSp) async {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    var currentUser = auth.currentUser;
+    CollectionReference collectionRef =
+        FirebaseFirestore.instance.collection('userFavItems');
+    return collectionRef
+        .doc(currentUser!.email)
+        .collection('favItems')
+        .doc()
+        .set({
+      // 'id': widget.book!.id,
+      'tenSP': widget.book!.tenSach,
+      'giaBan': widget.book!.giaBan,
+      'biaSach': widget.book!.biaSach,
+      // ignore: avoid_print
+    }).then((value) => print('Added to favorite!'));
+  }
+
   List<Book> favBookList = [];
   int soLuong = 1;
 
@@ -162,7 +180,10 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
                           ),
                         ),
                         ElevatedButton(
-                            onPressed: () {}, child: Text('Add to Favorite')),
+                            onPressed: () async {
+                              await addToFav(soLuong);
+                            },
+                            child: const Text('Yêu thích')),
                       ],
                     ),
                   ),
@@ -279,7 +300,7 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
                     onPressed: () async {
                       await addToCart(soLuong);
                     },
-                    child: const Text('Add to cart')),
+                    child: const Text('Thêm vào giỏ hàng')),
               )
             ],
           ),
