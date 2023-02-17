@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:simple_app/screens/cart_screen.dart';
 import 'package:simple_app/screens/favorite_screen.dart';
-import 'package:simple_app/screens/not_logged_in/fav_not_logged.dart';
 import 'package:simple_app/screens/home_screen.dart';
 
 import '../screens/profile_sceen.dart';
