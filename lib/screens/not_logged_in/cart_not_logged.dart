@@ -12,7 +12,7 @@ class CartNotLogged extends StatelessWidget {
         title: const Text('Giỏ hàng'),
         centerTitle: true,
         backgroundColor: Colors.white,
-        foregroundColor: Colors.deepPurple,
+        foregroundColor: Colors.black,
       ),
       body: Center(
         child: Column(

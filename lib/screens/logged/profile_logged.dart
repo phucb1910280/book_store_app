@@ -30,7 +30,8 @@ class _ProfileLoggedState extends State<ProfileLogged> {
     super.initState();
   }
 
-  CurrentUser? currentUser;
+  var currentUser = CurrentUser(
+      fullName: '', address: '', cccd: '', email: '', phoneNumber: '');
   Future<void> getDocData() async {
     final FirebaseAuth auth = FirebaseAuth.instance;
     var user = auth.currentUser;
@@ -55,192 +56,202 @@ class _ProfileLoggedState extends State<ProfileLogged> {
         });
       }
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        elevation: 0,
+      ),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 40,
+        child: Column(
+          children: [
+            Container(
+              decoration: const BoxDecoration(
+                color: Colors.black,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: const [
-                  Text(
-                    'Xin chào,',
-                    style: TextStyle(
-                        fontSize: 22,
-                        fontStyle: FontStyle.italic,
-                        color: Colors.deepPurple),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 5,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text(
-                    currentUser!.fullName.toString(),
-                    style: const TextStyle(
-                      fontSize: 30,
-                      color: Colors.deepPurple,
-                      fontWeight: FontWeight.bold,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 15, right: 15),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: const [
+                        Text(
+                          'Xin chào,',
+                          style: TextStyle(
+                              fontSize: 22,
+                              fontStyle: FontStyle.italic,
+                              color: Colors.white),
+                        ),
+                      ],
                     ),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 40,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: GestureDetector(
-                  onTap: () {},
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: const [
-                      Icon(
-                        Icons.person,
-                        color: Colors.deepPurple,
-                      ),
-                      SizedBox(
-                        width: 15,
-                      ),
-                      Text(
-                        'Thông tin của tôi',
-                        style: TextStyle(
-                            fontSize: 20,
-                            fontStyle: FontStyle.normal,
-                            color: Colors.deepPurple),
-                      ),
-                    ],
-                  ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Text(
+                          currentUser.fullName.toString(),
+                          style: const TextStyle(
+                            fontSize: 30,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 40,
+                    ),
+                  ],
                 ),
               ),
-              const SizedBox(
-                height: 10,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: GestureDetector(
-                  onTap: () {},
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: const [
-                      Icon(
-                        Icons.edit,
-                        color: Colors.deepPurple,
-                      ),
-                      SizedBox(
-                        width: 15,
-                      ),
-                      Text(
-                        'Cập nhật thông tin',
-                        style: TextStyle(
-                            fontSize: 20,
-                            fontStyle: FontStyle.normal,
-                            color: Colors.deepPurple),
-                      ),
-                    ],
-                  ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 10, 20, 20),
+              child: GestureDetector(
+                onTap: () {},
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: const [
+                    Icon(
+                      Icons.person,
+                      color: Colors.black,
+                    ),
+                    SizedBox(
+                      width: 15,
+                    ),
+                    Text(
+                      'Thông tin của tôi',
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontStyle: FontStyle.normal,
+                          color: Colors.black),
+                    ),
+                  ],
                 ),
               ),
-              const SizedBox(
-                height: 10,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: GestureDetector(
-                  onTap: () {},
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Image.asset(
-                        'assets/icons/myorder.png',
-                        width: 25,
-                        height: 25,
-                        color: Colors.deepPurple,
-                      ),
-                      const SizedBox(
-                        width: 15,
-                      ),
-                      const Text(
-                        'Đơn hàng của tôi',
-                        style: TextStyle(
-                            fontSize: 20,
-                            fontStyle: FontStyle.normal,
-                            color: Colors.deepPurple),
-                      ),
-                    ],
-                  ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 10, 20, 20),
+              child: GestureDetector(
+                onTap: () {},
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: const [
+                    Icon(
+                      Icons.edit,
+                      color: Colors.black,
+                    ),
+                    SizedBox(
+                      width: 15,
+                    ),
+                    Text(
+                      'Cập nhật thông tin',
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontStyle: FontStyle.normal,
+                          color: Colors.black),
+                    ),
+                  ],
                 ),
               ),
-              const SizedBox(
-                height: 10,
-              ),
-              Divider(
-                color: Colors.deepPurple.withOpacity(.3),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: GestureDetector(
-                  onTap: () {},
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: const [
-                      Icon(
-                        Icons.info_rounded,
-                        color: Colors.deepPurple,
-                      ),
-                      SizedBox(
-                        width: 15,
-                      ),
-                      Text(
-                        'Về chúng tôi',
-                        style: TextStyle(
-                            fontSize: 20,
-                            fontStyle: FontStyle.normal,
-                            color: Colors.deepPurple),
-                      ),
-                    ],
-                  ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 10, 20, 20),
+              child: GestureDetector(
+                onTap: () {},
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Image.asset(
+                      'assets/icons/myorder.png',
+                      width: 25,
+                      height: 25,
+                      color: Colors.black,
+                    ),
+                    const SizedBox(
+                      width: 15,
+                    ),
+                    const Text(
+                      'Đơn hàng của tôi',
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontStyle: FontStyle.normal,
+                          color: Colors.black),
+                    ),
+                  ],
                 ),
               ),
-              const SizedBox(
-                height: 10,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: GestureDetector(
-                  onTap: () {},
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: const [
-                      Text(
-                        'Phiên bản: bookstore.2.2.0',
-                        style: TextStyle(
-                            fontSize: 20,
-                            fontStyle: FontStyle.italic,
-                            color: Colors.grey),
-                      ),
-                    ],
-                  ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Divider(
+              color: Colors.deepPurple.withOpacity(.3),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 10, 20, 20),
+              child: GestureDetector(
+                onTap: () {},
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: const [
+                    Icon(
+                      Icons.info_rounded,
+                      color: Colors.black,
+                    ),
+                    SizedBox(
+                      width: 15,
+                    ),
+                    Text(
+                      'Về chúng tôi',
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontStyle: FontStyle.normal,
+                          color: Colors.black),
+                    ),
+                  ],
                 ),
               ),
-            ],
-          ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 10, 20, 20),
+              child: GestureDetector(
+                onTap: () {},
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: const [
+                    Text(
+                      'Phiên bản: bookstore.2.2.0',
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontStyle: FontStyle.italic,
+                          color: Colors.grey),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(

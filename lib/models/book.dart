@@ -1,14 +1,13 @@
 class Book {
   // String? id;
-  String? tenSach;
-  String? biaSach;
-  String? tacGia;
-  num? giaBan;
-  num? soTrang;
-  String? loaiBia;
-  String? theLoai;
-  String? moTa;
-  bool yeuThich = false;
+  String tenSach;
+  String biaSach;
+  String tacGia;
+  String giaBan;
+  String soTrang;
+  String loaiBia;
+  String theLoai;
+  String moTa;
 
   Book({
     // required this.id,
@@ -20,7 +19,6 @@ class Book {
     required this.loaiBia,
     required this.theLoai,
     required this.moTa,
-    required this.yeuThich,
   });
 
   Book.fromJson(Map<String, Object?> json)
@@ -29,12 +27,11 @@ class Book {
           tenSach: (json['tenSach']! as String),
           biaSach: (json['biaSach']! as String),
           tacGia: (json['tacGia']! as String),
-          giaBan: (json['giaBan']! as num),
-          soTrang: (json['soTrang']! as num),
+          giaBan: (json['giaBan']! as String),
+          soTrang: (json['soTrang']! as String),
           loaiBia: (json['loaiBia']! as String),
           theLoai: (json['theLoai']! as String),
           moTa: (json['moTa']! as String),
-          yeuThich: (json['yeuThich']! as bool),
         );
 
   Map<String, Object?> toJson() {
@@ -48,7 +45,6 @@ class Book {
       'loaiBia': loaiBia,
       'theLoai': theLoai,
       'moTa': moTa,
-      'yeuThich': yeuThich,
     };
   }
 }

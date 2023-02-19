@@ -19,9 +19,8 @@ class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController repasswordController = TextEditingController();
   final TextEditingController fullNameController = TextEditingController();
-  // final TextEditingController phoneNumberController = TextEditingController();
-  // final TextEditingController cccdController = TextEditingController();
-  // final TextEditingController addressController = TextEditingController();
+
+  bool showPW = true;
 
   @override
   void dispose() {
@@ -29,9 +28,6 @@ class _RegisterPageState extends State<RegisterPage> {
     passwordController.dispose();
     repasswordController.dispose();
     fullNameController.dispose();
-    // phoneNumberController.dispose();
-    // cccdController.dispose();
-    // addressController.dispose();
     super.dispose();
   }
 
@@ -100,7 +96,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   child: Text(
                     'WELCOME!',
                     style: TextStyle(
-                      color: Colors.deepPurple,
+                      color: Colors.black,
                       fontSize: 35,
                       fontWeight: FontWeight.bold,
                     ),
@@ -114,7 +110,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: TextField(
                     controller: fullNameController,
-                    cursorColor: Colors.deepPurple,
+                    cursorColor: Colors.black,
                     decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(
                         borderSide: const BorderSide(
@@ -125,7 +121,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       focusedBorder: OutlineInputBorder(
                         borderSide: const BorderSide(
                           width: 2,
-                          color: Colors.deepPurple,
+                          color: Colors.black,
                         ),
                         borderRadius: BorderRadius.circular(12),
                       ),
@@ -143,7 +139,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: TextField(
                     controller: emailController,
-                    cursorColor: Colors.deepPurple,
+                    cursorColor: Colors.black,
                     decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(
                         borderSide: const BorderSide(
@@ -154,7 +150,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       focusedBorder: OutlineInputBorder(
                         borderSide: const BorderSide(
                           width: 2,
-                          color: Colors.deepPurple,
+                          color: Colors.black,
                         ),
                         borderRadius: BorderRadius.circular(12),
                       ),
@@ -169,31 +165,49 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
 
                 // password textfield
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: TextField(
-                    controller: passwordController,
-                    obscureText: true,
-                    cursorColor: Colors.deepPurple,
-                    decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                          color: Colors.white,
+                Stack(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: TextField(
+                        controller: passwordController,
+                        obscureText: showPW,
+                        cursorColor: Colors.black,
+                        decoration: InputDecoration(
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                              color: Colors.white,
+                            ),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                              width: 2,
+                              color: Colors.black,
+                            ),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          hintText: 'Mật khẩu',
+                          fillColor: Colors.grey[200],
+                          filled: true,
                         ),
-                        borderRadius: BorderRadius.circular(12),
                       ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                          width: 2,
-                          color: Colors.deepPurple,
-                        ),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      hintText: 'Mật khẩu',
-                      fillColor: Colors.grey[200],
-                      filled: true,
                     ),
-                  ),
+                    Positioned(
+                      top: 6,
+                      right: 25,
+                      child: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            showPW = !showPW;
+                          });
+                        },
+                        icon: showPW
+                            ? Image.asset('assets/icons/showPass.png')
+                            : Image.asset('assets/icons/unShowPass.png'),
+                      ),
+                    ),
+                  ],
                 ),
 
                 const SizedBox(
@@ -206,7 +220,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   child: TextField(
                     controller: repasswordController,
                     obscureText: true,
-                    cursorColor: Colors.deepPurple,
+                    cursorColor: Colors.black,
                     decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(
                         borderSide: const BorderSide(
@@ -217,7 +231,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       focusedBorder: OutlineInputBorder(
                         borderSide: const BorderSide(
                           width: 2,
-                          color: Colors.deepPurple,
+                          color: Colors.black,
                         ),
                         borderRadius: BorderRadius.circular(12),
                       ),
@@ -240,7 +254,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     child: Container(
                       padding: const EdgeInsets.all(15),
                       decoration: BoxDecoration(
-                          color: Colors.deepPurple,
+                          color: Colors.black,
                           borderRadius: BorderRadius.circular(12)),
                       child: const Center(
                         child: Text(
@@ -264,18 +278,18 @@ class _RegisterPageState extends State<RegisterPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text(
-                      'Tôi có tài khoản, ',
+                      'Tôi có tài khoản! ',
                       style: TextStyle(
-                        color: Color(0xffA4508B),
+                        color: Colors.black,
                         fontSize: 17,
                       ),
                     ),
                     GestureDetector(
                       onTap: widget.showLoginPage,
                       child: const Text(
-                        'đăng nhập',
+                        'Đăng nhập',
                         style: TextStyle(
-                          color: Color(0xff5F0A87),
+                          color: Colors.deepPurple,
                           fontSize: 17,
                         ),
                       ),

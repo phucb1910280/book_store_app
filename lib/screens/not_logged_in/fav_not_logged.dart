@@ -10,7 +10,7 @@ class FavoriteNotLogged extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        foregroundColor: Colors.deepPurple,
+        foregroundColor: Colors.black,
         title: const Text('Danh sách yêu thích'),
         centerTitle: true,
       ),

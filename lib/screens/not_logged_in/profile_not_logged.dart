@@ -9,7 +9,7 @@ class ProfileNotLoggedIn extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        foregroundColor: Colors.deepPurple,
+        foregroundColor: Colors.black,
         title: const Text('Tài khoản'),
         centerTitle: true,
       ),

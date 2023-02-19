@@ -3,6 +3,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import '../../models/book.dart';
+import '../../widgets/book_detail_widget.dart';
+
 class FavoriteLogged extends StatefulWidget {
   const FavoriteLogged({super.key});
 
@@ -18,7 +21,7 @@ class _FavoriteLoggedState extends State<FavoriteLogged> {
         title: const Text('Danh sách yêu thích'),
         centerTitle: true,
         backgroundColor: Colors.white,
-        foregroundColor: Colors.deepPurple,
+        foregroundColor: Colors.black,
       ),
       body: SafeArea(
         child: StreamBuilder(
@@ -29,11 +32,11 @@ class _FavoriteLoggedState extends State<FavoriteLogged> {
               .snapshots(),
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-            if (snapshot.hasError) {
-              return const Center(child: Text('Somthing Wrong!'));
-            } else {
+            if (snapshot.hasData) {
               return ListView.builder(
-                itemCount: snapshot.data!.docs.length,
+                itemCount: snapshot.data!.docs.isEmpty
+                    ? 0
+                    : snapshot.data!.docs.length,
                 itemBuilder: (_, index) {
                   DocumentSnapshot documentSnapshot =
                       snapshot.data!.docs[index];
@@ -44,6 +47,8 @@ class _FavoriteLoggedState extends State<FavoriteLogged> {
                   );
                 },
               );
+            } else {
+              return const Center(child: Text('Somthing Wrong!'));
             }
           },
         ),
@@ -89,9 +94,28 @@ class CustomeListTile extends StatelessWidget {
                   width: 150,
                   child: Padding(
                     padding: const EdgeInsets.all(5.0),
-                    child: Image.network(
-                      documentSnapshot['biaSach'],
-                      fit: BoxFit.contain,
+                    child: GestureDetector(
+                      onTap: () {
+                        var currentBook = Book(
+                          tenSach: documentSnapshot['tenSach'],
+                          biaSach: documentSnapshot['biaSach'],
+                          tacGia: documentSnapshot['tacGia'],
+                          giaBan: documentSnapshot['giaBan'].toString(),
+                          soTrang: documentSnapshot['soTrang'].toString(),
+                          loaiBia: documentSnapshot['loaiBia'],
+                          theLoai: documentSnapshot['theLoai'],
+                          moTa: documentSnapshot['moTa'],
+                        );
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    BookDetailWidget(book: currentBook)));
+                      },
+                      child: Image.network(
+                        documentSnapshot['biaSach'],
+                        fit: BoxFit.contain,
+                      ),
                     ),
                   ),
                 ),
@@ -107,7 +131,7 @@ class CustomeListTile extends StatelessWidget {
                       children: [
                         Flexible(
                           child: Text(
-                            documentSnapshot['tenSP'],
+                            documentSnapshot['tenSach'],
                             // overflow: TextOverflow.ellipsis,
                             style: const TextStyle(
                               fontSize: 20,

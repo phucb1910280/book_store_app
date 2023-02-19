@@ -42,18 +42,17 @@ class HomePageState extends State<HomePage> {
         type: BottomNavigationBarType.fixed,
         showUnselectedLabels: false,
         showSelectedLabels: true,
-        selectedItemColor: Colors.deepPurple,
+        selectedItemColor: Colors.black,
         currentIndex: selectedIndex,
         items: [
           BottomNavigationBarItem(
             icon: Image.asset(
-              'assets/icons/home.png',
+              'assets/icons/home_slt.png',
               height: 20,
             ),
             activeIcon: Image.asset(
               'assets/icons/home.png',
               height: 20,
-              color: Colors.deepPurple,
             ),
             label: "Trang chủ",
           ),
@@ -63,21 +62,19 @@ class HomePageState extends State<HomePage> {
               height: 20,
             ),
             activeIcon: Image.asset(
-              'assets/icons/cart.png',
+              'assets/icons/cart_slt.png',
               height: 20,
-              color: Colors.deepPurple,
             ),
             label: "Giỏ hàng",
           ),
           BottomNavigationBarItem(
             icon: Image.asset(
-              'assets/icons/nofav.png',
+              'assets/icons/fav.png',
               height: 20,
             ),
             activeIcon: Image.asset(
-              'assets/icons/nofav.png',
+              'assets/icons/fav_slt.png',
               height: 20,
-              color: Colors.deepPurple,
             ),
             label: "Yêu thích",
           ),
@@ -87,9 +84,8 @@ class HomePageState extends State<HomePage> {
               height: 20,
             ),
             activeIcon: Image.asset(
-              'assets/icons/account.png',
+              'assets/icons/account_slt.png',
               height: 20,
-              color: Colors.deepPurple,
             ),
             label: "Tài khoản",
           ),

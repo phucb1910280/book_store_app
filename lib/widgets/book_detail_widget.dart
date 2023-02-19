@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:simple_app/screens/logged/cart_logged.dart';
 
 import '../models/book.dart';
 
@@ -24,12 +25,25 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
         .doc()
         .set({
       // 'id': widget.book!.id,
-      'tenSP': widget.book!.tenSach,
+      'tenSach': widget.book!.tenSach,
       'giaBan': widget.book!.giaBan,
       'biaSach': widget.book!.biaSach,
+      'tacGia': widget.book!.tacGia,
+      'soTrang': widget.book!.soTrang,
+      'loaiBia': widget.book!.loaiBia,
+      'theLoai': widget.book!.theLoai,
+      'moTa': widget.book!.moTa,
       'soLuong': soLuongSp,
       // ignore: avoid_print
-    }).then((value) => print('Added to cart!'));
+    }).then(
+      (value) => ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: const Text('Đã thêm vào Giỏ hàng'),
+          backgroundColor: (Colors.green[600]),
+          duration: const Duration(seconds: 1),
+        ),
+      ),
+    );
   }
 
   Future addToFav(int soLuongSp) async {
@@ -43,11 +57,23 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
         .doc()
         .set({
       // 'id': widget.book!.id,
-      'tenSP': widget.book!.tenSach,
+      'tenSach': widget.book!.tenSach,
       'giaBan': widget.book!.giaBan,
       'biaSach': widget.book!.biaSach,
-      // ignore: avoid_print
-    }).then((value) => print('Added to favorite!'));
+      'tacGia': widget.book!.tacGia,
+      'soTrang': widget.book!.soTrang,
+      'loaiBia': widget.book!.loaiBia,
+      'theLoai': widget.book!.theLoai,
+      'moTa': widget.book!.moTa,
+    }).then(
+      (value) => ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: const Text('Đã thêm vào Danh sách yêu thích'),
+          backgroundColor: (Colors.green[600]),
+          duration: const Duration(seconds: 1),
+        ),
+      ),
+    );
   }
 
   List<Book> favBookList = [];
@@ -65,16 +91,6 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
         soLuong--;
       });
     }
-  }
-
-  void setBookIsFav() {
-    setState(() {
-      if (widget.book!.yeuThich) {
-        widget.book!.yeuThich = false;
-      } else {
-        widget.book!.yeuThich = true;
-      }
-    });
   }
 
   @override
@@ -118,7 +134,7 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
                               },
                               icon: const Icon(
                                 Icons.arrow_back,
-                                color: Colors.deepPurple,
+                                color: Colors.black,
                               ),
                             ),
                           ),
@@ -134,10 +150,16 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
                               borderRadius: BorderRadius.circular(30),
                             ),
                             child: IconButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const CartLogged()));
+                              },
                               icon: const Icon(
                                 Icons.shopping_cart_sharp,
-                                color: Colors.deepPurple,
+                                color: Colors.black,
                               ),
                             ),
                           ),
@@ -157,7 +179,7 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
                           style: const TextStyle(
                             fontWeight: FontWeight.normal,
                             fontSize: 25,
-                            color: Colors.deepPurple,
+                            color: Colors.black,
                           ),
                         ),
                       ),
@@ -242,7 +264,7 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
                   Padding(
                     padding: const EdgeInsets.only(left: 10, right: 10),
                     child: Text(
-                      '${widget.book!.moTa}',
+                      widget.book!.moTa,
                       style: const TextStyle(
                         fontSize: 20,
                         color: Colors.black,
@@ -269,7 +291,7 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
                   decreaseSL();
                 },
                 color: Colors.deepPurple.shade100,
-                icon: const Icon(Icons.remove, color: Colors.deepPurple),
+                icon: const Icon(Icons.remove, color: Colors.black),
               ),
               const SizedBox(
                 width: 10,
@@ -292,7 +314,7 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
                 color: Colors.deepPurple.shade100,
                 icon: const Icon(
                   Icons.add,
-                  color: Colors.deepPurple,
+                  color: Colors.black,
                 ),
               ),
               Expanded(

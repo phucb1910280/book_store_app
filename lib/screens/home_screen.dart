@@ -28,16 +28,15 @@ class _HomeScreenState extends State<HomeScreen> {
   mapRecords(QuerySnapshot<Map<String, dynamic>> records) {
     var list = records.docs
         .map((books) => Book(
-            // id: books['id'],
-            tenSach: books['tenSach'],
-            biaSach: books['biaSach'],
-            tacGia: books['tacGia'],
-            giaBan: books['giaBan'],
-            soTrang: books['soTrang'],
-            loaiBia: books['loaiBia'],
-            theLoai: books['theLoai'],
-            moTa: books['moTa'],
-            yeuThich: books['yeuThich']))
+              tenSach: books['tenSach'],
+              biaSach: books['biaSach'],
+              tacGia: books['tacGia'],
+              giaBan: books['giaBan'].toString(),
+              soTrang: books['soTrang'].toString(),
+              loaiBia: books['loaiBia'],
+              theLoai: books['theLoai'],
+              moTa: books['moTa'],
+            ))
         .toList();
     setState(() {
       bookList = list;
@@ -49,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Image.asset(
-          'assets/images/appLogo_03.png',
+          'assets/images/appLogo_04.png',
           height: 45,
         ),
         centerTitle: true,

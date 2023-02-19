@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import '../models/book.dart';
 
 class ListOfBookWidget extends StatelessWidget {
@@ -9,10 +8,6 @@ class ListOfBookWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // double screenHeight = MediaQuery.of(context).size.height;
-    num? currency = book!.giaBan;
-    final oCcy = NumberFormat('#,##0', 'en_US');
-
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
@@ -58,12 +53,13 @@ class ListOfBookWidget extends StatelessWidget {
                       ],
                     ),
                   ),
+                  const Expanded(child: SizedBox()),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Row(
                       children: [
                         Text(
-                          '${oCcy.format(currency)} ₫',
+                          '${book!.giaBan.toString()}₫',
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.deepPurple,

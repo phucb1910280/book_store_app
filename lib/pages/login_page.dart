@@ -11,9 +11,10 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  // text controllers
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+
+  bool showPW = true;
 
   Future login() async {
     try {
@@ -62,28 +63,34 @@ class _LoginPageState extends State<LoginPage> {
                 //   height: 20,
                 // ),
                 Image.asset(
-                  'assets/images/appLogo_03.png',
+                  'assets/images/appLogo_04.png',
                   height: 210,
                   width: 340,
                   // fit: BoxFit.fitWidth
                 ),
 
-                // const SizedBox(
-                //   height: 20,
-                // ),
-                // // welcome back!
-                // const Center(
-                //   child: Text(
-                //     'WELCOME BACK!',
-                //     style: TextStyle(
-                //       color: Colors.deepPurple,
-                //       fontSize: 35,
-                //       fontWeight: FontWeight.bold,
-                //     ),
-                //   ),
-                // ),
                 const SizedBox(
-                  height: 50,
+                  height: 20,
+                ),
+                // welcome back!
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: const [
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Text(
+                      'Xin chào',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 35,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 20,
                 ),
 
                 // email textfield
@@ -91,7 +98,7 @@ class _LoginPageState extends State<LoginPage> {
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: TextField(
                     controller: emailController,
-                    cursorColor: Colors.deepPurple,
+                    cursorColor: Colors.black,
                     decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(
                         borderSide: const BorderSide(
@@ -102,7 +109,7 @@ class _LoginPageState extends State<LoginPage> {
                       focusedBorder: OutlineInputBorder(
                         borderSide: const BorderSide(
                           width: 2,
-                          color: Color(0xffE899DC),
+                          color: Colors.black,
                         ),
                         borderRadius: BorderRadius.circular(12),
                       ),
@@ -117,31 +124,49 @@ class _LoginPageState extends State<LoginPage> {
                 ),
 
                 // password textfield
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: TextField(
-                    controller: passwordController,
-                    obscureText: true,
-                    cursorColor: Colors.deepPurple,
-                    decoration: InputDecoration(
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                          color: Colors.white,
+                Stack(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: TextField(
+                        controller: passwordController,
+                        obscureText: showPW,
+                        cursorColor: Colors.black,
+                        decoration: InputDecoration(
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                              color: Colors.white,
+                            ),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                              width: 2,
+                              color: Colors.black,
+                            ),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          hintText: 'Mật khẩu',
+                          fillColor: Colors.grey[200],
+                          filled: true,
                         ),
-                        borderRadius: BorderRadius.circular(12),
                       ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                          width: 2,
-                          color: Color(0xffE899DC),
-                        ),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      hintText: 'Mật khẩu',
-                      fillColor: Colors.grey[200],
-                      filled: true,
                     ),
-                  ),
+                    Positioned(
+                      top: 6,
+                      right: 25,
+                      child: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            showPW = !showPW;
+                          });
+                        },
+                        icon: showPW
+                            ? Image.asset('assets/icons/showPass.png')
+                            : Image.asset('assets/icons/unShowPass.png'),
+                      ),
+                    ),
+                  ],
                 ),
 
                 const SizedBox(
@@ -156,7 +181,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: Container(
                       padding: const EdgeInsets.all(15),
                       decoration: BoxDecoration(
-                          color: Colors.deepPurple,
+                          color: Colors.black,
                           borderRadius: BorderRadius.circular(12)),
                       child: const Center(
                         child: Text(
@@ -182,7 +207,7 @@ class _LoginPageState extends State<LoginPage> {
                     const Text(
                       'Chưa có tài khoản? ',
                       style: TextStyle(
-                        color: Color(0xffA4508B),
+                        color: Colors.black,
                         fontSize: 17,
                       ),
                     ),
@@ -191,7 +216,7 @@ class _LoginPageState extends State<LoginPage> {
                       child: const Text(
                         'Đăng ký ngay',
                         style: TextStyle(
-                          color: Color(0xff5F0A87),
+                          color: Colors.deepPurple,
                           fontSize: 17,
                         ),
                       ),
