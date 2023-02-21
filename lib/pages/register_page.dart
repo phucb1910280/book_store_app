@@ -39,7 +39,6 @@ class _RegisterPageState extends State<RegisterPage> {
     var currentUser = CurrentUser(
         fullName: fullName,
         address: address,
-        cccd: cccd,
         email: email,
         phoneNumber: phoneNumber);
     Map<String, dynamic> userData = currentUser.toJson();
@@ -66,6 +65,7 @@ class _RegisterPageState extends State<RegisterPage> {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text(e.toString()),
         backgroundColor: Colors.red,
+        duration: const Duration(seconds: 1),
       ));
     }
   }

@@ -127,18 +127,37 @@ class CustomeListTile extends StatelessWidget {
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(top: 10),
-                    child: Row(
-                      children: [
-                        Flexible(
-                          child: Text(
-                            documentSnapshot['tenSach'],
-                            // overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(
-                              fontSize: 20,
+                    child: GestureDetector(
+                      onTap: () {
+                        var currentBook = Book(
+                          tenSach: documentSnapshot['tenSach'],
+                          biaSach: documentSnapshot['biaSach'],
+                          tacGia: documentSnapshot['tacGia'],
+                          giaBan: documentSnapshot['giaBan'].toString(),
+                          soTrang: documentSnapshot['soTrang'].toString(),
+                          loaiBia: documentSnapshot['loaiBia'],
+                          theLoai: documentSnapshot['theLoai'],
+                          moTa: documentSnapshot['moTa'],
+                        );
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    BookDetailWidget(book: currentBook)));
+                      },
+                      child: Row(
+                        children: [
+                          Flexible(
+                            child: Text(
+                              documentSnapshot['tenSach'],
+                              // overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                fontSize: 20,
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                   Row(

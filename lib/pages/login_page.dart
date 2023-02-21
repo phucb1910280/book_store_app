@@ -36,6 +36,7 @@ class _LoginPageState extends State<LoginPage> {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text('Email hoặc mật khẩu không hợp lệ!'),
         backgroundColor: Colors.red,
+        duration: Duration(seconds: 1),
       ));
     }
   }

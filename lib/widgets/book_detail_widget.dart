@@ -279,7 +279,7 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
         ),
       ),
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.only(left: 5, right: 5),
+        padding: const EdgeInsets.all(8),
         child: Container(
           decoration: const BoxDecoration(
             color: Colors.white,
@@ -318,11 +318,14 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
                 ),
               ),
               Expanded(
-                child: ElevatedButton(
-                    onPressed: () async {
-                      await addToCart(soLuong);
-                    },
-                    child: const Text('Thêm vào giỏ hàng')),
+                child: SizedBox(
+                  height: 50,
+                  child: ElevatedButton(
+                      onPressed: () async {
+                        await addToCart(soLuong);
+                      },
+                      child: const Text('Thêm vào giỏ hàng')),
+                ),
               )
             ],
           ),
