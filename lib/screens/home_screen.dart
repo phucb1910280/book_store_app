@@ -28,6 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
   mapRecords(QuerySnapshot<Map<String, dynamic>> records) {
     var list = records.docs
         .map((books) => Book(
+              id: books['id'],
               tenSach: books['tenSach'],
               biaSach: books['biaSach'],
               tacGia: books['tacGia'],

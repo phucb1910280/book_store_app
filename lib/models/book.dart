@@ -1,5 +1,5 @@
 class Book {
-  // String? id;
+  String? id;
   String tenSach;
   String biaSach;
   String tacGia;
@@ -10,7 +10,7 @@ class Book {
   String moTa;
 
   Book({
-    // required this.id,
+    required this.id,
     required this.tenSach,
     required this.biaSach,
     required this.tacGia,
@@ -23,7 +23,7 @@ class Book {
 
   Book.fromJson(Map<String, Object?> json)
       : this(
-          // id: (json['id']! as String),
+          id: (json['id']! as String),
           tenSach: (json['tenSach']! as String),
           biaSach: (json['biaSach']! as String),
           tacGia: (json['tacGia']! as String),
@@ -36,7 +36,7 @@ class Book {
 
   Map<String, Object?> toJson() {
     return {
-      // 'id': id,
+      'id': id,
       'tenSach': tenSach,
       'biaSach': biaSach,
       'tacGia': tacGia,

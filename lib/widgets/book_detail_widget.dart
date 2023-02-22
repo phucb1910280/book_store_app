@@ -22,9 +22,9 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
     return collectionRef
         .doc(currentUser!.email)
         .collection('cartItems')
-        .doc()
+        .doc(widget.book!.id)
         .set({
-      // 'id': widget.book!.id,
+      'id': widget.book!.id,
       'tenSach': widget.book!.tenSach,
       'giaBan': widget.book!.giaBan,
       'biaSach': widget.book!.biaSach,
@@ -54,9 +54,9 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
     return collectionRef
         .doc(currentUser!.email)
         .collection('favItems')
-        .doc()
+        .doc(widget.book!.id)
         .set({
-      // 'id': widget.book!.id,
+      'id': widget.book!.id,
       'tenSach': widget.book!.tenSach,
       'giaBan': widget.book!.giaBan,
       'biaSach': widget.book!.biaSach,

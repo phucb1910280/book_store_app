@@ -97,6 +97,7 @@ class CustomeListTile extends StatelessWidget {
                     child: GestureDetector(
                       onTap: () {
                         var currentBook = Book(
+                          id: documentSnapshot['id'],
                           tenSach: documentSnapshot['tenSach'],
                           biaSach: documentSnapshot['biaSach'],
                           tacGia: documentSnapshot['tacGia'],
@@ -130,6 +131,7 @@ class CustomeListTile extends StatelessWidget {
                     child: GestureDetector(
                       onTap: () {
                         var currentBook = Book(
+                          id: documentSnapshot['id'],
                           tenSach: documentSnapshot['tenSach'],
                           biaSach: documentSnapshot['biaSach'],
                           tacGia: documentSnapshot['tacGia'],
