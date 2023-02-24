@@ -81,8 +81,12 @@ class CustomeListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 8, left: 0, right: 5, bottom: 5),
-      child: SizedBox(
+      padding: const EdgeInsets.fromLTRB(15, 10, 15, 5),
+      child: Container(
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+          color: Colors.white,
+        ),
         height: 150,
         child: Row(
           children: [
@@ -163,14 +167,12 @@ class CustomeListTile extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      Flexible(
-                        child: Text(
-                          '${documentSnapshot['giaBan']}₫',
-                          style: const TextStyle(
-                            fontSize: 20,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                          ),
+                      Text(
+                        '${documentSnapshot['giaBan']}₫',
+                        style: const TextStyle(
+                          fontSize: 20,
+                          color: Colors.teal,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ],

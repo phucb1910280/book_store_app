@@ -96,81 +96,84 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: ListView(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(
-                  left: 20, right: 20, top: 10, bottom: 10),
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 300,
-                    width: double.infinity,
-                    child: Stack(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.network(
-                              widget.book!.biaSach.toString(),
-                              fit: BoxFit.contain,
-                            ),
-                          ],
-                        ),
-                        Positioned(
-                          top: 0,
-                          left: 0,
-                          child: Container(
-                            height: 40,
-                            width: 40,
-                            decoration: BoxDecoration(
-                              color: Colors.grey[100],
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                            child: IconButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              icon: const Icon(
-                                Icons.arrow_back,
-                                color: Colors.black,
-                              ),
+      body: ListView(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(
+                // left: 20, right: 20,
+                top: 10,
+                bottom: 0),
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 300,
+                  width: double.infinity,
+                  child: Stack(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Image.network(
+                            widget.book!.biaSach.toString(),
+                            fit: BoxFit.contain,
+                          ),
+                        ],
+                      ),
+                      Positioned(
+                        top: 0,
+                        left: 10,
+                        child: Container(
+                          height: 40,
+                          width: 40,
+                          decoration: BoxDecoration(
+                            color: Colors.grey[100],
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          child: IconButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            icon: const Icon(
+                              Icons.arrow_back,
+                              color: Colors.teal,
                             ),
                           ),
                         ),
-                        Positioned(
-                          top: 0,
-                          right: 0,
-                          child: Container(
-                            height: 40,
-                            width: 40,
-                            decoration: BoxDecoration(
-                              color: Colors.grey[100],
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                            child: IconButton(
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const CartLogged()));
-                              },
-                              icon: const Icon(
-                                Icons.shopping_cart_sharp,
-                                color: Colors.black,
-                              ),
+                      ),
+                      Positioned(
+                        top: 0,
+                        right: 10,
+                        child: Container(
+                          height: 40,
+                          width: 40,
+                          decoration: BoxDecoration(
+                            color: Colors.grey[100],
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          child: IconButton(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const CartLogged()));
+                            },
+                            icon: const Icon(
+                              Icons.shopping_cart_sharp,
+                              color: Colors.teal,
                             ),
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Row(
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Flexible(
@@ -185,150 +188,193 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
                       ),
                     ],
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          '${widget.book!.giaBan}₫',
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.red[700],
-                            fontWeight: FontWeight.bold,
-                          ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 20, right: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        '${widget.book!.giaBan}₫',
+                        style: const TextStyle(
+                          fontSize: 25,
+                          color: Colors.teal,
+                          fontWeight: FontWeight.bold,
                         ),
-                        ElevatedButton(
-                            onPressed: () async {
+                      ),
+                      ElevatedButton(
+                          onPressed: () async {
+                            if (FirebaseAuth.instance.currentUser != null) {
                               await addToFav(soLuong);
-                            },
-                            child: const Text('Yêu thích')),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: const [
-                      Text(
-                        'Thông tin sách',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 25,
-                        ),
-                      ),
+                            } else {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(const SnackBar(
+                                content: Text(
+                                  'Vui lòng đăng nhập để tiếp tục!',
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                                backgroundColor: Colors.teal,
+                                duration: Duration(seconds: 1),
+                              ));
+                            }
+                          },
+                          child: const Text('Yêu thích')),
                     ],
                   ),
-                  const SizedBox(
-                    height: 10,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.teal[50],
+                    borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(45),
+                        topRight: Radius.circular(45)),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10, right: 10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 30, 20, 5),
+                    child: Column(
                       children: [
-                        Text(
-                          'Tác giả: ${widget.book!.tacGia}\nSố Trang: ${widget.book!.soTrang}\nLoại bìa: ${widget.book!.loaiBia}',
-                          style: const TextStyle(
-                            fontSize: 20,
-                            color: Colors.black,
-                            fontStyle: FontStyle.italic,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: const [
+                            Text(
+                              'Thông tin sách',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 25,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10, right: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Tác giả: ${widget.book!.tacGia}\nSố trang: ${widget.book!.soTrang}\nLoại bìa: ${widget.book!.loaiBia}',
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.black,
+                                  fontStyle: FontStyle.italic,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: const [
+                            Text(
+                              'Mô tả',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 25,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10, right: 10),
+                          child: Text(
+                            widget.book!.moTa,
+                            style: const TextStyle(
+                              fontSize: 20,
+                              color: Colors.black,
+                              fontStyle: FontStyle.italic,
+                            ),
                           ),
                         ),
                       ],
                     ),
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: const [
-                      Text(
-                        'Mô tả',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 25,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10, right: 10),
-                    child: Text(
-                      widget.book!.moTa,
-                      style: const TextStyle(
-                        fontSize: 20,
-                        color: Colors.black,
-                        fontStyle: FontStyle.italic,
-                      ),
-                    ),
-                  ),
-                ],
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+      bottomNavigationBar: Container(
+        height: 60,
+        decoration: const BoxDecoration(
+          color: Colors.white,
+        ),
+        child: Row(
+          children: [
+            const SizedBox(
+              width: 5,
+            ),
+            IconButton(
+              onPressed: () {
+                decreaseSL();
+              },
+              color: Colors.deepPurple.shade100,
+              icon: const Icon(Icons.remove, color: Colors.black),
+            ),
+            const SizedBox(
+              width: 10,
+            ),
+            SizedBox(
+                width: 20,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(soLuong.toString()),
+                  ],
+                )),
+            const SizedBox(
+              width: 10,
+            ),
+            IconButton(
+              onPressed: () {
+                increaseSL();
+              },
+              color: Colors.deepPurple.shade100,
+              icon: const Icon(
+                Icons.add,
+                color: Colors.black,
               ),
             ),
-          ],
-        ),
-      ),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(8),
-        child: Container(
-          decoration: const BoxDecoration(
-            color: Colors.white,
-          ),
-          child: Row(
-            children: [
-              IconButton(
-                onPressed: () {
-                  decreaseSL();
-                },
-                color: Colors.deepPurple.shade100,
-                icon: const Icon(Icons.remove, color: Colors.black),
-              ),
-              const SizedBox(
-                width: 10,
-              ),
-              SizedBox(
-                  width: 20,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(soLuong.toString()),
-                    ],
-                  )),
-              const SizedBox(
-                width: 10,
-              ),
-              IconButton(
-                onPressed: () {
-                  increaseSL();
-                },
-                color: Colors.deepPurple.shade100,
-                icon: const Icon(
-                  Icons.add,
-                  color: Colors.black,
-                ),
-              ),
-              Expanded(
-                child: SizedBox(
-                  height: 50,
-                  child: ElevatedButton(
-                      onPressed: () async {
+            Expanded(
+              child: SizedBox(
+                height: 50,
+                child: ElevatedButton(
+                    onPressed: () async {
+                      if (FirebaseAuth.instance.currentUser != null) {
                         await addToCart(soLuong);
-                      },
-                      child: const Text('Thêm vào giỏ hàng')),
-                ),
-              )
-            ],
-          ),
+                      } else {
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(const SnackBar(
+                          content: Text(
+                            'Vui lòng đăng nhập để tiếp tục!',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          backgroundColor: Colors.teal,
+                          duration: Duration(seconds: 1),
+                        ));
+                      }
+                    },
+                    child: const Text('Thêm vào giỏ hàng')),
+              ),
+            ),
+            const SizedBox(
+              width: 10,
+            ),
+          ],
         ),
       ),
     );

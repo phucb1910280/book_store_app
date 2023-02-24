@@ -28,11 +28,8 @@ class _LoginPageState extends State<LoginPage> {
             MaterialPageRoute(builder: (_) => const HomePage()),
             (route) => false);
       }
-      // Navigator.push(
-      //     context, MaterialPageRoute(builder: (_) => const MainPage()));
       // ignore: unused_catch_clause
     } on FirebaseAuthException catch (e) {
-      // _showDialog(e.toString());
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text('Email hoặc mật khẩu không hợp lệ!'),
         backgroundColor: Colors.red,
@@ -81,7 +78,7 @@ class _LoginPageState extends State<LoginPage> {
                       width: 20,
                     ),
                     Text(
-                      'Xin chào',
+                      'Xin chào!',
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 35,

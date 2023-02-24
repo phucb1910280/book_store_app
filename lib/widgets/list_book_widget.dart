@@ -14,14 +14,6 @@ class ListOfBookWidget extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(10),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.3),
-              spreadRadius: 1,
-              blurRadius: 5,
-              offset: const Offset(0, 3), // changes position of shadow
-            ),
-          ],
         ),
         child: Column(
           children: [
@@ -33,13 +25,11 @@ class ListOfBookWidget extends StatelessWidget {
               child: Image.network(
                 book!.biaSach.toString(),
                 fit: BoxFit.contain,
-                // height: deviceHeight * 0.2,
               ),
             ),
             Expanded(
               flex: 2,
               child: Column(
-                // mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -62,7 +52,8 @@ class ListOfBookWidget extends StatelessWidget {
                           '${book!.giaBan.toString()}₫',
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Colors.deepPurple,
+                            fontSize: 17,
+                            color: Colors.teal,
                           ),
                         ),
                       ],

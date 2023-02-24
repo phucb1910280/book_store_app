@@ -14,7 +14,6 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  // text controllers
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController repasswordController = TextEditingController();
@@ -47,6 +46,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   Future signUp() async {
     try {
+      checkRegisterForm();
       if (confirmedPW()) {
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
             email: emailController.text.trim(),
@@ -60,12 +60,35 @@ class _RegisterPageState extends State<RegisterPage> {
               MaterialPageRoute(builder: (_) => const HomePage()),
               (route) => false);
         }
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text('Mật khẩu không trùng khớp'),
+          backgroundColor: Colors.red,
+          duration: Duration(seconds: 1),
+        ));
       }
     } on FirebaseAuthException catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text(e.toString()),
         backgroundColor: Colors.red,
         duration: const Duration(seconds: 1),
+      ));
+    }
+  }
+
+  checkRegisterForm() {
+    if (fullNameController.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text('Vui lòng nhập họ tên'),
+        backgroundColor: Colors.red,
+        duration: Duration(seconds: 1),
+      ));
+    }
+    if (passwordController.text.length < 8) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text('Mật khẩu phải dài hơn 8 ký tự'),
+        backgroundColor: Colors.red,
+        duration: Duration(seconds: 1),
       ));
     }
   }
@@ -92,15 +115,21 @@ class _RegisterPageState extends State<RegisterPage> {
                 const SizedBox(
                   height: 40,
                 ),
-                const Center(
-                  child: Text(
-                    'WELCOME!',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 35,
-                      fontWeight: FontWeight.bold,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: const [
+                    SizedBox(
+                      width: 20,
                     ),
-                  ),
+                    Text(
+                      'Chào mừng bạn!',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 35,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
                 ),
                 const SizedBox(
                   height: 40,

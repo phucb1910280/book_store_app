@@ -63,10 +63,6 @@ class _ProfileLoggedState extends State<ProfileLogged> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   backgroundColor: Colors.black,
-      //   elevation: 0,
-      // ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -74,8 +70,17 @@ class _ProfileLoggedState extends State<ProfileLogged> {
               Padding(
                 padding: const EdgeInsets.all(10),
                 child: Container(
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.8),
+                        spreadRadius: 1,
+                        blurRadius: 8,
+                        offset:
+                            const Offset(0, 3), // changes position of shadow
+                      ),
+                    ],
+                    borderRadius: const BorderRadius.all(Radius.circular(20)),
                     color: Colors.teal,
                   ),
                   child: Padding(
