@@ -8,8 +8,9 @@ class ProfileNotLoggedIn extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
+        elevation: 0,
+        backgroundColor: Colors.teal,
+        foregroundColor: Colors.white,
         title: const Text('Tài khoản'),
         centerTitle: true,
       ),

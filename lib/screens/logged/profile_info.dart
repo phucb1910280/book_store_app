@@ -12,6 +12,7 @@ class ProfileInfo extends StatelessWidget {
       value,
       style: const TextStyle(
         fontSize: 22,
+        color: Colors.teal,
       ),
     );
   }
@@ -20,8 +21,9 @@ class ProfileInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
+        elevation: 0,
+        backgroundColor: Colors.teal,
+        foregroundColor: Colors.white,
         title: const Text('Thông tin của tôi'),
         centerTitle: true,
       ),
@@ -34,9 +36,17 @@ class ProfileInfo extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  customeTextStye('Họ tên:'),
+                  const Text(
+                    'Họ tên:',
+                    style: TextStyle(
+                      fontSize: 20,
+                    ),
+                  ),
                   Flexible(
-                      child: customeTextStye(currentUser!.fullName.toString())),
+                    child: customeTextStye(
+                      currentUser!.fullName.toString(),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -49,7 +59,12 @@ class ProfileInfo extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  customeTextStye('Số điện thoại:'),
+                  const Text(
+                    'Số điện thoại:',
+                    style: TextStyle(
+                      fontSize: 20,
+                    ),
+                  ),
                   Flexible(
                       child:
                           customeTextStye(currentUser!.phoneNumber.toString())),
@@ -65,7 +80,12 @@ class ProfileInfo extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  customeTextStye('Email:'),
+                  const Text(
+                    'Email:',
+                    style: TextStyle(
+                      fontSize: 20,
+                    ),
+                  ),
                   Flexible(
                       child: customeTextStye(currentUser!.email.toString())),
                 ],
@@ -80,7 +100,12 @@ class ProfileInfo extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  customeTextStye('Địa chỉ:'),
+                  const Text(
+                    'Địa chỉ:',
+                    style: TextStyle(
+                      fontSize: 20,
+                    ),
+                  ),
                   const SizedBox(
                     width: 30,
                   ),
@@ -101,7 +126,7 @@ class ProfileInfo extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(50),
                   border: Border.all(
-                    color: Colors.black,
+                    color: Colors.teal,
                     width: 2,
                     style: BorderStyle.solid,
                     strokeAlign: BorderSide.strokeAlignCenter,
@@ -112,7 +137,7 @@ class ProfileInfo extends StatelessWidget {
                     Expanded(child: SizedBox()),
                     Icon(
                       Icons.edit,
-                      color: Colors.black,
+                      color: Colors.teal,
                     ),
                     SizedBox(
                       width: 15,
@@ -121,6 +146,7 @@ class ProfileInfo extends StatelessWidget {
                       'Chỉnh sửa thông tin',
                       style: TextStyle(
                         fontSize: 20,
+                        color: Colors.teal,
                       ),
                     ),
                     Expanded(child: SizedBox()),

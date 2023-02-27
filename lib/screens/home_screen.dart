@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:simple_app/widgets/book_detail_widget.dart';
 import 'package:simple_app/widgets/list_book_widget.dart';
 import 'package:simple_app/models/book.dart';
@@ -47,19 +48,46 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[50],
+      backgroundColor: Colors.grey[100],
       appBar: AppBar(
+        systemOverlayStyle:
+            const SystemUiOverlayStyle(statusBarColor: Colors.transparent),
+        elevation: 0,
         title: Image.asset(
           'assets/images/appLogo_04.png',
           height: 45,
         ),
         centerTitle: true,
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.deepPurple,
+        backgroundColor: Colors.teal,
       ),
       body: Column(
         children: [
-          // CustomeAppBar(),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(10, 15, 10, 0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Container(
+                  width: 5,
+                  height: 30,
+                  decoration: const BoxDecoration(
+                    color: Colors.teal,
+                  ),
+                ),
+                const SizedBox(
+                  width: 20,
+                ),
+                const Text(
+                  'Tất cả sách',
+                  style: TextStyle(
+                    color: Colors.teal,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.only(top: 10, left: 5, right: 5),

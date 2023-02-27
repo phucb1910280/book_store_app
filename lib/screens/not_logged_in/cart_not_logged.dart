@@ -11,8 +11,9 @@ class CartNotLogged extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Giỏ hàng'),
         centerTitle: true,
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
+        elevation: 0,
+        backgroundColor: Colors.teal,
+        foregroundColor: Colors.white,
       ),
       body: Center(
         child: Column(

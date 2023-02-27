@@ -102,17 +102,17 @@ class _LoginPageState extends State<LoginPage> {
                         borderSide: const BorderSide(
                           color: Colors.white,
                         ),
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(25),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderSide: const BorderSide(
                           width: 2,
                           color: Colors.black,
                         ),
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(25),
                       ),
                       hintText: 'Email',
-                      fillColor: Colors.grey[200],
+                      fillColor: Colors.grey[100],
                       filled: true,
                     ),
                   ),
@@ -135,17 +135,17 @@ class _LoginPageState extends State<LoginPage> {
                             borderSide: const BorderSide(
                               color: Colors.white,
                             ),
-                            borderRadius: BorderRadius.circular(12),
+                            borderRadius: BorderRadius.circular(25),
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderSide: const BorderSide(
                               width: 2,
                               color: Colors.black,
                             ),
-                            borderRadius: BorderRadius.circular(12),
+                            borderRadius: BorderRadius.circular(25),
                           ),
                           hintText: 'Mật khẩu',
-                          fillColor: Colors.grey[200],
+                          fillColor: Colors.grey[100],
                           filled: true,
                         ),
                       ),
@@ -180,7 +180,7 @@ class _LoginPageState extends State<LoginPage> {
                       padding: const EdgeInsets.all(15),
                       decoration: BoxDecoration(
                           color: Colors.black,
-                          borderRadius: BorderRadius.circular(12)),
+                          borderRadius: BorderRadius.circular(25)),
                       child: const Center(
                         child: Text(
                           'Đăng nhập',
@@ -214,7 +214,7 @@ class _LoginPageState extends State<LoginPage> {
                       child: const Text(
                         'Đăng ký ngay',
                         style: TextStyle(
-                          color: Colors.deepPurple,
+                          color: Colors.purple,
                           fontSize: 17,
                         ),
                       ),

@@ -19,8 +19,9 @@ class _CartLoggedState extends State<CartLogged> {
       appBar: AppBar(
         title: const Text('Giỏ hàng của tôi'),
         centerTitle: true,
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
+        backgroundColor: Colors.teal,
+        foregroundColor: Colors.white,
+        elevation: 0,
       ),
       body: SafeArea(
         child: StreamBuilder(
