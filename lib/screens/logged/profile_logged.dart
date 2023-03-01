@@ -129,17 +129,19 @@ class _ProfileLoggedState extends State<ProfileLogged> {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 30, 20, 20),
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ProfileInfo(
-                                currentUser: currentUser,
-                              )));
-                },
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ProfileInfo(
+                      currentUser: currentUser,
+                    ),
+                  ),
+                );
+              },
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(20, 30, 20, 20),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: const [
@@ -150,12 +152,14 @@ class _ProfileLoggedState extends State<ProfileLogged> {
                     SizedBox(
                       width: 15,
                     ),
-                    Text(
-                      'Thông tin của tôi',
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontStyle: FontStyle.normal,
-                          color: Colors.black),
+                    Expanded(
+                      child: Text(
+                        'Thông tin của tôi',
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontStyle: FontStyle.normal,
+                            color: Colors.black),
+                      ),
                     ),
                   ],
                 ),
@@ -164,10 +168,10 @@ class _ProfileLoggedState extends State<ProfileLogged> {
             const SizedBox(
               height: 10,
             ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 10, 20, 20),
-              child: GestureDetector(
-                onTap: () {},
+            GestureDetector(
+              onTap: () {},
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(20, 10, 20, 20),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: const [
@@ -178,12 +182,14 @@ class _ProfileLoggedState extends State<ProfileLogged> {
                     SizedBox(
                       width: 15,
                     ),
-                    Text(
-                      'Cập nhật thông tin',
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontStyle: FontStyle.normal,
-                          color: Colors.black),
+                    Expanded(
+                      child: Text(
+                        'Cập nhật thông tin',
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontStyle: FontStyle.normal,
+                            color: Colors.black),
+                      ),
                     ),
                   ],
                 ),
@@ -192,10 +198,10 @@ class _ProfileLoggedState extends State<ProfileLogged> {
             const SizedBox(
               height: 10,
             ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 10, 20, 20),
-              child: GestureDetector(
-                onTap: () {},
+            GestureDetector(
+              onTap: () {},
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(20, 10, 20, 20),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -208,12 +214,14 @@ class _ProfileLoggedState extends State<ProfileLogged> {
                     const SizedBox(
                       width: 15,
                     ),
-                    const Text(
-                      'Đơn hàng của tôi',
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontStyle: FontStyle.normal,
-                          color: Colors.black),
+                    const Expanded(
+                      child: Text(
+                        'Đơn hàng của tôi',
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontStyle: FontStyle.normal,
+                            color: Colors.black),
+                      ),
                     ),
                   ],
                 ),

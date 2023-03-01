@@ -96,6 +96,7 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: ListView(
         children: [
           Padding(
@@ -255,12 +256,37 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
                           height: 10,
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 10, right: 10),
+                          padding: const EdgeInsets.fromLTRB(10, 4, 10, 4),
+                          child: Row(
+                            children: [
+                              const Text(
+                                'Tác giả: ',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.black,
+                                  fontStyle: FontStyle.italic,
+                                ),
+                              ),
+                              Flexible(
+                                child: Text(
+                                  widget.book!.tacGia,
+                                  style: const TextStyle(
+                                    fontSize: 20,
+                                    color: Colors.black,
+                                    fontStyle: FontStyle.italic,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(10, 4, 10, 4),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Text(
-                                'Tác giả: ${widget.book!.tacGia}\nSố trang: ${widget.book!.soTrang}\nLoại bìa: ${widget.book!.loaiBia}',
+                                'Số trang: ${widget.book!.soTrang}\nLoại bìa: ${widget.book!.loaiBia}',
                                 style: const TextStyle(
                                   fontSize: 20,
                                   color: Colors.black,

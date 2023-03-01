@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:simple_app/shared/book_of_category.dart';
 
 class CategoryScreen extends StatelessWidget {
   const CategoryScreen({super.key});
@@ -32,20 +33,88 @@ class CategoryScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             GestureDetector(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const BookOfCategory(
+                              theLoaiSach: 'vanhoc',
+                              tenTheLoaiSach: 'Sách Văn học',
+                            )));
+              },
               child: customeText('Sách Văn học'),
             ),
             GestureDetector(
-              onTap: () {},
-              child: customeText('Sách Thiếu Nhi'),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const BookOfCategory(
+                              theLoaiSach: 'kinhte',
+                              tenTheLoaiSach: 'Sách Kinh tế',
+                            )));
+              },
+              child: customeText('Sách Kinh tế'),
             ),
             GestureDetector(
-              onTap: () {},
-              child: customeText('Truyện tranh'),
-            ),
-            GestureDetector(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const BookOfCategory(
+                              theLoaiSach: 'sgk',
+                              tenTheLoaiSach: 'SGK - Tham khảo',
+                            )));
+              },
               child: customeText('Sách Giáo khoa - Tham khảo'),
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const BookOfCategory(
+                              theLoaiSach: 'kynang',
+                              tenTheLoaiSach: 'Sách Kỹ năng sống',
+                            )));
+              },
+              child: customeText('Sách Kỹ năng sống'),
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const BookOfCategory(
+                              theLoaiSach: 'nuoicon',
+                              tenTheLoaiSach: 'Sách Nuôi dạy con',
+                            )));
+              },
+              child: customeText('Sách Nuôi dạy con'),
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const BookOfCategory(
+                              theLoaiSach: 'thieunhi',
+                              tenTheLoaiSach: 'Sách Thiếu nhi',
+                            )));
+              },
+              child: customeText('Sách Thiếu nhi'),
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const BookOfCategory(
+                              theLoaiSach: 'tieusu',
+                              tenTheLoaiSach: 'Sách Tiểu sử',
+                            )));
+              },
+              child: customeText('Sách Tiểu sử'),
             ),
           ],
         ),

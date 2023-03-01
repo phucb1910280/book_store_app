@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../models/book.dart';
-import '../../widgets/book_detail_widget.dart';
+import '../../shared/book_detail.dart';
 
 class FavoriteLogged extends StatefulWidget {
   const FavoriteLogged({super.key});

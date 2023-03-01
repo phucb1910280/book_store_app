@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_app/models/book.dart';
-import 'package:simple_app/widgets/book_detail_widget.dart';
+import 'package:simple_app/shared/book_detail.dart';
 
 class CartLogged extends StatefulWidget {
   const CartLogged({super.key});

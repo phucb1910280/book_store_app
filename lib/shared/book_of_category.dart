@@ -1,18 +1,24 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+
+import 'package:simple_app/models/book.dart';
 import 'package:simple_app/shared/book_detail.dart';
 import 'package:simple_app/shared/list_book_widget.dart';
-import 'package:simple_app/models/book.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class BookOfCategory extends StatefulWidget {
+  final String tenTheLoaiSach;
+  final String theLoaiSach;
+  const BookOfCategory({
+    Key? key,
+    required this.tenTheLoaiSach,
+    required this.theLoaiSach,
+  }) : super(key: key);
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<BookOfCategory> createState() => _BookOfCategoryState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _BookOfCategoryState extends State<BookOfCategory> {
   List<Book> bookList = [];
 
   @override
@@ -22,7 +28,10 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void fetchRecord() async {
-    var records = await FirebaseFirestore.instance.collection('books').get();
+    var records = await FirebaseFirestore.instance
+        .collection('books')
+        .where('theLoai', isEqualTo: widget.theLoaiSach)
+        .get();
     mapRecords(records);
   }
 
@@ -50,44 +59,14 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
-        systemOverlayStyle:
-            const SystemUiOverlayStyle(statusBarColor: Colors.transparent),
         elevation: 0,
-        title: Image.asset(
-          'assets/images/appLogo_04.png',
-          height: 45,
-        ),
+        title: Text(widget.tenTheLoaiSach),
         centerTitle: true,
         backgroundColor: Colors.teal,
+        foregroundColor: Colors.white,
       ),
       body: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(10, 15, 10, 0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Container(
-                  width: 5,
-                  height: 30,
-                  decoration: const BoxDecoration(
-                    color: Colors.teal,
-                  ),
-                ),
-                const SizedBox(
-                  width: 20,
-                ),
-                const Text(
-                  'Tất cả sách',
-                  style: TextStyle(
-                    color: Colors.teal,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-          ),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.only(top: 10, left: 5, right: 5),
