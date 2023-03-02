@@ -1,11 +1,51 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../models/user.dart';
+import 'edit_profile.dart';
 
-class ProfileInfo extends StatelessWidget {
-  final CurrentUser? currentUser;
+class ProfileInfo extends StatefulWidget {
+  const ProfileInfo({super.key});
 
-  const ProfileInfo({super.key, required this.currentUser});
+  @override
+  State<ProfileInfo> createState() => _ProfileInfoState();
+}
+
+class _ProfileInfoState extends State<ProfileInfo> {
+  @override
+  void initState() {
+    getDocData();
+    super.initState();
+  }
+
+  var currentUser =
+      CurrentUser(fullName: '', address: '', email: '', phoneNumber: '');
+  Future<void> getDocData() async {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    var user = auth.currentUser;
+    var collection = FirebaseFirestore.instance.collection('user');
+    var docSnapshot = await collection.doc(user!.email).get();
+    try {
+      if (docSnapshot.exists) {
+        Map<String, dynamic>? data = docSnapshot.data();
+        var currentUserName = data?['fullName'];
+        var currentUserAddress = data?['address'];
+        var currentUserEmail = data?['email'];
+        var currentUserPhoneNumber = data?['phoneNumber'];
+        var thisUser = CurrentUser(
+            fullName: currentUserName,
+            address: currentUserAddress,
+            email: currentUserEmail,
+            phoneNumber: currentUserPhoneNumber);
+        setState(() {
+          currentUser = thisUser;
+        });
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 
   Widget customeTextStye(String value) {
     return Text(
@@ -26,6 +66,11 @@ class ProfileInfo extends StatelessWidget {
         foregroundColor: Colors.white,
         title: const Text('Thông tin của tôi'),
         centerTitle: true,
+        leading: BackButton(
+          onPressed: () {
+            Navigator.pop(context, currentUser);
+          },
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(20, 15, 20, 20),
@@ -44,7 +89,7 @@ class ProfileInfo extends StatelessWidget {
                   ),
                   Flexible(
                     child: customeTextStye(
-                      currentUser!.fullName.toString(),
+                      currentUser.fullName.toString(),
                     ),
                   ),
                 ],
@@ -67,7 +112,7 @@ class ProfileInfo extends StatelessWidget {
                   ),
                   Flexible(
                       child:
-                          customeTextStye(currentUser!.phoneNumber.toString())),
+                          customeTextStye(currentUser.phoneNumber.toString())),
                 ],
               ),
             ),
@@ -87,7 +132,7 @@ class ProfileInfo extends StatelessWidget {
                     ),
                   ),
                   Flexible(
-                      child: customeTextStye(currentUser!.email.toString())),
+                      child: customeTextStye(currentUser.email.toString())),
                 ],
               ),
             ),
@@ -110,7 +155,7 @@ class ProfileInfo extends StatelessWidget {
                     width: 30,
                   ),
                   Flexible(
-                      child: customeTextStye(currentUser!.address.toString())),
+                      child: customeTextStye(currentUser.address.toString())),
                 ],
               ),
             ),
@@ -120,7 +165,16 @@ class ProfileInfo extends StatelessWidget {
                 foregroundColor: Colors.black,
                 // backgroundColor: Colors.white,
               ),
-              onPressed: () {},
+              onPressed: () async {
+                final updatedUser = await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            EditProfile(currentUser: currentUser)));
+                setState(() {
+                  currentUser = updatedUser;
+                });
+              },
               child: Container(
                 height: 50,
                 decoration: BoxDecoration(

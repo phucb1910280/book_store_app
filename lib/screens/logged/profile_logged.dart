@@ -6,6 +6,7 @@ import 'package:simple_app/screens/logged/about_me.dart';
 import 'package:simple_app/screens/logged/profile_info.dart';
 
 import '../../pages/home_page.dart';
+import 'edit_profile.dart';
 
 class ProfileLogged extends StatefulWidget {
   const ProfileLogged({super.key});
@@ -130,15 +131,14 @@ class _ProfileLoggedState extends State<ProfileLogged> {
               ),
             ),
             GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ProfileInfo(
-                      currentUser: currentUser,
-                    ),
-                  ),
-                );
+              onTap: () async {
+                final updatedUser = await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const ProfileInfo()));
+                setState(() {
+                  currentUser = updatedUser;
+                });
               },
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(20, 30, 20, 20),
@@ -169,7 +169,16 @@ class _ProfileLoggedState extends State<ProfileLogged> {
               height: 10,
             ),
             GestureDetector(
-              onTap: () {},
+              onTap: () async {
+                final updatedUser = await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            EditProfile(currentUser: currentUser)));
+                setState(() {
+                  currentUser = updatedUser;
+                });
+              },
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(20, 10, 20, 20),
                 child: Row(
