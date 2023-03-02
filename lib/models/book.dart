@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 class Book {
   String? id;
   String tenSach;
@@ -7,6 +8,7 @@ class Book {
   String soTrang;
   String loaiBia;
   String theLoai;
+  String thuocTheLoai;
   String moTa;
 
   Book({
@@ -18,6 +20,7 @@ class Book {
     required this.soTrang,
     required this.loaiBia,
     required this.theLoai,
+    required this.thuocTheLoai,
     required this.moTa,
   });
 
@@ -31,6 +34,7 @@ class Book {
           soTrang: (json['soTrang']! as String),
           loaiBia: (json['loaiBia']! as String),
           theLoai: (json['theLoai']! as String),
+          thuocTheLoai: (json['thuocTheLoai']! as String),
           moTa: (json['moTa']! as String),
         );
 
@@ -44,6 +48,7 @@ class Book {
       'soTrang': soTrang,
       'loaiBia': loaiBia,
       'theLoai': theLoai,
+      'thuocTheLoai': thuocTheLoai,
       'moTa': moTa,
     };
   }

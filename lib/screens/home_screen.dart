@@ -37,6 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
               soTrang: books['soTrang'].toString(),
               loaiBia: books['loaiBia'],
               theLoai: books['theLoai'],
+              thuocTheLoai: books['thuocTheLoai'],
               moTa: books['moTa'],
             ))
         .toList();

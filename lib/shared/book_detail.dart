@@ -267,12 +267,15 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
                                   fontStyle: FontStyle.italic,
                                 ),
                               ),
+                              const SizedBox(
+                                width: 10,
+                              ),
                               Flexible(
                                 child: Text(
                                   widget.book!.tacGia,
                                   style: const TextStyle(
                                     fontSize: 20,
-                                    color: Colors.black,
+                                    color: Colors.teal,
                                     fontStyle: FontStyle.italic,
                                   ),
                                 ),
@@ -283,13 +286,66 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
                         Padding(
                           padding: const EdgeInsets.fromLTRB(10, 4, 10, 4),
                           child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Text(
-                                'Số trang: ${widget.book!.soTrang}\nLoại bìa: ${widget.book!.loaiBia}',
-                                style: const TextStyle(
+                              const Text(
+                                'Số trang: ',
+                                style: TextStyle(
                                   fontSize: 20,
                                   color: Colors.black,
+                                  fontStyle: FontStyle.italic,
+                                ),
+                              ),
+                              Text(
+                                widget.book!.soTrang,
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.teal,
+                                  fontStyle: FontStyle.italic,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(10, 4, 10, 4),
+                          child: Row(
+                            children: [
+                              const Text(
+                                'Loại bìa: ',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.black,
+                                  fontStyle: FontStyle.italic,
+                                ),
+                              ),
+                              Text(
+                                widget.book!.loaiBia,
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.teal,
+                                  fontStyle: FontStyle.italic,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(10, 4, 10, 4),
+                          child: Row(
+                            children: [
+                              const Text(
+                                'Thể loại: ',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.black,
+                                  fontStyle: FontStyle.italic,
+                                ),
+                              ),
+                              Text(
+                                widget.book!.thuocTheLoai,
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.teal,
                                   fontStyle: FontStyle.italic,
                                 ),
                               ),

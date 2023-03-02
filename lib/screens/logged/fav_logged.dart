@@ -110,6 +110,7 @@ class CustomeListTile extends StatelessWidget {
                           soTrang: documentSnapshot['soTrang'].toString(),
                           loaiBia: documentSnapshot['loaiBia'],
                           theLoai: documentSnapshot['theLoai'],
+                          thuocTheLoai: documentSnapshot['thuocTheLoai'],
                           moTa: documentSnapshot['moTa'],
                         );
                         Navigator.push(
@@ -144,6 +145,7 @@ class CustomeListTile extends StatelessWidget {
                           soTrang: documentSnapshot['soTrang'].toString(),
                           loaiBia: documentSnapshot['loaiBia'],
                           theLoai: documentSnapshot['theLoai'],
+                          thuocTheLoai: documentSnapshot['thuocTheLoai'],
                           moTa: documentSnapshot['moTa'],
                         );
                         Navigator.push(

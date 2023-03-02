@@ -46,6 +46,7 @@ class _BookOfCategoryState extends State<BookOfCategory> {
               soTrang: books['soTrang'].toString(),
               loaiBia: books['loaiBia'],
               theLoai: books['theLoai'],
+              thuocTheLoai: books['thuocTheLoai'],
               moTa: books['moTa'],
             ))
         .toList();
