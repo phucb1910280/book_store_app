@@ -59,7 +59,6 @@ class _HomeScreenState extends State<HomeScreen> {
           height: 45,
         ),
         centerTitle: true,
-        backgroundColor: Colors.teal,
       ),
       body: Column(
         children: [

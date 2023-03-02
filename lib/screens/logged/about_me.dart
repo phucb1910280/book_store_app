@@ -7,9 +7,11 @@ class AboutMe extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: const Text('Thông tin ứng dụng'),
         elevation: 0,
-        backgroundColor: Colors.teal,
-        foregroundColor: Colors.white,
+        centerTitle: true,
+        // backgroundColor: Colors.teal,
+        // foregroundColor: Colors.white,
       ),
       body: Center(
           child: Column(

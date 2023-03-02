@@ -64,10 +64,6 @@ class _ProfileLoggedState extends State<ProfileLogged> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   elevation: 0,
-      //   backgroundColor: Colors.teal,
-      // ),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -130,18 +126,22 @@ class _ProfileLoggedState extends State<ProfileLogged> {
                 ),
               ),
             ),
-            GestureDetector(
-              onTap: () async {
-                final updatedUser = await Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const ProfileInfo()));
-                setState(() {
-                  currentUser = updatedUser;
-                });
-              },
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(20, 30, 20, 20),
+            const SizedBox(
+              height: 10,
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
+              child: TextButton(
+                style: const ButtonStyle(alignment: Alignment.bottomLeft),
+                onPressed: () async {
+                  final updatedUser = await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const ProfileInfo()));
+                  setState(() {
+                    currentUser = updatedUser;
+                  });
+                },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: const [
@@ -165,22 +165,21 @@ class _ProfileLoggedState extends State<ProfileLogged> {
                 ),
               ),
             ),
-            const SizedBox(
-              height: 10,
-            ),
-            GestureDetector(
-              onTap: () async {
-                final updatedUser = await Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            EditProfile(currentUser: currentUser)));
-                setState(() {
-                  currentUser = updatedUser;
-                });
-              },
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(20, 10, 20, 20),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
+              child: TextButton(
+                style: const ButtonStyle(alignment: Alignment.bottomLeft),
+                onPressed: () async {
+                  final updatedUser = await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => EditProfile(
+                                currentUser: currentUser,
+                              )));
+                  setState(() {
+                    currentUser = updatedUser;
+                  });
+                },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: const [
@@ -193,7 +192,7 @@ class _ProfileLoggedState extends State<ProfileLogged> {
                     ),
                     Expanded(
                       child: Text(
-                        'Cập nhật thông tin',
+                        'Chỉnh sửa thông tin',
                         style: TextStyle(
                             fontSize: 20,
                             fontStyle: FontStyle.normal,
@@ -204,21 +203,17 @@ class _ProfileLoggedState extends State<ProfileLogged> {
                 ),
               ),
             ),
-            const SizedBox(
-              height: 10,
-            ),
-            GestureDetector(
-              onTap: () {},
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(20, 10, 20, 20),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
+              child: TextButton(
+                style: const ButtonStyle(alignment: Alignment.bottomLeft),
+                onPressed: () {},
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Image.asset(
                       'assets/icons/myorder.png',
-                      width: 25,
                       height: 25,
-                      color: Colors.black,
                     ),
                     const SizedBox(
                       width: 15,
@@ -236,23 +231,21 @@ class _ProfileLoggedState extends State<ProfileLogged> {
                 ),
               ),
             ),
-            const SizedBox(
-              height: 10,
-            ),
-            SizedBox(
-              width: 290,
-              child: Divider(
-                height: 2,
-                color: Colors.black.withOpacity(.2),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 10),
+              child: SizedBox(
+                width: 290,
+                child: Divider(
+                  height: 2,
+                  color: Colors.black.withOpacity(.2),
+                ),
               ),
             ),
-            const SizedBox(
-              height: 10,
-            ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(20, 10, 20, 20),
-              child: GestureDetector(
-                onTap: () {
+              padding: const EdgeInsets.fromLTRB(20, 0, 20, 5),
+              child: TextButton(
+                style: const ButtonStyle(alignment: Alignment.bottomLeft),
+                onPressed: () {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => const AboutMe()));
                 },
@@ -260,18 +253,21 @@ class _ProfileLoggedState extends State<ProfileLogged> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: const [
                     Icon(
-                      Icons.info_rounded,
+                      Icons.info_outline,
                       color: Colors.black,
+                      size: 28,
                     ),
                     SizedBox(
                       width: 15,
                     ),
-                    Text(
-                      'Thông tin ứng dụng',
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontStyle: FontStyle.normal,
-                          color: Colors.black),
+                    Expanded(
+                      child: Text(
+                        'Thông tin ứng dụng',
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontStyle: FontStyle.normal,
+                            color: Colors.black),
+                      ),
                     ),
                   ],
                 ),
@@ -281,7 +277,7 @@ class _ProfileLoggedState extends State<ProfileLogged> {
               height: 10,
             ),
             Padding(
-              padding: const EdgeInsets.fromLTRB(20, 10, 20, 20),
+              padding: const EdgeInsets.only(left: 30),
               child: GestureDetector(
                 onTap: () {},
                 child: Row(

@@ -21,8 +21,6 @@ class _FavoriteLoggedState extends State<FavoriteLogged> {
         title: const Text('Danh sách yêu thích'),
         centerTitle: true,
         elevation: 0,
-        backgroundColor: Colors.teal,
-        foregroundColor: Colors.white,
       ),
       body: SafeArea(
         child: StreamBuilder(

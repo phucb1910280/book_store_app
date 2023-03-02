@@ -62,8 +62,8 @@ class _ProfileInfoState extends State<ProfileInfo> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.teal,
-        foregroundColor: Colors.white,
+        // backgroundColor: Colors.teal,
+        // foregroundColor: Colors.white,
         title: const Text('Thông tin của tôi'),
         centerTitle: true,
         leading: BackButton(
