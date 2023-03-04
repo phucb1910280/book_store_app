@@ -9,11 +9,16 @@ class CartNotLogged extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Giỏ hàng'),
-        centerTitle: true,
+        title: const Text(
+          'Giỏ hàng',
+          style: TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
         elevation: 0,
-        backgroundColor: Colors.teal,
-        foregroundColor: Colors.white,
       ),
       body: Center(
         child: Column(

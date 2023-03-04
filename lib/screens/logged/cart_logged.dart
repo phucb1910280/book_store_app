@@ -17,8 +17,15 @@ class _CartLoggedState extends State<CartLogged> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Giỏ hàng của tôi'),
-        centerTitle: true,
+        title: const Text(
+          'Giỏ hàng',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 22,
+          ),
+        ),
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
         elevation: 0,
       ),
       body: SafeArea(

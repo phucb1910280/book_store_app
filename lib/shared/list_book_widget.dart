@@ -38,6 +38,8 @@ class ListOfBookWidget extends StatelessWidget {
                         Flexible(
                           child: Text(
                             book!.tenSach.toString(),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
                       ],

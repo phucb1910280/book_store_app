@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:simple_app/screens/cart_screen_controller.dart';
 import 'package:simple_app/screens/category_screen.dart';
 import 'package:simple_app/screens/favorite_screen_controller.dart';
 import 'package:simple_app/screens/home_screen.dart';
@@ -20,7 +19,6 @@ class HomePageState extends State<HomePage> {
   static const List<Widget> page = <Widget>[
     HomeScreen(),
     CategoryScreen(),
-    CartScreen(),
     FavoriteScreen(),
     ProfileScreen(),
   ];
@@ -72,18 +70,18 @@ class HomePageState extends State<HomePage> {
               ),
               label: "Danh mục",
             ),
-            BottomNavigationBarItem(
-              icon: Image.asset(
-                'assets/icons/cart.png',
-                height: 20,
-              ),
-              activeIcon: Image.asset(
-                'assets/icons/cart_slt.png',
-                color: Colors.teal,
-                height: 20,
-              ),
-              label: "Giỏ hàng",
-            ),
+            // BottomNavigationBarItem(
+            //   icon: Image.asset(
+            //     'assets/icons/cart.png',
+            //     height: 20,
+            //   ),
+            //   activeIcon: Image.asset(
+            //     'assets/icons/cart_slt.png',
+            //     color: Colors.teal,
+            //     height: 20,
+            //   ),
+            //   label: "Giỏ hàng",
+            // ),
             BottomNavigationBarItem(
               icon: Image.asset(
                 'assets/icons/fav.png',

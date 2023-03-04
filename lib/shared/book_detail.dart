@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:simple_app/screens/logged/cart_logged.dart';
 
 import '../models/book.dart';
+import '../screens/cart_screen_controller.dart';
 
 class BookDetailWidget extends StatefulWidget {
   final Book? book;
@@ -32,9 +32,9 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
       'soTrang': widget.book!.soTrang,
       'loaiBia': widget.book!.loaiBia,
       'theLoai': widget.book!.theLoai,
+      'thuocTheLoai': widget.book!.thuocTheLoai,
       'moTa': widget.book!.moTa,
       'soLuong': soLuongSp,
-      // ignore: avoid_print
     }).then(
       (value) => ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -63,6 +63,7 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
       'tacGia': widget.book!.tacGia,
       'soTrang': widget.book!.soTrang,
       'loaiBia': widget.book!.loaiBia,
+      'thuocTheLoai': widget.book!.thuocTheLoai,
       'theLoai': widget.book!.theLoai,
       'moTa': widget.book!.moTa,
     }).then(
@@ -136,7 +137,7 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
                             },
                             icon: const Icon(
                               Icons.arrow_back,
-                              color: Colors.teal,
+                              color: Colors.black,
                             ),
                           ),
                         ),
@@ -151,18 +152,20 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
                             color: Colors.grey[100],
                             borderRadius: BorderRadius.circular(30),
                           ),
-                          child: IconButton(
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const CartLogged()));
-                            },
-                            icon: const Icon(
-                              Icons.shopping_cart_sharp,
-                              color: Colors.teal,
-                            ),
+                          child: Badge(
+                            alignment: const AlignmentDirectional(20, 20),
+                            label: const Text('3'),
+                            backgroundColor: Colors.teal,
+                            textColor: Colors.white,
+                            child: IconButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const CartScreen()));
+                                },
+                                icon: const Icon(Icons.shopping_cart_outlined)),
                           ),
                         ),
                       ),

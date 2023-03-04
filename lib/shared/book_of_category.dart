@@ -20,7 +20,6 @@ class BookOfCategory extends StatefulWidget {
 
 class _BookOfCategoryState extends State<BookOfCategory> {
   List<Book> bookList = [];
-
   @override
   void initState() {
     fetchRecord();
@@ -61,10 +60,15 @@ class _BookOfCategoryState extends State<BookOfCategory> {
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
         elevation: 0,
-        title: Text(widget.tenTheLoaiSach),
-        centerTitle: true,
-        backgroundColor: Colors.teal,
-        foregroundColor: Colors.white,
+        title: Text(
+          widget.tenTheLoaiSach,
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 22,
+          ),
+        ),
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
       ),
       body: Column(
         children: [

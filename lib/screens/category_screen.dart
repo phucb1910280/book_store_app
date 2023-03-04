@@ -21,8 +21,15 @@ class CategoryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Danh mục sách'),
-        centerTitle: true,
+        title: const Text(
+          'Danh mục sách',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 22,
+          ),
+        ),
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
         elevation: 0,
       ),
       body: Padding(
@@ -76,11 +83,11 @@ class CategoryScreen extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => const BookOfCategory(
-                                      theLoaiSach: 'sgk',
-                                      tenTheLoaiSach: 'SGK - Tham khảo',
+                                      theLoaiSach: 'thamkhao',
+                                      tenTheLoaiSach: 'Sách Tham khảo',
                                     )));
                       },
-                      child: customeText('Sách Giáo khoa - Tham khảo')),
+                      child: customeText('Sách Tham khảo')),
                 ),
               ],
             ),
