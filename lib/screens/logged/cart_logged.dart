@@ -220,9 +220,26 @@ class CustomeListTile extends StatelessWidget {
                     child: Row(
                       children: [
                         IconButton(
-                          onPressed: () {},
+                          onPressed: () async {
+                            int t = documentSnapshot['soLuong'] - 1;
+                            if (t > 0) {
+                              var document = FirebaseFirestore.instance
+                                  .collection('userCartItems')
+                                  .doc(FirebaseAuth.instance.currentUser!.email)
+                                  .collection('cartItems')
+                                  .doc(docID);
+                              document.update({
+                                'soLuong': t,
+                              });
+                              cartCounter.updateCartCount();
+                              cartCounter.updateCartTotal();
+                            } else {
+                              await deleteData();
+                              cartCounter.updateCartCount();
+                              cartCounter.updateCartTotal();
+                            }
+                          },
                           icon: const Icon(Icons.remove, color: Colors.black),
-                          color: Colors.deepPurple.shade100,
                         ),
                         const SizedBox(
                           width: 5,
@@ -244,9 +261,20 @@ class CustomeListTile extends StatelessWidget {
                           width: 5,
                         ),
                         IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            int t = documentSnapshot['soLuong'] + 1;
+                            var document = FirebaseFirestore.instance
+                                .collection('userCartItems')
+                                .doc(FirebaseAuth.instance.currentUser!.email)
+                                .collection('cartItems')
+                                .doc(docID);
+                            document.update({
+                              'soLuong': t,
+                            });
+                            cartCounter.updateCartCount();
+                            cartCounter.updateCartTotal();
+                          },
                           icon: const Icon(Icons.add, color: Colors.black),
-                          color: Colors.deepPurple.shade100,
                         ),
                         const Expanded(
                           child: SizedBox(),

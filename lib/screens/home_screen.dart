@@ -23,6 +23,10 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     fetchRecord();
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      var cartCounter = Provider.of<CartProvider>(context, listen: false);
+      cartCounter.getCartData();
+    });
   }
 
   void fetchRecord() async {
