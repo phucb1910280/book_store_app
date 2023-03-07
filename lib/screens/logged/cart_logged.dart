@@ -2,8 +2,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:simple_app/models/book.dart';
 import 'package:simple_app/shared/book_detail.dart';
+
+import '../../models/cart_provider.dart';
 
 class CartLogged extends StatefulWidget {
   const CartLogged({super.key});
@@ -15,6 +18,7 @@ class CartLogged extends StatefulWidget {
 class _CartLoggedState extends State<CartLogged> {
   @override
   Widget build(BuildContext context) {
+    final cartCounter = Provider.of<CartProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -58,6 +62,31 @@ class _CartLoggedState extends State<CartLogged> {
           },
         ),
       ),
+      bottomNavigationBar: Container(
+        height: 60,
+        margin: const EdgeInsets.all(10),
+        decoration: const BoxDecoration(
+          color: Colors.teal,
+          borderRadius: BorderRadius.all(Radius.circular(20)),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15),
+          child: Row(
+            children: [
+              const Text(
+                'Thanh toán:',
+                style: TextStyle(color: Colors.white, fontSize: 20),
+              ),
+              const Expanded(child: SizedBox()),
+              Text('${cartCounter.getCartTotal()}₫',
+                  style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold)),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
@@ -86,6 +115,7 @@ class CustomeListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cartCounter = Provider.of<CartProvider>(context);
     return Padding(
       padding: const EdgeInsets.fromLTRB(15, 10, 15, 5),
       child: Container(
@@ -110,8 +140,8 @@ class CustomeListTile extends StatelessWidget {
                           tenSach: documentSnapshot['tenSach'],
                           biaSach: documentSnapshot['biaSach'],
                           tacGia: documentSnapshot['tacGia'],
-                          giaBan: documentSnapshot['giaBan'].toString(),
-                          soTrang: documentSnapshot['soTrang'].toString(),
+                          giaBan: documentSnapshot['giaBan'],
+                          soTrang: documentSnapshot['soTrang'],
                           loaiBia: documentSnapshot['loaiBia'],
                           theLoai: documentSnapshot['theLoai'],
                           thuocTheLoai: documentSnapshot['thuocTheLoai'],
@@ -145,8 +175,8 @@ class CustomeListTile extends StatelessWidget {
                           tenSach: documentSnapshot['tenSach'],
                           biaSach: documentSnapshot['biaSach'],
                           tacGia: documentSnapshot['tacGia'],
-                          giaBan: documentSnapshot['giaBan'].toString(),
-                          soTrang: documentSnapshot['soTrang'].toString(),
+                          giaBan: documentSnapshot['giaBan'],
+                          soTrang: documentSnapshot['soTrang'],
                           loaiBia: documentSnapshot['loaiBia'],
                           theLoai: documentSnapshot['theLoai'],
                           thuocTheLoai: documentSnapshot['thuocTheLoai'],
@@ -202,7 +232,11 @@ class CustomeListTile extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text(documentSnapshot['soLuong'].toString()),
+                              Text(
+                                documentSnapshot['soLuong'].toString(),
+                                style: const TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.bold),
+                              ),
                             ],
                           ),
                         ),
@@ -220,8 +254,10 @@ class CustomeListTile extends StatelessWidget {
                         IconButton(
                           onPressed: () async {
                             await deleteData();
+                            cartCounter.updateCartCount();
+                            cartCounter.updateCartTotal();
                           },
-                          icon: const Icon(Icons.delete, color: Colors.black),
+                          icon: Icon(Icons.cancel, color: Colors.red[700]),
                         ),
                       ],
                     ),

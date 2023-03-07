@@ -1,10 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:simple_app/screens/cart_screen_controller.dart';
 import 'package:simple_app/shared/book_detail.dart';
 import 'package:simple_app/shared/list_book_widget.dart';
 import 'package:simple_app/models/book.dart';
+
+import '../models/cart_provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -34,8 +37,8 @@ class _HomeScreenState extends State<HomeScreen> {
               tenSach: books['tenSach'],
               biaSach: books['biaSach'],
               tacGia: books['tacGia'],
-              giaBan: books['giaBan'].toString(),
-              soTrang: books['soTrang'].toString(),
+              giaBan: books['giaBan'],
+              soTrang: books['soTrang'],
               loaiBia: books['loaiBia'],
               theLoai: books['theLoai'],
               thuocTheLoai: books['thuocTheLoai'],
@@ -48,6 +51,88 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   final TextEditingController searchController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    final cartCounter = Provider.of<CartProvider>(context);
+    return Scaffold(
+      appBar: AppBar(
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+        ),
+        title: const Text(
+          'Tất cả sách',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 22,
+          ),
+        ),
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
+        elevation: 0,
+        actions: [
+          Badge(
+            textStyle: const TextStyle(
+              fontSize: 20,
+            ),
+            largeSize: 22,
+            smallSize: 20,
+            alignment: const AlignmentDirectional(35, 13),
+            label: Text(cartCounter.getCartCount().toString()),
+            backgroundColor: Colors.white,
+            textColor: Colors.teal,
+            child: IconButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const CartScreen()));
+                },
+                icon: const Icon(
+                  Icons.shopping_cart_outlined,
+                  color: Colors.teal,
+                )),
+          ),
+          const SizedBox(
+            width: 20,
+          ),
+        ],
+      ),
+      body: Column(
+        children: [
+          searchForm(),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 5, left: 5, right: 5),
+              child: GridView.builder(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 1.0,
+                  mainAxisSpacing: 1.0,
+                  childAspectRatio: 2.3 / 3,
+                ),
+                itemCount: bookList.length,
+                itemBuilder: ((context, index) {
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  BookDetailWidget(book: bookList[index])));
+                    },
+                    child: ListOfBookWidget(
+                      book: bookList[index],
+                    ),
+                  );
+                }),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 
   Widget searchForm() {
     return Padding(
@@ -85,79 +170,6 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        systemOverlayStyle: const SystemUiOverlayStyle(
-          statusBarColor: Colors.transparent,
-        ),
-        title: const Text(
-          'Tất cả sách',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 22,
-          ),
-        ),
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
-        elevation: 0,
-        actions: [
-          Badge(
-            alignment: const AlignmentDirectional(25, 23),
-            label: const Text('3'),
-            backgroundColor: Colors.teal,
-            textColor: Colors.white,
-            child: IconButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const CartScreen()));
-                },
-                icon: const Icon(Icons.shopping_cart_outlined)),
-          ),
-          const SizedBox(
-            width: 15,
-          ),
-        ],
-      ),
-      body: Column(
-        children: [
-          searchForm(),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.only(top: 5, left: 5, right: 5),
-              child: GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 1.0,
-                  mainAxisSpacing: 1.0,
-                  childAspectRatio: 2.3 / 3,
-                ),
-                itemCount: bookList.length,
-                itemBuilder: ((context, index) {
-                  return GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  BookDetailWidget(book: bookList[index])));
-                    },
-                    child: ListOfBookWidget(
-                      book: bookList[index],
-                    ),
-                  );
-                }),
-              ),
-            ),
-          ),
-        ],
       ),
     );
   }

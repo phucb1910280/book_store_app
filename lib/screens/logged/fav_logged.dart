@@ -2,8 +2,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../models/book.dart';
+import '../../models/cart_provider.dart';
 import '../../shared/book_detail.dart';
 import '../cart_screen_controller.dart';
 
@@ -17,6 +19,7 @@ class FavoriteLogged extends StatefulWidget {
 class _FavoriteLoggedState extends State<FavoriteLogged> {
   @override
   Widget build(BuildContext context) {
+    final cartCounter = Provider.of<CartProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -31,10 +34,17 @@ class _FavoriteLoggedState extends State<FavoriteLogged> {
         elevation: 0,
         actions: [
           Badge(
-            alignment: const AlignmentDirectional(25, 23),
-            label: const Text('3'),
-            backgroundColor: Colors.teal,
-            textColor: Colors.white,
+            textStyle: const TextStyle(
+              fontSize: 20,
+            ),
+            largeSize: 22,
+            smallSize: 20,
+            alignment: const AlignmentDirectional(35, 13),
+            label: Text(
+              cartCounter.getCartCount().toString(),
+            ),
+            backgroundColor: Colors.white,
+            textColor: Colors.teal,
             child: IconButton(
                 onPressed: () {
                   Navigator.push(
@@ -42,10 +52,13 @@ class _FavoriteLoggedState extends State<FavoriteLogged> {
                       MaterialPageRoute(
                           builder: (context) => const CartScreen()));
                 },
-                icon: const Icon(Icons.shopping_cart_outlined)),
+                icon: const Icon(
+                  Icons.shopping_cart_outlined,
+                  color: Colors.teal,
+                )),
           ),
           const SizedBox(
-            width: 15,
+            width: 20,
           ),
         ],
       ),
@@ -131,8 +144,8 @@ class CustomeListTile extends StatelessWidget {
                           tenSach: documentSnapshot['tenSach'],
                           biaSach: documentSnapshot['biaSach'],
                           tacGia: documentSnapshot['tacGia'],
-                          giaBan: documentSnapshot['giaBan'].toString(),
-                          soTrang: documentSnapshot['soTrang'].toString(),
+                          giaBan: documentSnapshot['giaBan'],
+                          soTrang: documentSnapshot['soTrang'],
                           loaiBia: documentSnapshot['loaiBia'],
                           theLoai: documentSnapshot['theLoai'],
                           thuocTheLoai: documentSnapshot['thuocTheLoai'],
@@ -166,8 +179,8 @@ class CustomeListTile extends StatelessWidget {
                           tenSach: documentSnapshot['tenSach'],
                           biaSach: documentSnapshot['biaSach'],
                           tacGia: documentSnapshot['tacGia'],
-                          giaBan: documentSnapshot['giaBan'].toString(),
-                          soTrang: documentSnapshot['soTrang'].toString(),
+                          giaBan: documentSnapshot['giaBan'],
+                          soTrang: documentSnapshot['soTrang'],
                           loaiBia: documentSnapshot['loaiBia'],
                           theLoai: documentSnapshot['theLoai'],
                           thuocTheLoai: documentSnapshot['thuocTheLoai'],

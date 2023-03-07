@@ -4,8 +4,8 @@ class Book {
   String tenSach;
   String biaSach;
   String tacGia;
-  String giaBan;
-  String soTrang;
+  int giaBan;
+  int soTrang;
   String loaiBia;
   String theLoai;
   String thuocTheLoai;
@@ -30,8 +30,8 @@ class Book {
           tenSach: (json['tenSach']! as String),
           biaSach: (json['biaSach']! as String),
           tacGia: (json['tacGia']! as String),
-          giaBan: (json['giaBan']! as String),
-          soTrang: (json['soTrang']! as String),
+          giaBan: (json['giaBan']! as int),
+          soTrang: (json['soTrang']! as int),
           loaiBia: (json['loaiBia']! as String),
           theLoai: (json['theLoai']! as String),
           thuocTheLoai: (json['thuocTheLoai']! as String),

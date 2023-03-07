@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../models/book.dart';
+import '../models/cart_provider.dart';
 import '../screens/cart_screen_controller.dart';
 
 class BookDetailWidget extends StatefulWidget {
@@ -96,15 +98,13 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final cartCounter = Provider.of<CartProvider>(context);
     return Scaffold(
       backgroundColor: Colors.white,
       body: ListView(
         children: [
           Padding(
-            padding: const EdgeInsets.only(
-                // left: 20, right: 20,
-                top: 10,
-                bottom: 0),
+            padding: const EdgeInsets.only(top: 10, bottom: 0),
             child: Column(
               children: [
                 SizedBox(
@@ -128,7 +128,7 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
                           height: 40,
                           width: 40,
                           decoration: BoxDecoration(
-                            color: Colors.grey[100],
+                            // color: Colors.grey[100],
                             borderRadius: BorderRadius.circular(30),
                           ),
                           child: IconButton(
@@ -144,19 +144,24 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
                       ),
                       Positioned(
                         top: 0,
-                        right: 10,
+                        right: 25,
                         child: Container(
                           height: 40,
                           width: 40,
                           decoration: BoxDecoration(
-                            color: Colors.grey[100],
+                            // color: Colors.grey[100],
                             borderRadius: BorderRadius.circular(30),
                           ),
                           child: Badge(
-                            alignment: const AlignmentDirectional(20, 20),
-                            label: const Text('3'),
-                            backgroundColor: Colors.teal,
-                            textColor: Colors.white,
+                            label: Text(cartCounter.getCartCount().toString()),
+                            textStyle: const TextStyle(
+                              fontSize: 20,
+                            ),
+                            largeSize: 22,
+                            smallSize: 20,
+                            alignment: const AlignmentDirectional(31, 8),
+                            backgroundColor: Colors.white,
+                            textColor: Colors.teal,
                             child: IconButton(
                                 onPressed: () {
                                   Navigator.push(
@@ -165,7 +170,10 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
                                           builder: (context) =>
                                               const CartScreen()));
                                 },
-                                icon: const Icon(Icons.shopping_cart_outlined)),
+                                icon: const Icon(
+                                  Icons.shopping_cart_outlined,
+                                  color: Colors.teal,
+                                )),
                           ),
                         ),
                       ),
@@ -299,7 +307,7 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
                                 ),
                               ),
                               Text(
-                                widget.book!.soTrang,
+                                widget.book!.soTrang.toString(),
                                 style: const TextStyle(
                                   fontSize: 20,
                                   color: Colors.teal,
@@ -414,11 +422,15 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
               width: 10,
             ),
             SizedBox(
-                width: 20,
+                width: 25,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(soLuong.toString()),
+                    Text(
+                      soLuong.toString(),
+                      style: const TextStyle(
+                          fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
                   ],
                 )),
             const SizedBox(
@@ -434,6 +446,9 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
                 color: Colors.black,
               ),
             ),
+            const SizedBox(
+              width: 10,
+            ),
             Expanded(
               child: SizedBox(
                 height: 50,
@@ -441,6 +456,8 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
                     onPressed: () async {
                       if (FirebaseAuth.instance.currentUser != null) {
                         await addToCart(soLuong);
+                        cartCounter.updateCartCount();
+                        cartCounter.updateCartTotal();
                       } else {
                         ScaffoldMessenger.of(context)
                             .showSnackBar(const SnackBar(
