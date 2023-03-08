@@ -137,7 +137,7 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
                             },
                             icon: const Icon(
                               Icons.arrow_back,
-                              color: Colors.black,
+                              color: Colors.teal,
                             ),
                           ),
                         ),

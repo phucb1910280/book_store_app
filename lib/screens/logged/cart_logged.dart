@@ -21,9 +21,9 @@ class _CartLoggedState extends State<CartLogged> {
     final cartCounter = Provider.of<CartProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Giỏ hàng',
-          style: TextStyle(
+        title: Text(
+          'Giỏ hàng (${cartCounter.getCartCount()})',
+          style: const TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 22,
           ),
@@ -62,28 +62,33 @@ class _CartLoggedState extends State<CartLogged> {
           },
         ),
       ),
-      bottomNavigationBar: Container(
-        height: 60,
-        margin: const EdgeInsets.all(10),
-        decoration: const BoxDecoration(
-          color: Colors.teal,
-          borderRadius: BorderRadius.all(Radius.circular(20)),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15),
-          child: Row(
-            children: [
-              const Text(
-                'Thanh toán:',
-                style: TextStyle(color: Colors.white, fontSize: 20),
-              ),
-              const Expanded(child: SizedBox()),
-              Text('${cartCounter.getCartTotal()}₫',
-                  style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold)),
-            ],
+      bottomNavigationBar: GestureDetector(
+        onTap: () {
+          cartCounter.addOrderCollection('Thanh toán khi nhận');
+        },
+        child: Container(
+          height: 60,
+          margin: const EdgeInsets.all(10),
+          decoration: const BoxDecoration(
+            color: Colors.teal,
+            borderRadius: BorderRadius.all(Radius.circular(20)),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15),
+            child: Row(
+              children: [
+                const Text(
+                  'Thanh toán:',
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
+                const Expanded(child: SizedBox()),
+                Text('${cartCounter.getCartTotal()}₫',
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold)),
+              ],
+            ),
           ),
         ),
       ),
@@ -221,15 +226,15 @@ class CustomeListTile extends StatelessWidget {
                       children: [
                         IconButton(
                           onPressed: () async {
-                            int t = documentSnapshot['soLuong'] - 1;
-                            if (t > 0) {
+                            // int t = documentSnapshot['soLuong'] - 1;
+                            if (documentSnapshot['soLuong'] > 1) {
                               var document = FirebaseFirestore.instance
                                   .collection('userCartItems')
                                   .doc(FirebaseAuth.instance.currentUser!.email)
                                   .collection('cartItems')
                                   .doc(docID);
                               document.update({
-                                'soLuong': t,
+                                'soLuong': documentSnapshot['soLuong'] - 1,
                               });
                               cartCounter.updateCartCount();
                               cartCounter.updateCartTotal();

@@ -9,13 +9,22 @@ class CartProvider extends ChangeNotifier {
   getCartCount() => _cartCount;
   getCartTotal() => _cartTotal;
 
-  CollectionReference collectionRef = FirebaseFirestore.instance
+  var userCollectionRef = FirebaseFirestore.instance
+      .collection('user')
+      .doc(FirebaseAuth.instance.currentUser!.email);
+
+  var cartCollectionRef = FirebaseFirestore.instance
       .collection('userCartItems')
       .doc(FirebaseAuth.instance.currentUser!.email)
       .collection('cartItems');
 
+  var orderCollectionRef = FirebaseFirestore.instance
+      .collection('userOrder')
+      .doc(FirebaseAuth.instance.currentUser!.email)
+      .collection('orderItems');
+
   void getCartData() async {
-    QuerySnapshot querySnapshot = await collectionRef.get();
+    QuerySnapshot querySnapshot = await cartCollectionRef.get();
     if (querySnapshot.docs.isNotEmpty) {
       _cartCount = 0;
       _cartTotal = 0;
@@ -33,8 +42,79 @@ class CartProvider extends ChangeNotifier {
     }
   }
 
+  void addOrderCollection(String hinhThucThanhToan) async {
+    QuerySnapshot querySnapshot = await cartCollectionRef.get();
+    if (querySnapshot.docs.isNotEmpty) {
+      var curDay = DateTime.now();
+      String orderDay =
+          '${curDay.hour + 7}:${curDay.minute} ngày ${curDay.day}/${curDay.month}/${curDay.year}';
+      String receiveDay = '${curDay.day + 2}/${curDay.month}/${curDay.year}';
+
+      var documentSnapshot = await userCollectionRef.get();
+      var document = await orderCollectionRef.add({
+        'id': orderDay.replaceAll(' ', ''),
+        'ngayDat': orderDay,
+        'ngayGiaoDuKiem': receiveDay,
+        //
+        'fullName': documentSnapshot['fullName'],
+        'phoneNumber': documentSnapshot['phoneNumber'],
+        'address': documentSnapshot['address'],
+        //
+        'tongHoaDon': getCartTotal().toString(),
+        'hinhThucThanhToan': hinhThucThanhToan,
+        //
+        'trangThaiDonHang': 'Đã tiếp nhận',
+      });
+      for (var i = 0; i < querySnapshot.docs.length; i++) {
+        addOrderSubCollection(
+            document.id,
+            querySnapshot.docs[i]['id'],
+            querySnapshot.docs[i]['biaSach'],
+            querySnapshot.docs[i]['tenSach'],
+            querySnapshot.docs[i]['tacGia'],
+            querySnapshot.docs[i]['giaBan'],
+            querySnapshot.docs[i]['soTrang'],
+            querySnapshot.docs[i]['soLuong'],
+            querySnapshot.docs[i]['loaiBia'],
+            querySnapshot.docs[i]['theLoai'],
+            querySnapshot.docs[i]['thuocTheLoai'],
+            querySnapshot.docs[i]['moTa']);
+      }
+    }
+  }
+
+  void addOrderSubCollection(
+    String docId,
+    String id,
+    String biaSach,
+    String tenSach,
+    String tacGia,
+    int giaBan,
+    int soTrang,
+    int soLuong,
+    String loaiBia,
+    String theLoai,
+    String thuocTheLoai,
+    String moTa,
+  ) async {
+    var subCollection = orderCollectionRef;
+    subCollection.doc(docId).collection('cacSanpham').add({
+      'id': id,
+      'biaSach': biaSach,
+      'tenSach': tenSach,
+      'tacGia': tacGia,
+      'giaBan': giaBan,
+      'soTrang': soTrang,
+      'soLuong': soLuong,
+      'loaiBia': loaiBia,
+      'theLoai': theLoai,
+      'thuocTheLoai': thuocTheLoai,
+      'moTa': moTa,
+    });
+  }
+
   Future<void> updateCartCount() async {
-    QuerySnapshot querySnapshot = await collectionRef.get();
+    QuerySnapshot querySnapshot = await cartCollectionRef.get();
     if (querySnapshot.docs.isNotEmpty) {
       _cartCount = 0;
       for (var i = 0; i < querySnapshot.docs.length; i++) {
@@ -48,7 +128,7 @@ class CartProvider extends ChangeNotifier {
   }
 
   Future<void> updateCartTotal() async {
-    QuerySnapshot querySnapshot = await collectionRef.get();
+    QuerySnapshot querySnapshot = await cartCollectionRef.get();
     if (querySnapshot.docs.isNotEmpty) {
       _cartTotal = 0;
       int sl;
