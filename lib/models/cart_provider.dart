@@ -46,15 +46,17 @@ class CartProvider extends ChangeNotifier {
     QuerySnapshot querySnapshot = await cartCollectionRef.get();
     if (querySnapshot.docs.isNotEmpty) {
       var curDay = DateTime.now();
+      String id =
+          '${curDay.day}${curDay.month}${curDay.year}${curDay.hour + 7}${curDay.minute}';
       String orderDay =
-          '${curDay.hour + 7}:${curDay.minute} ngày ${curDay.day}/${curDay.month}/${curDay.year}';
+          '${curDay.hour + 7}:${curDay.minute}, ${curDay.day}/${curDay.month}/${curDay.year}';
       String receiveDay = '${curDay.day + 2}/${curDay.month}/${curDay.year}';
 
       var documentSnapshot = await userCollectionRef.get();
       var document = await orderCollectionRef.add({
-        'id': orderDay.replaceAll(' ', ''),
+        'id': id,
         'ngayDat': orderDay,
-        'ngayGiaoDuKiem': receiveDay,
+        'ngayGiaoDuKien': receiveDay,
         //
         'fullName': documentSnapshot['fullName'],
         'phoneNumber': documentSnapshot['phoneNumber'],
@@ -80,6 +82,11 @@ class CartProvider extends ChangeNotifier {
             querySnapshot.docs[i]['thuocTheLoai'],
             querySnapshot.docs[i]['moTa']);
       }
+      for (var i = 0; i < querySnapshot.docs.length; i++) {
+        clearCart(querySnapshot.docs[i].id);
+      }
+      updateCartCount();
+      updateCartTotal();
     }
   }
 
@@ -141,6 +148,19 @@ class CartProvider extends ChangeNotifier {
       notifyListeners();
     } else {
       _cartTotal = 0;
+    }
+  }
+
+  Future clearCart(String docID) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('userCartItems')
+          .doc(FirebaseAuth.instance.currentUser!.email)
+          .collection('cartItems')
+          .doc(docID)
+          .delete();
+    } catch (e) {
+      return false;
     }
   }
 }

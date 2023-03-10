@@ -7,6 +7,7 @@ import 'package:simple_app/screens/logged/profile_info.dart';
 
 import '../../pages/home_page.dart';
 import 'edit_profile.dart';
+import 'recent_order.dart';
 
 class ProfileLogged extends StatefulWidget {
   const ProfileLogged({super.key});
@@ -207,7 +208,13 @@ class _ProfileLoggedState extends State<ProfileLogged> {
               padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
               child: TextButton(
                 style: const ButtonStyle(alignment: Alignment.bottomLeft),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const RecentOrder()),
+                  );
+                },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [

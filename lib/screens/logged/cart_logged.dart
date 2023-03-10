@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_app/models/book.dart';
+import 'package:simple_app/screens/logged/cart_confirm.dart';
 import 'package:simple_app/shared/book_detail.dart';
 
 import '../../models/cart_provider.dart';
@@ -57,39 +58,66 @@ class _CartLoggedState extends State<CartLogged> {
                 },
               );
             } else {
-              return const Center(child: Text('Somthing Wrong!'));
+              return const Center(child: Text('Đang tải'));
             }
           },
         ),
       ),
-      bottomNavigationBar: GestureDetector(
-        onTap: () {
-          cartCounter.addOrderCollection('Thanh toán khi nhận');
-        },
-        child: Container(
-          height: 60,
-          margin: const EdgeInsets.all(10),
-          decoration: const BoxDecoration(
-            color: Colors.teal,
-            borderRadius: BorderRadius.all(Radius.circular(20)),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: Row(
+      bottomNavigationBar: Container(
+        height: 110,
+        margin: const EdgeInsets.symmetric(horizontal: 10),
+        child: Column(
+          // padding: const EdgeInsets.symmetric(horizontal: 15),
+          children: [
+            Row(
               children: [
-                const Text(
-                  'Thanh toán:',
-                  style: TextStyle(color: Colors.white, fontSize: 20),
-                ),
                 const Expanded(child: SizedBox()),
-                Text('${cartCounter.getCartTotal()}₫',
-                    style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold)),
+                const Text(
+                  'Tổng: ',
+                  style: TextStyle(color: Colors.black, fontSize: 23),
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  '${cartCounter.getCartTotal()}₫',
+                  style: const TextStyle(
+                      color: Colors.black,
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold),
+                ),
               ],
             ),
-          ),
+            const Expanded(child: SizedBox()),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const CartConfirm()),
+                );
+              },
+              child: Container(
+                margin: const EdgeInsets.only(bottom: 10),
+                height: 60,
+                decoration: const BoxDecoration(
+                  color: Colors.teal,
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Text(
+                      'Xác nhận đơn hàng',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );

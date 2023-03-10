@@ -87,7 +87,7 @@ class _FavoriteLoggedState extends State<FavoriteLogged> {
                 },
               );
             } else {
-              return const Center(child: Text('Somthing Wrong!'));
+              return const Center(child: Text('Đang tải'));
             }
           },
         ),
