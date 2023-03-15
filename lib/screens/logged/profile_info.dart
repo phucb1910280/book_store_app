@@ -50,9 +50,9 @@ class _ProfileInfoState extends State<ProfileInfo> {
   Widget customeTextStye(String value) {
     return Text(
       value,
-      style: const TextStyle(
+      style: TextStyle(
         fontSize: 22,
-        color: Colors.teal,
+        color: Colors.cyan[800],
       ),
     );
   }
@@ -186,23 +186,23 @@ class _ProfileInfoState extends State<ProfileInfo> {
                   ),
                 ),
                 child: Row(
-                  children: const [
-                    Expanded(child: SizedBox()),
+                  children: [
+                    const Expanded(child: SizedBox()),
                     Icon(
                       Icons.edit,
-                      color: Colors.teal,
+                      color: Colors.cyan[800],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 15,
                     ),
                     Text(
                       'Chỉnh sửa thông tin',
                       style: TextStyle(
                         fontSize: 20,
-                        color: Colors.teal,
+                        color: Colors.cyan[800],
                       ),
                     ),
-                    Expanded(child: SizedBox()),
+                    const Expanded(child: SizedBox()),
                   ],
                 ),
               ),

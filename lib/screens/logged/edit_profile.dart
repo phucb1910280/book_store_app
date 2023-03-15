@@ -34,9 +34,9 @@ class _EditProfileState extends State<EditProfile> {
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: Text(
         string,
-        style: const TextStyle(
+        style: TextStyle(
           fontSize: 20,
-          color: Colors.teal,
+          color: Colors.cyan[800],
         ),
       ),
     );
@@ -176,7 +176,7 @@ class _EditProfileState extends State<EditProfile> {
                           child: Container(
                             padding: const EdgeInsets.all(15),
                             decoration: BoxDecoration(
-                                color: Colors.teal,
+                                color: Colors.cyan[800],
                                 borderRadius: BorderRadius.circular(25)),
                             child: const Center(
                               child: Text(
@@ -207,15 +207,15 @@ class _EditProfileState extends State<EditProfile> {
                           child: Container(
                             padding: const EdgeInsets.all(15),
                             decoration: BoxDecoration(
-                                border:
-                                    Border.all(color: Colors.teal, width: 2),
+                                border: Border.all(
+                                    color: Colors.cyan[800]!, width: 2),
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(25)),
-                            child: const Center(
+                            child: Center(
                               child: Text(
                                 'Hủy',
                                 style: TextStyle(
-                                  color: Colors.teal,
+                                  color: Colors.cyan[800]!,
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
                                 ),

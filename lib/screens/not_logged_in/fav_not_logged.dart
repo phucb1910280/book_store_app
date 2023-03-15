@@ -35,7 +35,7 @@ class FavoriteNotLogged extends StatelessWidget {
                 ? Text(cartCounter.getCartCount().toString())
                 : const Text(''),
             backgroundColor: Colors.white,
-            textColor: Colors.teal,
+            textColor: Colors.cyan[800],
             child: IconButton(
                 onPressed: () {
                   Navigator.push(
@@ -43,9 +43,9 @@ class FavoriteNotLogged extends StatelessWidget {
                       MaterialPageRoute(
                           builder: (context) => const CartScreen()));
                 },
-                icon: const Icon(
+                icon: Icon(
                   Icons.shopping_cart_outlined,
-                  color: Colors.teal,
+                  color: Colors.cyan[800],
                 )),
           ),
           const SizedBox(
@@ -57,16 +57,40 @@ class FavoriteNotLogged extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text('Bạn chưa đăng nhập!'),
-            const SizedBox(height: 10),
+            Image.asset(
+              'assets/icons/emptyFav.png',
+              height: 150,
+              color: Colors.grey.withOpacity(.5),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Text(
+              'Danh sách trống',
+              style:
+                  TextStyle(fontSize: 25, color: Colors.grey.withOpacity(.5)),
+            ),
+            const SizedBox(
+              height: 30,
+              width: 150,
+              child: Divider(
+                color: Colors.grey,
+              ),
+            ),
             ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.cyan[800],
+                ),
                 onPressed: () {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) => const AuthPage()));
                 },
-                child: const Text('Đăng nhập')),
+                child: const Text(
+                  'Đăng nhập',
+                  style: TextStyle(fontSize: 22),
+                )),
           ],
         ),
       ),

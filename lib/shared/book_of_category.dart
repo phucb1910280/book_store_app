@@ -87,7 +87,7 @@ class _BookOfCategoryState extends State<BookOfCategory> {
                 ? Text(cartCounter.getCartCount().toString())
                 : const Text(''),
             backgroundColor: Colors.white,
-            textColor: Colors.teal,
+            textColor: Colors.cyan[800],
             child: IconButton(
                 onPressed: () {
                   Navigator.push(
@@ -95,9 +95,9 @@ class _BookOfCategoryState extends State<BookOfCategory> {
                       MaterialPageRoute(
                           builder: (context) => const CartScreen()));
                 },
-                icon: const Icon(
+                icon: Icon(
                   Icons.shopping_cart_outlined,
-                  color: Colors.teal,
+                  color: Colors.cyan[800],
                 )),
           ),
           const SizedBox(

@@ -80,7 +80,7 @@ class _CartLoggedState extends State<CartLogged> {
                   width: 10,
                 ),
                 Text(
-                  '${cartCounter.getCartTotal()}₫',
+                  '${cartCounter.getCartTotal()} VND',
                   style: const TextStyle(
                       color: Colors.black,
                       fontSize: 25,
@@ -99,9 +99,9 @@ class _CartLoggedState extends State<CartLogged> {
               child: Container(
                 margin: const EdgeInsets.only(bottom: 10),
                 height: 60,
-                decoration: const BoxDecoration(
-                  color: Colors.teal,
-                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                decoration: BoxDecoration(
+                  color: Colors.cyan[800],
+                  borderRadius: const BorderRadius.all(Radius.circular(20)),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -240,9 +240,9 @@ class CustomeListTile extends StatelessWidget {
                     children: [
                       Text(
                         '${documentSnapshot['giaBan']}₫',
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 20,
-                          color: Colors.teal,
+                          color: Colors.cyan[800],
                           fontWeight: FontWeight.bold,
                         ),
                       ),

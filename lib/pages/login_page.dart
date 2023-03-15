@@ -65,7 +65,7 @@ class _LoginPageState extends State<LoginPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset(
-                  'assets/images/appLogo_04.png',
+                  'assets/images/appLogo_05.png',
                   height: 210,
                   width: 340,
                   // fit: BoxFit.fitWidth
@@ -77,14 +77,14 @@ class _LoginPageState extends State<LoginPage> {
                 // welcome back!
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  children: const [
-                    SizedBox(
+                  children: [
+                    const SizedBox(
                       width: 20,
                     ),
                     Text(
                       'Xin chào!',
                       style: TextStyle(
-                        color: Colors.black,
+                        color: Colors.cyan[800],
                         fontSize: 35,
                         fontWeight: FontWeight.bold,
                       ),
@@ -100,7 +100,7 @@ class _LoginPageState extends State<LoginPage> {
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: TextField(
                     controller: emailController,
-                    cursorColor: Colors.black,
+                    cursorColor: Colors.cyan[800],
                     decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(
                         borderSide: const BorderSide(
@@ -109,9 +109,9 @@ class _LoginPageState extends State<LoginPage> {
                         borderRadius: BorderRadius.circular(25),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
+                        borderSide: BorderSide(
                           width: 2,
-                          color: Colors.black,
+                          color: Colors.cyan[800]!,
                         ),
                         borderRadius: BorderRadius.circular(25),
                       ),
@@ -133,7 +133,7 @@ class _LoginPageState extends State<LoginPage> {
                       child: TextField(
                         controller: passwordController,
                         obscureText: showPW,
-                        cursorColor: Colors.black,
+                        cursorColor: Colors.cyan[800],
                         decoration: InputDecoration(
                           enabledBorder: OutlineInputBorder(
                             borderSide: const BorderSide(
@@ -142,9 +142,9 @@ class _LoginPageState extends State<LoginPage> {
                             borderRadius: BorderRadius.circular(25),
                           ),
                           focusedBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(
+                            borderSide: BorderSide(
                               width: 2,
-                              color: Colors.black,
+                              color: Colors.cyan[800]!,
                             ),
                             borderRadius: BorderRadius.circular(25),
                           ),
@@ -164,8 +164,14 @@ class _LoginPageState extends State<LoginPage> {
                           });
                         },
                         icon: showPW
-                            ? Image.asset('assets/icons/showPass.png')
-                            : Image.asset('assets/icons/unShowPass.png'),
+                            ? Image.asset(
+                                'assets/icons/showPass.png',
+                                color: Colors.cyan[800],
+                              )
+                            : Image.asset(
+                                'assets/icons/unShowPass.png',
+                                color: Colors.cyan[800],
+                              ),
                       ),
                     ),
                   ],
@@ -183,7 +189,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: Container(
                       padding: const EdgeInsets.all(15),
                       decoration: BoxDecoration(
-                          color: Colors.black,
+                          color: Colors.cyan[800],
                           borderRadius: BorderRadius.circular(25)),
                       child: const Center(
                         child: Text(
@@ -215,10 +221,10 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     GestureDetector(
                       onTap: widget.showRegisterPage,
-                      child: const Text(
+                      child: Text(
                         'Đăng ký ngay',
                         style: TextStyle(
-                          color: Colors.purple,
+                          color: Colors.cyan[800],
                           fontSize: 17,
                         ),
                       ),

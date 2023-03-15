@@ -44,7 +44,7 @@ class _FavoriteLoggedState extends State<FavoriteLogged> {
                 ? Text(cartCounter.getCartCount().toString())
                 : const Text(''),
             backgroundColor: Colors.white,
-            textColor: Colors.teal,
+            textColor: Colors.cyan[800],
             child: IconButton(
                 onPressed: () {
                   Navigator.push(
@@ -52,9 +52,9 @@ class _FavoriteLoggedState extends State<FavoriteLogged> {
                       MaterialPageRoute(
                           builder: (context) => const CartScreen()));
                 },
-                icon: const Icon(
+                icon: Icon(
                   Icons.shopping_cart_outlined,
-                  color: Colors.teal,
+                  color: Colors.cyan[800],
                 )),
           ),
           const SizedBox(
@@ -212,9 +212,9 @@ class CustomeListTile extends StatelessWidget {
                     children: [
                       Text(
                         '${documentSnapshot['giaBan']}₫',
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 20,
-                          color: Colors.teal,
+                          color: Colors.cyan[800],
                           fontWeight: FontWeight.bold,
                         ),
                       ),

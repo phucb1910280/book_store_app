@@ -71,7 +71,7 @@ class HomePageState extends State<HomePage> {
           type: BottomNavigationBarType.fixed,
           showUnselectedLabels: false,
           showSelectedLabels: true,
-          selectedItemColor: Colors.teal,
+          selectedItemColor: Colors.cyan[800],
           currentIndex: selectedIndex,
           items: [
             BottomNavigationBarItem(
@@ -81,7 +81,7 @@ class HomePageState extends State<HomePage> {
               ),
               activeIcon: Image.asset(
                 'assets/icons/home_slt.png',
-                color: Colors.teal,
+                color: Colors.cyan[800],
                 height: 20,
               ),
               label: "Trang chủ",
@@ -93,7 +93,7 @@ class HomePageState extends State<HomePage> {
               ),
               activeIcon: Image.asset(
                 'assets/icons/category_slt.png',
-                color: Colors.teal,
+                color: Colors.cyan[800],
                 height: 20,
               ),
               label: "Danh mục",
@@ -105,7 +105,7 @@ class HomePageState extends State<HomePage> {
               ),
               activeIcon: Image.asset(
                 'assets/icons/fav_slt.png',
-                color: Colors.teal,
+                color: Colors.cyan[800],
                 height: 20,
               ),
               label: "Yêu thích",
@@ -117,7 +117,7 @@ class HomePageState extends State<HomePage> {
               ),
               activeIcon: Image.asset(
                 'assets/icons/profile_slt.png',
-                color: Colors.teal,
+                color: Colors.cyan[800],
                 height: 20,
               ),
               label: "Tài khoản",

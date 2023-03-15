@@ -23,18 +23,41 @@ class CartNotLogged extends StatelessWidget {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          // crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Text('Bạn chưa đăng nhập!'),
-            const SizedBox(height: 10),
+            Image.asset(
+              'assets/icons/emptyCart.png',
+              height: 150,
+              color: Colors.grey.withOpacity(.5),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Text(
+              'Giỏ hàng rỗng',
+              style:
+                  TextStyle(fontSize: 25, color: Colors.grey.withOpacity(.5)),
+            ),
+            const SizedBox(
+              height: 30,
+              width: 150,
+              child: Divider(
+                color: Colors.grey,
+              ),
+            ),
             ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.cyan[800],
+                ),
                 onPressed: () {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) => const AuthPage()));
                 },
-                child: const Text('Đăng nhập')),
+                child: const Text(
+                  'Đăng nhập',
+                  style: TextStyle(fontSize: 22),
+                )),
           ],
         ),
       ),

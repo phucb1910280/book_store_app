@@ -84,7 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ? Text(cartCounter.getCartCount().toString())
                 : const Text(''),
             backgroundColor: Colors.white,
-            textColor: Colors.teal,
+            textColor: Colors.cyan[800],
             child: IconButton(
                 onPressed: () {
                   Navigator.push(
@@ -92,9 +92,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       MaterialPageRoute(
                           builder: (context) => const CartScreen()));
                 },
-                icon: const Icon(
+                icon: Icon(
                   Icons.shopping_cart_outlined,
-                  color: Colors.teal,
+                  color: Colors.cyan[800],
                 )),
           ),
 
@@ -145,7 +145,7 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Container(
         height: 45,
         decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey[200]!, width: 1),
+          // border: Border.all(color: Colors.grey[200]!, width: 1),
           borderRadius: const BorderRadius.all(Radius.circular(25)),
           color: Colors.grey[100],
         ),

@@ -52,10 +52,10 @@ class ListOfBookWidget extends StatelessWidget {
                       children: [
                         Text(
                           '${book!.giaBan.toString()}₫',
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 17,
-                            color: Colors.teal,
+                            color: Colors.cyan[800],
                           ),
                         ),
                       ],

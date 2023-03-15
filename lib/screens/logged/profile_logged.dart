@@ -19,13 +19,7 @@ class ProfileLogged extends StatefulWidget {
 class _ProfileLoggedState extends State<ProfileLogged> {
   Future _signOut() async {
     await FirebaseAuth.instance.signOut();
-    // ignore: use_build_context_synchronously
-    // var helper = Provider.of<Helper>(context, listen: false);
-    // helper.inToOut();
     if (FirebaseAuth.instance.currentUser == null) {
-      // ignore: use_build_context_synchronously
-      // var cart = Provider.of<CartProvider>(context, listen: false);
-      // cart.resetCartCount();
       // ignore: use_build_context_synchronously
       Navigator.pushAndRemoveUntil(
           context,
@@ -76,19 +70,21 @@ class _ProfileLoggedState extends State<ProfileLogged> {
           children: [
             Container(
               decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.8),
-                    spreadRadius: 1,
-                    blurRadius: 8,
-                    offset: const Offset(0, 3), // changes position of shadow
-                  ),
-                ],
-                borderRadius: const BorderRadius.only(
-                    bottomLeft: Radius.circular(25),
-                    bottomRight: Radius.circular(25)),
-                color: Colors.teal,
-              ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.8),
+                      spreadRadius: 1,
+                      blurRadius: 8,
+                      offset: const Offset(0, 3), // changes position of shadow
+                    ),
+                  ],
+                  borderRadius: const BorderRadius.only(
+                      bottomLeft: Radius.circular(25),
+                      bottomRight: Radius.circular(25)),
+                  // color: Colors.teal,
+                  image: const DecorationImage(
+                      image: AssetImage('assets/images/profileDecoration.png'),
+                      fit: BoxFit.cover)),
               child: Padding(
                 padding: const EdgeInsets.only(left: 15, right: 15),
                 child: Column(
@@ -311,6 +307,7 @@ class _ProfileLoggedState extends State<ProfileLogged> {
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
+        backgroundColor: Colors.cyan[800],
         onPressed: () => _signOut(),
         label: const Text('Đăng xuất'),
         icon: const Icon(Icons.logout_outlined),

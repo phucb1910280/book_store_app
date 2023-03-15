@@ -10,8 +10,8 @@ class AboutMe extends StatelessWidget {
         title: const Text('Thông tin ứng dụng'),
         elevation: 0,
         centerTitle: true,
-        // backgroundColor: Colors.teal,
-        // foregroundColor: Colors.white,
+        backgroundColor: Colors.cyan[800],
+        foregroundColor: Colors.white,
       ),
       body: Center(
           child: Column(

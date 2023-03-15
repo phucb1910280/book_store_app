@@ -41,7 +41,7 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
       (value) => ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: const Text('Đã thêm vào Giỏ hàng'),
-          backgroundColor: (Colors.green[600]),
+          backgroundColor: (Colors.cyan[800]),
           duration: const Duration(seconds: 1),
         ),
       ),
@@ -72,7 +72,7 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
       (value) => ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: const Text('Đã thêm vào Danh sách yêu thích'),
-          backgroundColor: (Colors.green[600]),
+          backgroundColor: (Colors.cyan[800]),
           duration: const Duration(seconds: 1),
         ),
       ),
@@ -135,9 +135,9 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
                             onPressed: () {
                               Navigator.pop(context);
                             },
-                            icon: const Icon(
+                            icon: Icon(
                               Icons.arrow_back,
-                              color: Colors.teal,
+                              color: Colors.cyan[800],
                             ),
                           ),
                         ),
@@ -163,7 +163,7 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
                             smallSize: 20,
                             alignment: const AlignmentDirectional(31, 8),
                             backgroundColor: Colors.white,
-                            textColor: Colors.teal,
+                            textColor: Colors.cyan[800],
                             child: IconButton(
                                 onPressed: () {
                                   Navigator.push(
@@ -172,9 +172,9 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
                                           builder: (context) =>
                                               const CartScreen()));
                                 },
-                                icon: const Icon(
+                                icon: Icon(
                                   Icons.shopping_cart_outlined,
-                                  color: Colors.teal,
+                                  color: Colors.cyan[800],
                                 )),
                           ),
                         ),
@@ -213,25 +213,28 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
                     children: [
                       Text(
                         '${widget.book!.giaBan}₫',
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 25,
-                          color: Colors.teal,
+                          color: Colors.cyan[800],
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.cyan[800],
+                          ),
                           onPressed: () async {
                             if (FirebaseAuth.instance.currentUser != null) {
                               await addToFav(soLuong);
                             } else {
                               ScaffoldMessenger.of(context)
-                                  .showSnackBar(const SnackBar(
-                                content: Text(
+                                  .showSnackBar(SnackBar(
+                                content: const Text(
                                   'Vui lòng đăng nhập để tiếp tục!',
                                   style: TextStyle(color: Colors.white),
                                 ),
-                                backgroundColor: Colors.teal,
-                                duration: Duration(seconds: 1),
+                                backgroundColor: Colors.cyan[800],
+                                duration: const Duration(seconds: 1),
                               ));
                             }
                           },
@@ -286,9 +289,9 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
                               Flexible(
                                 child: Text(
                                   widget.book!.tacGia,
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                     fontSize: 20,
-                                    color: Colors.teal,
+                                    color: Colors.cyan[800],
                                     fontStyle: FontStyle.italic,
                                   ),
                                 ),
@@ -310,9 +313,9 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
                               ),
                               Text(
                                 widget.book!.soTrang.toString(),
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontSize: 20,
-                                  color: Colors.teal,
+                                  color: Colors.cyan[800],
                                   fontStyle: FontStyle.italic,
                                 ),
                               ),
@@ -333,9 +336,9 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
                               ),
                               Text(
                                 widget.book!.loaiBia,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontSize: 20,
-                                  color: Colors.teal,
+                                  color: Colors.cyan[800],
                                   fontStyle: FontStyle.italic,
                                 ),
                               ),
@@ -356,9 +359,9 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
                               ),
                               Text(
                                 widget.book!.thuocTheLoai,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontSize: 20,
-                                  color: Colors.teal,
+                                  color: Colors.cyan[800],
                                   fontStyle: FontStyle.italic,
                                 ),
                               ),
@@ -455,20 +458,22 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
               child: SizedBox(
                 height: 50,
                 child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.cyan[800],
+                    ),
                     onPressed: () async {
                       if (FirebaseAuth.instance.currentUser != null) {
                         await addToCart(soLuong);
                         cartCounter.updateCartCount();
                         cartCounter.updateCartTotal();
                       } else {
-                        ScaffoldMessenger.of(context)
-                            .showSnackBar(const SnackBar(
-                          content: Text(
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: const Text(
                             'Vui lòng đăng nhập để tiếp tục!',
                             style: TextStyle(color: Colors.white),
                           ),
-                          backgroundColor: Colors.teal,
-                          duration: Duration(seconds: 1),
+                          backgroundColor: Colors.cyan[800],
+                          duration: const Duration(seconds: 1),
                         ));
                       }
                     },

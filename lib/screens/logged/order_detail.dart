@@ -19,14 +19,14 @@ class OrderDetail extends StatefulWidget {
 
 class _OrderDetailState extends State<OrderDetail> {
   Widget customeText(String text,
-      {double? size, bool? isBold, bool? isTealColor}) {
+      {double? size, bool? isBold, bool? isCyanColor}) {
     return Text(
       text,
       style: TextStyle(
         // ignore: prefer_if_null_operators
         fontSize: size == null ? 23 : size,
         fontWeight: isBold == true ? FontWeight.bold : FontWeight.normal,
-        color: isTealColor == true ? Colors.teal : Colors.black,
+        color: isCyanColor == true ? Colors.cyan[800] : Colors.black,
       ),
     );
   }
@@ -117,15 +117,17 @@ class _OrderDetailState extends State<OrderDetail> {
                       ),
                     ],
                   ),
-                  const SizedBox(
+                  SizedBox(
                     width: 300,
                     height: 30,
-                    child: Divider(color: Colors.black),
+                    child: Divider(
+                      color: Colors.black.withOpacity(.5),
+                    ),
                   ),
                   Row(
                     children: [
                       customeText('Chi tiết đơn hàng',
-                          size: 30, isTealColor: true),
+                          size: 30, isCyanColor: true),
                       // Text(documentSnapshot['ngayGiaoDuKien']),
                     ],
                   ),
@@ -135,10 +137,10 @@ class _OrderDetailState extends State<OrderDetail> {
                   // const SizedBox(
                   //   height: 10,
                   // ),
-                  const SizedBox(
+                  SizedBox(
                     width: 300,
                     height: 50,
-                    child: Divider(color: Colors.black),
+                    child: Divider(color: Colors.black.withOpacity(.5)),
                   ),
                   Row(
                     children: [
@@ -162,7 +164,7 @@ class _OrderDetailState extends State<OrderDetail> {
                         child: SizedBox(),
                       ),
                       customeText('${widget.documentSnapshot['tongHoaDon']}₫',
-                          isBold: true, isTealColor: true, size: 25),
+                          isBold: true, isCyanColor: true, size: 25),
                     ],
                   ),
                 ],
@@ -214,7 +216,7 @@ class BookOrdered extends StatelessWidget {
               },
             );
           } else {
-            return const Center(child: Text('Loading'));
+            return const Center(child: Text('Đang tải'));
           }
         },
       ),
@@ -289,9 +291,9 @@ class CustomeListTile extends StatelessWidget {
                       Text(
                         //
                         '${totalPrice().toString()}₫',
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 20,
-                          color: Colors.teal,
+                          color: Colors.cyan[800],
                           fontWeight: FontWeight.bold,
                         ),
                       ),

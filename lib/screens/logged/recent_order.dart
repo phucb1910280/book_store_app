@@ -53,11 +53,25 @@ class _RecentOrderState extends State<RecentOrder> {
                       ),
                     );
                   },
-                  child: ListTile(
-                    title: Text('Mã đơn: ${documentSnapshot['id']}'),
-                    subtitle: Text('Ngày đặt: ${documentSnapshot['ngayDat']}'),
-                    trailing: const Icon(
-                      Icons.info_outline,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    child: SizedBox(
+                      height: 80,
+                      child: ListTile(
+                        title: Text(
+                          'Mã đơn: ${documentSnapshot['id']}',
+                          style:
+                              TextStyle(color: Colors.cyan[800], fontSize: 20),
+                        ),
+                        subtitle: Text(
+                          'Ngày đặt: ${documentSnapshot['ngayDat']}',
+                          style: const TextStyle(fontSize: 18),
+                        ),
+                        trailing: Icon(
+                          Icons.info_outline,
+                          color: Colors.cyan[800],
+                        ),
+                      ),
                     ),
                   ),
                 );

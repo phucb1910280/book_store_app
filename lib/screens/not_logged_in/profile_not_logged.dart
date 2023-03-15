@@ -24,16 +24,25 @@ class ProfileNotLoggedIn extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Text('Bạn chưa đăng nhập!'),
-            const SizedBox(height: 10),
+            Image.asset(
+              'assets/icons/readingBooks.png',
+              height: 250,
+              // color: Colors.grey.withOpacity(.5),
+            ),
             ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.cyan[800],
+                ),
                 onPressed: () {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) => const AuthPage()));
                 },
-                child: const Text('Đăng nhập')),
+                child: const Text(
+                  'Đăng nhập',
+                  style: TextStyle(fontSize: 22),
+                )),
           ],
         ),
       ),

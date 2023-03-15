@@ -123,14 +123,14 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  children: const [
-                    SizedBox(
+                  children: [
+                    const SizedBox(
                       width: 20,
                     ),
                     Text(
                       'Chào mừng bạn!',
                       style: TextStyle(
-                        color: Colors.black,
+                        color: Colors.cyan[800],
                         fontSize: 35,
                         fontWeight: FontWeight.bold,
                       ),
@@ -145,7 +145,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: TextField(
                     controller: fullNameController,
-                    cursorColor: Colors.black,
+                    cursorColor: Colors.cyan[800],
                     decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(
                         borderSide: const BorderSide(
@@ -154,9 +154,9 @@ class _RegisterPageState extends State<RegisterPage> {
                         borderRadius: BorderRadius.circular(25),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
+                        borderSide: BorderSide(
                           width: 2,
-                          color: Colors.black,
+                          color: Colors.cyan[800]!,
                         ),
                         borderRadius: BorderRadius.circular(25),
                       ),
@@ -174,7 +174,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: TextField(
                     controller: emailController,
-                    cursorColor: Colors.black,
+                    cursorColor: Colors.cyan[800],
                     decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(
                         borderSide: const BorderSide(
@@ -183,9 +183,9 @@ class _RegisterPageState extends State<RegisterPage> {
                         borderRadius: BorderRadius.circular(25),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
+                        borderSide: BorderSide(
                           width: 2,
-                          color: Colors.black,
+                          color: Colors.cyan[800]!,
                         ),
                         borderRadius: BorderRadius.circular(25),
                       ),
@@ -207,7 +207,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       child: TextField(
                         controller: passwordController,
                         obscureText: showPW,
-                        cursorColor: Colors.black,
+                        cursorColor: Colors.cyan[800],
                         decoration: InputDecoration(
                           enabledBorder: OutlineInputBorder(
                             borderSide: const BorderSide(
@@ -216,9 +216,9 @@ class _RegisterPageState extends State<RegisterPage> {
                             borderRadius: BorderRadius.circular(25),
                           ),
                           focusedBorder: OutlineInputBorder(
-                            borderSide: const BorderSide(
+                            borderSide: BorderSide(
                               width: 2,
-                              color: Colors.black,
+                              color: Colors.cyan[800]!,
                             ),
                             borderRadius: BorderRadius.circular(25),
                           ),
@@ -238,8 +238,14 @@ class _RegisterPageState extends State<RegisterPage> {
                           });
                         },
                         icon: showPW
-                            ? Image.asset('assets/icons/showPass.png')
-                            : Image.asset('assets/icons/unShowPass.png'),
+                            ? Image.asset(
+                                'assets/icons/showPass.png',
+                                color: Colors.cyan[800],
+                              )
+                            : Image.asset(
+                                'assets/icons/unShowPass.png',
+                                color: Colors.cyan[800],
+                              ),
                       ),
                     ),
                   ],
@@ -255,7 +261,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   child: TextField(
                     controller: repasswordController,
                     obscureText: true,
-                    cursorColor: Colors.black,
+                    cursorColor: Colors.cyan[800],
                     decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(
                         borderSide: const BorderSide(
@@ -264,9 +270,9 @@ class _RegisterPageState extends State<RegisterPage> {
                         borderRadius: BorderRadius.circular(25),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
+                        borderSide: BorderSide(
                           width: 2,
-                          color: Colors.black,
+                          color: Colors.cyan[800]!,
                         ),
                         borderRadius: BorderRadius.circular(25),
                       ),
@@ -289,7 +295,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     child: Container(
                       padding: const EdgeInsets.all(15),
                       decoration: BoxDecoration(
-                          color: Colors.black,
+                          color: Colors.cyan[800],
                           borderRadius: BorderRadius.circular(25)),
                       child: const Center(
                         child: Text(
@@ -321,10 +327,10 @@ class _RegisterPageState extends State<RegisterPage> {
                     ),
                     GestureDetector(
                       onTap: widget.showLoginPage,
-                      child: const Text(
+                      child: Text(
                         'Đăng nhập',
                         style: TextStyle(
-                          color: Colors.purple,
+                          color: Colors.cyan[800],
                           fontSize: 17,
                         ),
                       ),

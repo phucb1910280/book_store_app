@@ -19,9 +19,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
       padding: const EdgeInsets.all(10),
       child: Text(
         categoryName,
-        style: const TextStyle(
+        style: TextStyle(
           fontSize: 22,
-          color: Colors.teal,
+          color: Colors.cyan[800],
         ),
       ),
     );
@@ -54,7 +54,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                 ? Text(cartCounter.getCartCount().toString())
                 : const Text(''),
             backgroundColor: Colors.white,
-            textColor: Colors.teal,
+            textColor: Colors.cyan[800],
             child: IconButton(
                 onPressed: () {
                   Navigator.push(
@@ -62,9 +62,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
                       MaterialPageRoute(
                           builder: (context) => const CartScreen()));
                 },
-                icon: const Icon(
+                icon: Icon(
                   Icons.shopping_cart_outlined,
-                  color: Colors.teal,
+                  color: Colors.cyan[800],
                 )),
           ),
           const SizedBox(

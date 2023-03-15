@@ -57,7 +57,7 @@ class _CartConfirmState extends State<CartConfirm> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: const Text('Vui lòng chọn hình thức thanh toán!'),
-          backgroundColor: (Colors.green[600]),
+          backgroundColor: (Colors.cyan[800]),
           duration: const Duration(seconds: 1),
         ),
       );
@@ -67,7 +67,7 @@ class _CartConfirmState extends State<CartConfirm> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: const Text('Vui lòng cập nhật số điện thoại'),
-          backgroundColor: (Colors.green[600]),
+          backgroundColor: (Colors.cyan[800]),
           duration: const Duration(seconds: 1),
         ),
       );
@@ -77,7 +77,7 @@ class _CartConfirmState extends State<CartConfirm> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: const Text('Vui lòng cập nhật địa chỉ'),
-          backgroundColor: (Colors.green[600]),
+          backgroundColor: (Colors.cyan[800]),
           duration: const Duration(seconds: 1),
         ),
       );
@@ -87,11 +87,11 @@ class _CartConfirmState extends State<CartConfirm> {
   }
 
   Widget customeText(String content, bool isBold,
-      {bool? isItalic, double? size, bool? isTeal}) {
+      {bool? isItalic, double? size, bool? isCyanColor}) {
     return Text(
       content,
       style: TextStyle(
-        color: isTeal == true ? Colors.teal : Colors.black,
+        color: isCyanColor == true ? Colors.cyan[800] : Colors.black,
         // ignore: prefer_if_null_operators
         fontSize: size != null ? size : 22,
         fontWeight: isBold == true ? FontWeight.bold : FontWeight.normal,
@@ -110,8 +110,7 @@ class _CartConfirmState extends State<CartConfirm> {
       leading: Radio(
         value: content,
         groupValue: payOption,
-        // autofocus: isDefault,
-        activeColor: Colors.teal,
+        activeColor: Colors.cyan[800],
         onChanged: (value) {
           setState(() {
             payOption = value;
@@ -145,7 +144,7 @@ class _CartConfirmState extends State<CartConfirm> {
             Padding(
               padding: const EdgeInsets.only(top: 2, bottom: 5),
               child: customeText('Thông tin người nhận', false,
-                  size: 29, isTeal: true),
+                  size: 29, isCyanColor: true),
             ),
             const SizedBox(height: 10),
             Padding(
@@ -184,7 +183,7 @@ class _CartConfirmState extends State<CartConfirm> {
             Padding(
               padding: const EdgeInsets.only(top: 2, bottom: 5),
               child: customeText('Hình thức thanh toán:', false,
-                  size: 29, isTeal: true),
+                  size: 29, isCyanColor: true),
             ),
             paymentOption('Thanh toán khi nhận hàng'),
             paymentOption('Thanh toán qua thẻ ATM'),
@@ -192,16 +191,43 @@ class _CartConfirmState extends State<CartConfirm> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: const [
+                  // SizedBox(
+                  //   width: 20,
+                  // ),
+                  Text(
+                    'Phí ship: ',
+                    style: TextStyle(
+                      fontSize: 22,
+                    ),
+                  ),
+                  Expanded(child: SizedBox()),
+                  Text(
+                    '0 VND',
+                    style:
+                        TextStyle(fontSize: 22, fontWeight: FontWeight.normal),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
+                  // const SizedBox(
+                  //   width: 20,
+                  // ),
                   const Text(
-                    'Tổng cộng:',
+                    'Tổng cộng: ',
                     style: TextStyle(
                       fontSize: 22,
                     ),
                   ),
                   const Expanded(child: SizedBox()),
                   Text(
-                    '${cartCounter.getCartTotal().toString()}₫',
+                    '${cartCounter.getCartTotal().toString()} VND',
                     style: const TextStyle(
                         fontSize: 25, fontWeight: FontWeight.bold),
                   ),
@@ -222,7 +248,7 @@ class _CartConfirmState extends State<CartConfirm> {
                 height: 50,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(50),
-                    color: Colors.teal),
+                    color: Colors.cyan[800]),
                 child: Row(
                   children: const [
                     Expanded(child: SizedBox()),
