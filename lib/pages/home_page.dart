@@ -1,12 +1,20 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 import 'package:simple_app/screens/category_screen.dart';
 import 'package:simple_app/screens/favorite_screen_controller.dart';
 import 'package:simple_app/screens/home_screen.dart';
 
+import '../models/cart_provider.dart';
 import '../screens/profile_sceen_controller.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  const HomePage({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -15,6 +23,7 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State<HomePage> {
+  SharedPreferences? prefs;
   int selectedIndex = 0;
   static const List<Widget> page = <Widget>[
     HomeScreen(),
@@ -23,10 +32,29 @@ class HomePageState extends State<HomePage> {
     ProfileScreen(),
   ];
 
+  void loadRef() async {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      var cartCounter = Provider.of<CartProvider>(context, listen: false);
+      if (FirebaseAuth.instance.currentUser != null) {
+        // cartCounter.getCartData();
+        cartCounter.updateCartCount();
+        cartCounter.updateCartTotal();
+      } else {
+        cartCounter.resetCartCount();
+      }
+    });
+  }
+
   void _onItemTapped(int index) {
     setState(() {
       selectedIndex = index;
     });
+  }
+
+  @override
+  void initState() {
+    loadRef();
+    super.initState();
   }
 
   @override
@@ -70,18 +98,6 @@ class HomePageState extends State<HomePage> {
               ),
               label: "Danh mục",
             ),
-            // BottomNavigationBarItem(
-            //   icon: Image.asset(
-            //     'assets/icons/cart.png',
-            //     height: 20,
-            //   ),
-            //   activeIcon: Image.asset(
-            //     'assets/icons/cart_slt.png',
-            //     color: Colors.teal,
-            //     height: 20,
-            //   ),
-            //   label: "Giỏ hàng",
-            // ),
             BottomNavigationBarItem(
               icon: Image.asset(
                 'assets/icons/fav.png',

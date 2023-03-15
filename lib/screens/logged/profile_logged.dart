@@ -19,7 +19,13 @@ class ProfileLogged extends StatefulWidget {
 class _ProfileLoggedState extends State<ProfileLogged> {
   Future _signOut() async {
     await FirebaseAuth.instance.signOut();
+    // ignore: use_build_context_synchronously
+    // var helper = Provider.of<Helper>(context, listen: false);
+    // helper.inToOut();
     if (FirebaseAuth.instance.currentUser == null) {
+      // ignore: use_build_context_synchronously
+      // var cart = Provider.of<CartProvider>(context, listen: false);
+      // cart.resetCartCount();
       // ignore: use_build_context_synchronously
       Navigator.pushAndRemoveUntil(
           context,

@@ -1,9 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'package:simple_app/models/book.dart';
 import 'package:simple_app/shared/book_detail.dart';
 import 'package:simple_app/shared/list_book_widget.dart';
+
+import '../models/cart_provider.dart';
+import '../screens/cart_screen_controller.dart';
 
 class BookOfCategory extends StatefulWidget {
   final String tenTheLoaiSach;
@@ -56,6 +61,7 @@ class _BookOfCategoryState extends State<BookOfCategory> {
 
   @override
   Widget build(BuildContext context) {
+    final cartCounter = Provider.of<CartProvider>(context);
     return Scaffold(
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
@@ -69,6 +75,35 @@ class _BookOfCategoryState extends State<BookOfCategory> {
         ),
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
+        actions: [
+          Badge(
+            textStyle: const TextStyle(
+              fontSize: 20,
+            ),
+            largeSize: 22,
+            smallSize: 20,
+            alignment: const AlignmentDirectional(35, 13),
+            label: FirebaseAuth.instance.currentUser != null
+                ? Text(cartCounter.getCartCount().toString())
+                : const Text(''),
+            backgroundColor: Colors.white,
+            textColor: Colors.teal,
+            child: IconButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const CartScreen()));
+                },
+                icon: const Icon(
+                  Icons.shopping_cart_outlined,
+                  color: Colors.teal,
+                )),
+          ),
+          const SizedBox(
+            width: 20,
+          ),
+        ],
       ),
       body: Column(
         children: [

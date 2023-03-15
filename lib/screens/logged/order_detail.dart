@@ -76,7 +76,9 @@ class _OrderDetailState extends State<OrderDetail> {
                     ],
                   ),
                   const SizedBox(
-                    height: 10,
+                    width: 300,
+                    height: 30,
+                    child: Divider(color: Colors.black),
                   ),
                   Row(
                     children: [
@@ -116,7 +118,9 @@ class _OrderDetailState extends State<OrderDetail> {
                     ],
                   ),
                   const SizedBox(
-                    height: 20,
+                    width: 300,
+                    height: 30,
+                    child: Divider(color: Colors.black),
                   ),
                   Row(
                     children: [
@@ -128,6 +132,26 @@ class _OrderDetailState extends State<OrderDetail> {
                   BookOrdered(
                       documentSnapshot: widget.documentSnapshot,
                       docId: widget.docId),
+                  // const SizedBox(
+                  //   height: 10,
+                  // ),
+                  const SizedBox(
+                    width: 300,
+                    height: 50,
+                    child: Divider(color: Colors.black),
+                  ),
+                  Row(
+                    children: [
+                      customeText('Phí vận chuyển:', isBold: false, size: 20),
+                      const Expanded(
+                        child: SizedBox(),
+                      ),
+                      const Text(
+                        '0₫',
+                        style: TextStyle(fontSize: 20),
+                      ),
+                    ],
+                  ),
                   const SizedBox(
                     height: 10,
                   ),

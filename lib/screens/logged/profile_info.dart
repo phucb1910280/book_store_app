@@ -35,9 +35,9 @@ class _ProfileInfoState extends State<ProfileInfo> {
         var currentUserPhoneNumber = data?['phoneNumber'];
         var thisUser = CurrentUser(
             fullName: currentUserName,
-            address: currentUserAddress,
+            address: currentUserAddress ?? 'Chưa cung cấp',
             email: currentUserEmail,
-            phoneNumber: currentUserPhoneNumber);
+            phoneNumber: currentUserPhoneNumber ?? 'Chưa cung cấp');
         setState(() {
           currentUser = thisUser;
         });

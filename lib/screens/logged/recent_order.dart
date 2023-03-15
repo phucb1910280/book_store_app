@@ -57,7 +57,7 @@ class _RecentOrderState extends State<RecentOrder> {
                     title: Text('Mã đơn: ${documentSnapshot['id']}'),
                     subtitle: Text('Ngày đặt: ${documentSnapshot['ngayDat']}'),
                     trailing: const Icon(
-                      Icons.arrow_forward_ios_rounded,
+                      Icons.info_outline,
                     ),
                   ),
                 );

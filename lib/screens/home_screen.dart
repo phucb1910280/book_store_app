@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -23,10 +24,6 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     fetchRecord();
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      var cartCounter = Provider.of<CartProvider>(context, listen: false);
-      cartCounter.getCartData();
-    });
   }
 
   void fetchRecord() async {
@@ -75,6 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
         foregroundColor: Colors.black,
         elevation: 0,
         actions: [
+          // helper.getLogStatus()
           Badge(
             textStyle: const TextStyle(
               fontSize: 20,
@@ -82,7 +80,9 @@ class _HomeScreenState extends State<HomeScreen> {
             largeSize: 22,
             smallSize: 20,
             alignment: const AlignmentDirectional(35, 13),
-            label: Text(cartCounter.getCartCount().toString()),
+            label: FirebaseAuth.instance.currentUser != null
+                ? Text(cartCounter.getCartCount().toString())
+                : const Text(''),
             backgroundColor: Colors.white,
             textColor: Colors.teal,
             child: IconButton(
@@ -97,6 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   color: Colors.teal,
                 )),
           ),
+
           const SizedBox(
             width: 20,
           ),
@@ -144,6 +145,7 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Container(
         height: 45,
         decoration: BoxDecoration(
+          border: Border.all(color: Colors.grey[200]!, width: 1),
           borderRadius: const BorderRadius.all(Radius.circular(25)),
           color: Colors.grey[100],
         ),

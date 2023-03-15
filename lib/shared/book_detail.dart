@@ -153,7 +153,9 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
                             borderRadius: BorderRadius.circular(30),
                           ),
                           child: Badge(
-                            label: Text(cartCounter.getCartCount().toString()),
+                            label: FirebaseAuth.instance.currentUser != null
+                                ? Text(cartCounter.getCartCount().toString())
+                                : const Text('0'),
                             textStyle: const TextStyle(
                               fontSize: 20,
                             ),

@@ -53,7 +53,13 @@ class _RegisterPageState extends State<RegisterPage> {
             password: passwordController.text.trim());
         addUserDetail(
             fullNameController.text, '', emailController.text.trim(), '', '');
+        // ignore: use_build_context_synchronously
+        // var helper = Provider.of<Helper>(context, listen: false);
+        // helper.outToIn();
         if (FirebaseAuth.instance.currentUser != null) {
+          // ignore: use_build_context_synchronously
+          // var cart = Provider.of<CartProvider>(context, listen: false);
+          // cart.getCartData();
           // ignore: use_build_context_synchronously
           Navigator.pushAndRemoveUntil(
               context,

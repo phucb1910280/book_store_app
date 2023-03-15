@@ -40,9 +40,9 @@ class _FavoriteLoggedState extends State<FavoriteLogged> {
             largeSize: 22,
             smallSize: 20,
             alignment: const AlignmentDirectional(35, 13),
-            label: Text(
-              cartCounter.getCartCount().toString(),
-            ),
+            label: FirebaseAuth.instance.currentUser != null
+                ? Text(cartCounter.getCartCount().toString())
+                : const Text(''),
             backgroundColor: Colors.white,
             textColor: Colors.teal,
             child: IconButton(
@@ -198,6 +198,7 @@ class CustomeListTile extends StatelessWidget {
                             child: Text(
                               documentSnapshot['tenSach'],
                               overflow: TextOverflow.ellipsis,
+                              maxLines: 3,
                               style: const TextStyle(
                                 fontSize: 20,
                               ),
@@ -222,7 +223,11 @@ class CustomeListTile extends StatelessWidget {
                         onPressed: () async {
                           await deleteData();
                         },
-                        icon: const Icon(Icons.favorite, color: Colors.red),
+                        icon: Image.asset(
+                          'assets/icons/unFav.png',
+                          color: Colors.red[700],
+                          height: 25,
+                        ),
                       ),
                     ],
                   ),

@@ -21,12 +21,19 @@ class _LoginPageState extends State<LoginPage> {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: emailController.text.trim(),
           password: passwordController.text.trim());
+      // ignore: use_build_context_synchronously
+      // var helper = Provider.of<Helper>(context, listen: false);
+      // helper.outToIn();
       if (FirebaseAuth.instance.currentUser != null) {
         // ignore: use_build_context_synchronously
+        // var cart = Provider.of<CartProvider>(context, listen: false);
+        // cart.getCartData();
+        // ignore: use_build_context_synchronously
         Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(builder: (_) => const HomePage()),
-            (route) => false);
+          context,
+          MaterialPageRoute(builder: (_) => const HomePage()),
+          (route) => false,
+        );
       }
       // ignore: unused_catch_clause
     } on FirebaseAuthException catch (e) {
@@ -57,9 +64,6 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // const SizedBox(
-                //   height: 20,
-                // ),
                 Image.asset(
                   'assets/images/appLogo_04.png',
                   height: 210,

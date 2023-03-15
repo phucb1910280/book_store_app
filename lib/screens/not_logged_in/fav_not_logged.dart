@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
+import 'package:provider/provider.dart';
+import '../../models/cart_provider.dart';
 import '../../pages/auth_page.dart';
 import '../cart_screen_controller.dart';
 
@@ -8,6 +10,7 @@ class FavoriteNotLogged extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cartCounter = Provider.of<CartProvider>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -22,10 +25,17 @@ class FavoriteNotLogged extends StatelessWidget {
         elevation: 0,
         actions: [
           Badge(
-            alignment: const AlignmentDirectional(25, 23),
-            label: const Text('3'),
-            backgroundColor: Colors.teal,
-            textColor: Colors.white,
+            textStyle: const TextStyle(
+              fontSize: 20,
+            ),
+            largeSize: 22,
+            smallSize: 20,
+            alignment: const AlignmentDirectional(35, 13),
+            label: FirebaseAuth.instance.currentUser != null
+                ? Text(cartCounter.getCartCount().toString())
+                : const Text(''),
+            backgroundColor: Colors.white,
+            textColor: Colors.teal,
             child: IconButton(
                 onPressed: () {
                   Navigator.push(
@@ -33,10 +43,13 @@ class FavoriteNotLogged extends StatelessWidget {
                       MaterialPageRoute(
                           builder: (context) => const CartScreen()));
                 },
-                icon: const Icon(Icons.shopping_cart_outlined)),
+                icon: const Icon(
+                  Icons.shopping_cart_outlined,
+                  color: Colors.teal,
+                )),
           ),
           const SizedBox(
-            width: 15,
+            width: 20,
           ),
         ],
       ),
