@@ -9,9 +9,8 @@ class AboutMe extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Thông tin ứng dụng'),
         elevation: 0,
-        centerTitle: true,
-        backgroundColor: Colors.cyan[800],
-        foregroundColor: Colors.white,
+        foregroundColor: Colors.cyan[800],
+        backgroundColor: Colors.white,
       ),
       body: Center(
           child: Column(
@@ -47,7 +46,7 @@ class AboutMe extends StatelessWidget {
   }
 
   Widget creditText(String value) {
-    return Text(
+    return SelectableText(
       value,
       style: const TextStyle(
         color: Colors.black,

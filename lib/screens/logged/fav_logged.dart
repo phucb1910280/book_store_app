@@ -21,6 +21,7 @@ class _FavoriteLoggedState extends State<FavoriteLogged> {
   Widget build(BuildContext context) {
     final cartCounter = Provider.of<CartProvider>(context);
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text(
           'Danh sách yêu thích',

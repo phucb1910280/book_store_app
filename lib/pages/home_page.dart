@@ -12,14 +12,23 @@ import '../models/cart_provider.dart';
 import '../screens/profile_sceen_controller.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({
-    Key? key,
-  }) : super(key: key);
+  HomePage({
+    int? outFromIndex,
+    super.key,
+  }) {
+    if (outFromIndex != null) {
+      myIndex = outFromIndex;
+    } else {
+      myIndex = 0;
+    }
+  }
 
   @override
   State<StatefulWidget> createState() {
     return HomePageState();
   }
+
+  late final int myIndex;
 }
 
 class HomePageState extends State<HomePage> {
@@ -53,6 +62,9 @@ class HomePageState extends State<HomePage> {
 
   @override
   void initState() {
+    if (widget.myIndex != 0) {
+      _onItemTapped(widget.myIndex);
+    }
     loadRef();
     super.initState();
   }
@@ -60,6 +72,7 @@ class HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: IndexedStack(
         index: selectedIndex,
         children: page,
@@ -67,6 +80,7 @@ class HomePageState extends State<HomePage> {
       bottomNavigationBar: SizedBox(
         height: 60,
         child: BottomNavigationBar(
+          elevation: 8,
           backgroundColor: Colors.white,
           type: BottomNavigationBarType.fixed,
           showUnselectedLabels: false,

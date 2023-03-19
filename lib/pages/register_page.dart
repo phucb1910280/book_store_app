@@ -61,10 +61,8 @@ class _RegisterPageState extends State<RegisterPage> {
           // var cart = Provider.of<CartProvider>(context, listen: false);
           // cart.getCartData();
           // ignore: use_build_context_synchronously
-          Navigator.pushAndRemoveUntil(
-              context,
-              MaterialPageRoute(builder: (_) => const HomePage()),
-              (route) => false);
+          Navigator.pushAndRemoveUntil(context,
+              MaterialPageRoute(builder: (_) => HomePage()), (route) => false);
         }
       } else {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
@@ -114,7 +112,6 @@ class _RegisterPageState extends State<RegisterPage> {
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
-            reverse: true,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

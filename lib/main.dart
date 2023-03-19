@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
             systemOverlayStyle: SystemUiOverlayStyle.dark,
           ),
         ),
-        home: const HomePage(),
+        home: HomePage(),
       ),
     );
   }

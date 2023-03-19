@@ -289,12 +289,11 @@ class CustomeListTile extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        //
-                        '${totalPrice().toString()}₫',
-                        style: TextStyle(
+                        'x${documentSnapshot['soLuong']}',
+                        style: const TextStyle(
                           fontSize: 20,
-                          color: Colors.cyan[800],
-                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                          fontWeight: FontWeight.normal,
                         ),
                       ),
                     ],
@@ -302,11 +301,12 @@ class CustomeListTile extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        'x${documentSnapshot['soLuong']}',
-                        style: const TextStyle(
+                        //
+                        '${totalPrice().toString()}₫',
+                        style: TextStyle(
                           fontSize: 20,
-                          color: Colors.black,
-                          fontWeight: FontWeight.normal,
+                          color: Colors.cyan[800],
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ],

@@ -21,10 +21,8 @@ class _ProfileLoggedState extends State<ProfileLogged> {
     await FirebaseAuth.instance.signOut();
     if (FirebaseAuth.instance.currentUser == null) {
       // ignore: use_build_context_synchronously
-      Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (_) => const HomePage()),
-          (route) => false);
+      Navigator.pushAndRemoveUntil(context,
+          MaterialPageRoute(builder: (_) => HomePage()), (route) => false);
     }
   }
 
@@ -65,6 +63,7 @@ class _ProfileLoggedState extends State<ProfileLogged> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -302,6 +301,9 @@ class _ProfileLoggedState extends State<ProfileLogged> {
                   ],
                 ),
               ),
+            ),
+            const SizedBox(
+              height: 20,
             ),
           ],
         ),

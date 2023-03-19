@@ -63,7 +63,7 @@ class _BookOfCategoryState extends State<BookOfCategory> {
   Widget build(BuildContext context) {
     final cartCounter = Provider.of<CartProvider>(context);
     return Scaffold(
-      backgroundColor: Colors.grey[100],
+      backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
         title: Text(

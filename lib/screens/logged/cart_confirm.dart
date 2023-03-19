@@ -52,35 +52,29 @@ class _CartConfirmState extends State<CartConfirm> {
     }
   }
 
-  bool checkPaymentInfo() {
-    if (payOption == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: const Text('Vui lòng chọn hình thức thanh toán!'),
-          backgroundColor: (Colors.cyan[800]),
-          duration: const Duration(seconds: 1),
-        ),
-      );
-      return false;
-    }
-    if (currentUser.phoneNumber == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: const Text('Vui lòng cập nhật số điện thoại'),
-          backgroundColor: (Colors.cyan[800]),
-          duration: const Duration(seconds: 1),
-        ),
-      );
-      return false;
-    }
-    if (currentUser.address == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: const Text('Vui lòng cập nhật địa chỉ'),
-          backgroundColor: (Colors.cyan[800]),
-          duration: const Duration(seconds: 1),
-        ),
-      );
+  bool checkPaymentInfo(String phoneNumber, String address) {
+    if (phoneNumber.isEmpty || address.isEmpty) {
+      showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              // title: const Text('Thông tin nhận hàng trống'),
+              content: const Text(
+                  'Vui lòng cập nhật số điện thoại/ địa chỉ giao hàng.'),
+              actions: [
+                TextButton(
+                    onPressed: () {
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                            builder: (contex) => HomePage(outFromIndex: 3)),
+                        (route) => false,
+                      );
+                    },
+                    child: const Text('Cập nhật thông tin')),
+              ],
+            );
+          });
       return false;
     }
     return true;
@@ -100,20 +94,22 @@ class _CartConfirmState extends State<CartConfirm> {
     );
   }
 
+  int choice = 1;
   String? payOption;
-  Widget paymentOption(String content) {
+  Widget paymentOption(String content, int orderChoice) {
     return ListTile(
       title: Text(
         content,
         style: const TextStyle(fontSize: 22),
       ),
       leading: Radio(
-        value: content,
-        groupValue: payOption,
+        value: orderChoice,
+        groupValue: choice,
         activeColor: Colors.cyan[800],
         onChanged: (value) {
           setState(() {
-            payOption = value;
+            choice = orderChoice;
+            payOption = content;
           });
         },
       ),
@@ -136,135 +132,208 @@ class _CartConfirmState extends State<CartConfirm> {
         foregroundColor: Colors.black,
         elevation: 0,
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 2, bottom: 5),
-              child: customeText('Thông tin người nhận', false,
-                  size: 29, isCyanColor: true),
+      body: ListView(
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(15, 0, 15, 5),
+            child: customeText('Thông tin người nhận', false,
+                size: 29, isCyanColor: true),
+          ),
+          const SizedBox(height: 10),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(30, 5, 30, 5),
+            child: Row(
+              children: [
+                customeText('Khách hàng:  ', false),
+                customeText(currentUser.fullName.toString(), true,
+                    isItalic: false),
+              ],
             ),
-            const SizedBox(height: 10),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(15, 5, 15, 5),
-              child: Row(
-                children: [
-                  customeText('Khách hàng:  ', false),
-                  customeText(currentUser.fullName.toString(), true,
-                      isItalic: false),
-                ],
-              ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(30, 5, 30, 5),
+            child: Row(
+              children: [
+                customeText('Số điện thoại:  ', false),
+                customeText(currentUser.phoneNumber.toString(), true,
+                    isItalic: false),
+              ],
             ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(15, 5, 15, 5),
-              child: Row(
-                children: [
-                  customeText('Số điện thoại:  ', false),
-                  customeText(currentUser.phoneNumber.toString(), true,
-                      isItalic: false),
-                ],
-              ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(30, 5, 30, 5),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                customeText('Địa chỉ:  ', false),
+                Flexible(
+                  flex: 1,
+                  child: customeText(currentUser.address.toString(), true),
+                ),
+              ],
             ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(15, 5, 15, 5),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  customeText('Địa chỉ:  ', false),
-                  Flexible(
-                    child: customeText(currentUser.address.toString(), true),
+          ),
+          const SizedBox(height: 20),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(15, 0, 15, 5),
+            child: customeText('Hình thức thanh toán:', false,
+                size: 29, isCyanColor: true),
+          ),
+          paymentOption('Thanh toán khi nhận hàng', 1),
+          paymentOption('Thanh toán qua thẻ ATM', 2),
+          // const Expanded(child: SizedBox()),
+        ],
+      ),
+      bottomNavigationBar: TextButton(
+        onPressed: () {
+          if (checkPaymentInfo(currentUser.phoneNumber.toString(),
+              currentUser.address.toString())) {
+            showModalBottomSheet(
+                context: context,
+                isDismissible: true,
+                isScrollControlled: true,
+                enableDrag: true,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(30),
+                    topRight: Radius.circular(30),
                   ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 20),
-            Padding(
-              padding: const EdgeInsets.only(top: 2, bottom: 5),
-              child: customeText('Hình thức thanh toán:', false,
-                  size: 29, isCyanColor: true),
-            ),
-            paymentOption('Thanh toán khi nhận hàng'),
-            paymentOption('Thanh toán qua thẻ ATM'),
-            const Expanded(child: SizedBox()),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: const [
-                  // SizedBox(
-                  //   width: 20,
-                  // ),
-                  Text(
-                    'Phí ship: ',
-                    style: TextStyle(
-                      fontSize: 22,
+                ),
+                builder: (context) {
+                  return SizedBox(
+                    height: 200,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const SizedBox(
+                          height: 20,
+                          width: 50,
+                          child: Divider(
+                            color: Colors.grey,
+                            thickness: 5,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: const [
+                              // SizedBox(
+                              //   width: 20,
+                              // ),
+                              Text(
+                                'Phí vận chuyển: ',
+                                style: TextStyle(
+                                  fontSize: 22,
+                                ),
+                              ),
+                              Expanded(child: SizedBox()),
+                              Text(
+                                '0 VND',
+                                style: TextStyle(
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.normal),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              // const SizedBox(
+                              //   width: 20,
+                              // ),
+                              const Text(
+                                'Tổng đơn hàng: ',
+                                style: TextStyle(
+                                  fontSize: 22,
+                                ),
+                              ),
+                              const Expanded(child: SizedBox()),
+                              Text(
+                                '${cartCounter.getCartTotal().toString()} VND',
+                                style: const TextStyle(
+                                    fontSize: 25, fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                        ),
+                        // const Expanded(child: SizedBox()),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.fromLTRB(12, 0, 0, 5),
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.cyan[50],
+                                      foregroundColor: Colors.cyan[800]),
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: const Text(
+                                    'Trở lại',
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.fromLTRB(12, 0, 0, 5),
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.cyan[800],
+                                      foregroundColor: Colors.white),
+                                  onPressed: () {
+                                    if (payOption != null) {
+                                      cartCounter
+                                          .addOrderCollection(payOption!);
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  HomePage()));
+                                    }
+                                  },
+                                  child: const Text(
+                                    'Đặt hàng',
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
-                  ),
-                  Expanded(child: SizedBox()),
-                  Text(
-                    '0 VND',
-                    style:
-                        TextStyle(fontSize: 22, fontWeight: FontWeight.normal),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  // const SizedBox(
-                  //   width: 20,
-                  // ),
-                  const Text(
-                    'Tổng cộng: ',
-                    style: TextStyle(
-                      fontSize: 22,
-                    ),
-                  ),
-                  const Expanded(child: SizedBox()),
-                  Text(
-                    '${cartCounter.getCartTotal().toString()} VND',
-                    style: const TextStyle(
-                        fontSize: 25, fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
-            ),
-            TextButton(
-              onPressed: () {
-                if (checkPaymentInfo()) {
-                  cartCounter.addOrderCollection(payOption!);
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const HomePage()));
-                }
-              },
-              child: Container(
-                height: 50,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(50),
-                    color: Colors.cyan[800]),
-                child: Row(
-                  children: const [
-                    Expanded(child: SizedBox()),
-                    Text(
-                      'Đặt hàng',
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.white,
-                      ),
-                    ),
-                    Expanded(child: SizedBox()),
-                  ],
+                  );
+                });
+          }
+        },
+        child: Container(
+          height: 50,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(50), color: Colors.cyan[800]),
+          child: Row(
+            children: const [
+              Expanded(child: SizedBox()),
+              Text(
+                'Xác nhận',
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.white,
                 ),
               ),
-            ),
-          ],
+              Expanded(child: SizedBox()),
+            ],
+          ),
         ),
       ),
     );

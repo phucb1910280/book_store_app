@@ -57,6 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final cartCounter = Provider.of<CartProvider>(context);
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         systemOverlayStyle: const SystemUiOverlayStyle(
           statusBarColor: Colors.transparent,
@@ -145,9 +146,9 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Container(
         height: 45,
         decoration: BoxDecoration(
-          // border: Border.all(color: Colors.grey[200]!, width: 1),
+          border: Border.all(color: Colors.grey[200]!, width: 1),
           borderRadius: const BorderRadius.all(Radius.circular(25)),
-          color: Colors.grey[100],
+          color: Colors.white,
         ),
         child: Row(
           children: [

@@ -101,310 +101,308 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
     final cartCounter = Provider.of<CartProvider>(context);
     return Scaffold(
       backgroundColor: Colors.white,
-      body: ListView(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 10, bottom: 0),
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 300,
-                  width: double.infinity,
-                  child: Stack(
+      body: Padding(
+        padding: const EdgeInsets.only(top: 10, bottom: 0),
+        child: ListView(
+          children: [
+            SizedBox(
+              height: 300,
+              width: double.infinity,
+              child: Stack(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.network(
-                            widget.book!.biaSach.toString(),
-                            fit: BoxFit.contain,
-                          ),
-                        ],
+                      Hero(
+                        tag: 'hero',
+                        child: Image.network(
+                          widget.book!.biaSach.toString(),
+                          fit: BoxFit.contain,
+                        ),
                       ),
-                      Positioned(
-                        top: 0,
-                        left: 10,
-                        child: Container(
-                          height: 40,
-                          width: 40,
-                          decoration: BoxDecoration(
-                            // color: Colors.grey[100],
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                          child: IconButton(
+                    ],
+                  ),
+                  Positioned(
+                    top: 0,
+                    left: 10,
+                    child: Container(
+                      height: 40,
+                      width: 40,
+                      decoration: BoxDecoration(
+                        // color: Colors.grey[100],
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      child: IconButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        icon: Icon(
+                          Icons.arrow_back,
+                          color: Colors.cyan[800],
+                        ),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    top: 0,
+                    right: 25,
+                    child: Container(
+                      height: 40,
+                      width: 40,
+                      decoration: BoxDecoration(
+                        // color: Colors.grey[100],
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      child: Badge(
+                        label: FirebaseAuth.instance.currentUser != null
+                            ? Text(cartCounter.getCartCount().toString())
+                            : const Text('0'),
+                        textStyle: const TextStyle(
+                          fontSize: 20,
+                        ),
+                        largeSize: 22,
+                        smallSize: 20,
+                        alignment: const AlignmentDirectional(31, 8),
+                        backgroundColor: Colors.white,
+                        textColor: Colors.cyan[800],
+                        child: IconButton(
                             onPressed: () {
-                              Navigator.pop(context);
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const CartScreen()));
                             },
                             icon: Icon(
-                              Icons.arrow_back,
+                              Icons.shopping_cart_outlined,
                               color: Colors.cyan[800],
-                            ),
-                          ),
-                        ),
+                            )),
                       ),
-                      Positioned(
-                        top: 0,
-                        right: 25,
-                        child: Container(
-                          height: 40,
-                          width: 40,
-                          decoration: BoxDecoration(
-                            // color: Colors.grey[100],
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                          child: Badge(
-                            label: FirebaseAuth.instance.currentUser != null
-                                ? Text(cartCounter.getCartCount().toString())
-                                : const Text('0'),
-                            textStyle: const TextStyle(
-                              fontSize: 20,
-                            ),
-                            largeSize: 22,
-                            smallSize: 20,
-                            alignment: const AlignmentDirectional(31, 8),
-                            backgroundColor: Colors.white,
-                            textColor: Colors.cyan[800],
-                            child: IconButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const CartScreen()));
-                                },
-                                icon: Icon(
-                                  Icons.shopping_cart_outlined,
-                                  color: Colors.cyan[800],
-                                )),
-                          ),
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Flexible(
-                        child: Text(
-                          widget.book!.tenSach.toString(),
-                          style: const TextStyle(
-                            fontWeight: FontWeight.normal,
-                            fontSize: 25,
-                            color: Colors.black,
-                          ),
-                        ),
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Flexible(
+                    child: Text(
+                      widget.book!.tenSach.toString(),
+                      style: const TextStyle(
+                        fontWeight: FontWeight.normal,
+                        fontSize: 25,
+                        color: Colors.black,
                       ),
-                    ],
+                    ),
                   ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 20, right: 20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        '${widget.book!.giaBan}₫',
-                        style: TextStyle(
-                          fontSize: 25,
-                          color: Colors.cyan[800],
-                          fontWeight: FontWeight.bold,
-                        ),
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 20, right: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    '${widget.book!.giaBan}₫',
+                    style: TextStyle(
+                      fontSize: 25,
+                      color: Colors.cyan[800],
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.cyan[800],
                       ),
-                      ElevatedButton(
-                          style: ElevatedButton.styleFrom(
+                      onPressed: () async {
+                        if (FirebaseAuth.instance.currentUser != null) {
+                          await addToFav(soLuong);
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: const Text(
+                              'Vui lòng đăng nhập để tiếp tục!',
+                              style: TextStyle(color: Colors.white),
+                            ),
                             backgroundColor: Colors.cyan[800],
-                          ),
-                          onPressed: () async {
-                            if (FirebaseAuth.instance.currentUser != null) {
-                              await addToFav(soLuong);
-                            } else {
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(SnackBar(
-                                content: const Text(
-                                  'Vui lòng đăng nhập để tiếp tục!',
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                                backgroundColor: Colors.cyan[800],
-                                duration: const Duration(seconds: 1),
-                              ));
-                            }
-                          },
-                          child: const Text('Yêu thích')),
-                    ],
-                  ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    color: Colors.teal[50],
-                    borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(45),
-                        topRight: Radius.circular(45)),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 30, 20, 5),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: const [
-                            Text(
-                              'Thông tin sách',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 25,
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(10, 4, 10, 4),
-                          child: Row(
-                            children: [
-                              const Text(
-                                'Tác giả: ',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  color: Colors.black,
-                                  fontStyle: FontStyle.italic,
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              Flexible(
-                                child: Text(
-                                  widget.book!.tacGia,
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    color: Colors.cyan[800],
-                                    fontStyle: FontStyle.italic,
-                                  ),
-                                ),
-                              ),
-                            ],
+                            duration: const Duration(seconds: 1),
+                          ));
+                        }
+                      },
+                      child: const Text('Yêu thích')),
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.teal[50],
+                borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(45),
+                    topRight: Radius.circular(45)),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(20, 30, 20, 5),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: const [
+                        Text(
+                          'Thông tin sách',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 25,
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(10, 4, 10, 4),
-                          child: Row(
-                            children: [
-                              const Text(
-                                'Số trang: ',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  color: Colors.black,
-                                  fontStyle: FontStyle.italic,
-                                ),
-                              ),
-                              Text(
-                                widget.book!.soTrang.toString(),
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  color: Colors.cyan[800],
-                                  fontStyle: FontStyle.italic,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(10, 4, 10, 4),
-                          child: Row(
-                            children: [
-                              const Text(
-                                'Loại bìa: ',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  color: Colors.black,
-                                  fontStyle: FontStyle.italic,
-                                ),
-                              ),
-                              Text(
-                                widget.book!.loaiBia,
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  color: Colors.cyan[800],
-                                  fontStyle: FontStyle.italic,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(10, 4, 10, 4),
-                          child: Row(
-                            children: [
-                              const Text(
-                                'Thể loại: ',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  color: Colors.black,
-                                  fontStyle: FontStyle.italic,
-                                ),
-                              ),
-                              Text(
-                                widget.book!.thuocTheLoai,
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  color: Colors.cyan[800],
-                                  fontStyle: FontStyle.italic,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: const [
-                            Text(
-                              'Mô tả',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 25,
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 10, right: 10),
-                          child: Text(
-                            widget.book!.moTa,
-                            style: const TextStyle(
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(10, 4, 10, 4),
+                      child: Row(
+                        children: [
+                          const Text(
+                            'Tác giả: ',
+                            style: TextStyle(
                               fontSize: 20,
                               color: Colors.black,
                               fontStyle: FontStyle.italic,
                             ),
                           ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Flexible(
+                            child: Text(
+                              widget.book!.tacGia,
+                              style: TextStyle(
+                                fontSize: 20,
+                                color: Colors.cyan[800],
+                                fontStyle: FontStyle.italic,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(10, 4, 10, 4),
+                      child: Row(
+                        children: [
+                          const Text(
+                            'Số trang: ',
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.black,
+                              fontStyle: FontStyle.italic,
+                            ),
+                          ),
+                          Text(
+                            widget.book!.soTrang.toString(),
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.cyan[800],
+                              fontStyle: FontStyle.italic,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(10, 4, 10, 4),
+                      child: Row(
+                        children: [
+                          const Text(
+                            'Loại bìa: ',
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.black,
+                              fontStyle: FontStyle.italic,
+                            ),
+                          ),
+                          Text(
+                            widget.book!.loaiBia,
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.cyan[800],
+                              fontStyle: FontStyle.italic,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(10, 4, 10, 4),
+                      child: Row(
+                        children: [
+                          const Text(
+                            'Thể loại: ',
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.black,
+                              fontStyle: FontStyle.italic,
+                            ),
+                          ),
+                          Text(
+                            widget.book!.thuocTheLoai,
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.cyan[800],
+                              fontStyle: FontStyle.italic,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: const [
+                        Text(
+                          'Mô tả',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 25,
+                          ),
                         ),
                       ],
                     ),
-                  ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10, right: 10),
+                      child: Text(
+                        widget.book!.moTa,
+                        style: const TextStyle(
+                          fontSize: 20,
+                          color: Colors.black,
+                          fontStyle: FontStyle.italic,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
       bottomNavigationBar: Container(
         height: 60,

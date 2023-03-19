@@ -7,6 +7,7 @@ class ProfileNotLoggedIn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
@@ -20,30 +21,31 @@ class ProfileNotLoggedIn extends StatelessWidget {
         ),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Image.asset(
-              'assets/icons/readingBooks.png',
-              height: 250,
-              // color: Colors.grey.withOpacity(.5),
-            ),
-            ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.cyan[800],
-                ),
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const AuthPage()));
-                },
-                child: const Text(
-                  'Đăng nhập',
-                  style: TextStyle(fontSize: 22),
-                )),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                'assets/icons/readingBooks.png',
+                height: 250,
+                // color: Colors.grey.withOpacity(.5),
+              ),
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.cyan[800],
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const AuthPage()));
+                  },
+                  child: const Text(
+                    'Đăng nhập',
+                    style: TextStyle(fontSize: 22),
+                  )),
+            ],
+          ),
         ),
       ),
     );

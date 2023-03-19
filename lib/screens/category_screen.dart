@@ -31,6 +31,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
   Widget build(BuildContext context) {
     final cartCounter = Provider.of<CartProvider>(context);
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text(
           'Danh mục sách',
@@ -74,10 +75,10 @@ class _CategoryScreenState extends State<CategoryScreen> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: ListView(
           children: [
             Row(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Expanded(
                   child: TextButton(
@@ -96,6 +97,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
               ],
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Expanded(
                   child: TextButton(
@@ -114,6 +116,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
               ],
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Expanded(
                   child: TextButton(
@@ -132,6 +135,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
               ],
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Expanded(
                   child: TextButton(
@@ -150,6 +154,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
               ],
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Expanded(
                   child: TextButton(
@@ -187,6 +192,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
               ],
             ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Expanded(
                   child: TextButton(

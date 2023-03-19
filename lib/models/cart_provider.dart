@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class CartProvider extends ChangeNotifier {
   int _cartCount = 0;
@@ -51,8 +50,7 @@ class CartProvider extends ChangeNotifier {
   }
 
   void addOrderCollection(String hinhThucThanhToan) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    if (prefs.getBool('logStt')!) {
+    if (FirebaseAuth.instance.currentUser != null) {
       var cartCollectionRef = FirebaseFirestore.instance
           .collection('userCartItems')
           .doc(FirebaseAuth.instance.currentUser!.email)
@@ -61,9 +59,9 @@ class CartProvider extends ChangeNotifier {
       if (querySnapshot.docs.isNotEmpty) {
         var curDay = DateTime.now();
         String id =
-            '${curDay.day}${curDay.month}${curDay.year}${curDay.hour + 7}${curDay.minute}';
+            '${curDay.day}${curDay.month}${curDay.year}${curDay.hour}${curDay.minute}';
         String orderDay =
-            '${curDay.hour + 7}:${curDay.minute}, ${curDay.day}/${curDay.month}/${curDay.year}';
+            '${curDay.hour}:${curDay.minute}, ${curDay.day}/${curDay.month}/${curDay.year}';
         String receiveDay = '${curDay.day + 2}/${curDay.month}/${curDay.year}';
         var userCollectionRef = FirebaseFirestore.instance
             .collection('user')
@@ -125,8 +123,7 @@ class CartProvider extends ChangeNotifier {
     String thuocTheLoai,
     String moTa,
   ) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    if (prefs.getBool('logStt')!) {
+    if (FirebaseAuth.instance.currentUser != null) {
       var orderCollectionRef = FirebaseFirestore.instance
           .collection('userOrder')
           .doc(FirebaseAuth.instance.currentUser!.email)
