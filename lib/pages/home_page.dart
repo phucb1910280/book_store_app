@@ -5,11 +5,11 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:simple_app/screens/category_screen.dart';
-import 'package:simple_app/screens/favorite_screen_controller.dart';
 import 'package:simple_app/screens/home_screen.dart';
 
 import '../models/cart_provider.dart';
-import '../screens/profile_sceen_controller.dart';
+import '../pagesRoute/favorite_screen_controller.dart';
+import '../pagesRoute/profile_sceen_controller.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({

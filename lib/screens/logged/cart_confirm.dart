@@ -58,7 +58,8 @@ class _CartConfirmState extends State<CartConfirm> {
           context: context,
           builder: (context) {
             return AlertDialog(
-              // title: const Text('Thông tin nhận hàng trống'),
+              shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(20))),
               content: const Text(
                   'Vui lòng cập nhật số điện thoại/ địa chỉ giao hàng.'),
               actions: [

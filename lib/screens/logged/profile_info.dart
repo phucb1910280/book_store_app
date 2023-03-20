@@ -73,7 +73,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 15, 20, 20),
+        padding: const EdgeInsets.fromLTRB(20, 15, 20, 5),
         child: Column(
           children: [
             Padding(
@@ -180,7 +180,7 @@ class _ProfileInfoState extends State<ProfileInfo> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(50),
                   border: Border.all(
-                    color: Colors.teal,
+                    color: Colors.cyan[800]!,
                     width: 2,
                     style: BorderStyle.solid,
                     strokeAlign: BorderSide.strokeAlignCenter,

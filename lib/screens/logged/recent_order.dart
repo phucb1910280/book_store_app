@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:simple_app/pagesRoute/pape_route_transition.dart';
 import 'package:simple_app/screens/logged/order_detail.dart';
 
 class RecentOrder extends StatefulWidget {
@@ -46,8 +47,8 @@ class _RecentOrderState extends State<RecentOrder> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                        builder: (context) => OrderDetail(
+                      SlideToLeftRoute(
+                        page: OrderDetail(
                           docId: documentSnapshot.id,
                           documentSnapshot: documentSnapshot,
                         ),

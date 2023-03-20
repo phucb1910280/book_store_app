@@ -3,12 +3,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:simple_app/screens/cart_screen_controller.dart';
+import 'package:simple_app/pagesRoute/pape_route_transition.dart';
 import 'package:simple_app/shared/book_detail.dart';
 import 'package:simple_app/shared/list_book_widget.dart';
 import 'package:simple_app/models/book.dart';
 
 import '../models/cart_provider.dart';
+import '../pagesRoute/cart_screen_controller.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -89,9 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: IconButton(
                 onPressed: () {
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const CartScreen()));
+                      context, SlideUpRoute(page: const CartScreen()));
                 },
                 icon: Icon(
                   Icons.shopping_cart_outlined,
@@ -123,9 +122,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     onTap: () {
                       Navigator.push(
                           context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  BookDetailWidget(book: bookList[index])));
+                          SlideUpRoute(
+                              page: BookDetailWidget(book: bookList[index])));
                     },
                     child: ListOfBookWidget(
                       book: bookList[index],

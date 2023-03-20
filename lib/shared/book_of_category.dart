@@ -8,7 +8,8 @@ import 'package:simple_app/shared/book_detail.dart';
 import 'package:simple_app/shared/list_book_widget.dart';
 
 import '../models/cart_provider.dart';
-import '../screens/cart_screen_controller.dart';
+import '../pagesRoute/cart_screen_controller.dart';
+import '../pagesRoute/pape_route_transition.dart';
 
 class BookOfCategory extends StatefulWidget {
   final String tenTheLoaiSach;
@@ -91,9 +92,7 @@ class _BookOfCategoryState extends State<BookOfCategory> {
             child: IconButton(
                 onPressed: () {
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const CartScreen()));
+                      context, SlideUpRoute(page: const CartScreen()));
                 },
                 icon: Icon(
                   Icons.shopping_cart_outlined,
@@ -123,9 +122,8 @@ class _BookOfCategoryState extends State<BookOfCategory> {
                     onTap: () {
                       Navigator.push(
                           context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  BookDetailWidget(book: bookList[index])));
+                          SlideUpRoute(
+                              page: BookDetailWidget(book: bookList[index])));
                     },
                     child: ListOfBookWidget(
                       book: bookList[index],

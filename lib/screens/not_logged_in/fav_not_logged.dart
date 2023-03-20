@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../models/cart_provider.dart';
 import '../../pages/auth_page.dart';
-import '../cart_screen_controller.dart';
+import '../../pagesRoute/cart_screen_controller.dart';
+import '../../pagesRoute/pape_route_transition.dart';
 
 class FavoriteNotLogged extends StatelessWidget {
   const FavoriteNotLogged({super.key});
@@ -40,9 +41,7 @@ class FavoriteNotLogged extends StatelessWidget {
             child: IconButton(
                 onPressed: () {
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const CartScreen()));
+                      context, SlideUpRoute(page: const CartScreen()));
                 },
                 icon: Icon(
                   Icons.shopping_cart_outlined,

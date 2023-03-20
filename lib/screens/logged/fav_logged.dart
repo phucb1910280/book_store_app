@@ -6,8 +6,9 @@ import 'package:provider/provider.dart';
 
 import '../../models/book.dart';
 import '../../models/cart_provider.dart';
+import '../../pagesRoute/cart_screen_controller.dart';
+import '../../pagesRoute/pape_route_transition.dart';
 import '../../shared/book_detail.dart';
-import '../cart_screen_controller.dart';
 
 class FavoriteLogged extends StatefulWidget {
   const FavoriteLogged({super.key});
@@ -49,9 +50,7 @@ class _FavoriteLoggedState extends State<FavoriteLogged> {
             child: IconButton(
                 onPressed: () {
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const CartScreen()));
+                      context, SlideUpRoute(page: const CartScreen()));
                 },
                 icon: Icon(
                   Icons.shopping_cart_outlined,
@@ -154,9 +153,8 @@ class CustomeListTile extends StatelessWidget {
                         );
                         Navigator.push(
                             context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    BookDetailWidget(book: currentBook)));
+                            SlideToLeftRoute(
+                                page: BookDetailWidget(book: currentBook)));
                       },
                       child: Image.network(
                         documentSnapshot['biaSach'],
@@ -189,9 +187,8 @@ class CustomeListTile extends StatelessWidget {
                         );
                         Navigator.push(
                             context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    BookDetailWidget(book: currentBook)));
+                            SlideToLeftRoute(
+                                page: BookDetailWidget(book: currentBook)));
                       },
                       child: Row(
                         children: [

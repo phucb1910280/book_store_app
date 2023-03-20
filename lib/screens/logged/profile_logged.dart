@@ -6,6 +6,7 @@ import 'package:simple_app/screens/logged/about_me.dart';
 import 'package:simple_app/screens/logged/profile_info.dart';
 
 import '../../pages/home_page.dart';
+import '../../pagesRoute/cart_screen_controller.dart';
 import 'edit_profile.dart';
 import 'recent_order.dart';
 
@@ -171,6 +172,39 @@ class _ProfileLoggedState extends State<ProfileLogged> {
               padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
               child: TextButton(
                 style: const ButtonStyle(alignment: Alignment.bottomLeft),
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const CartScreen()));
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: const [
+                    Icon(
+                      Icons.shopping_cart,
+                      color: Colors.black,
+                    ),
+                    SizedBox(
+                      width: 15,
+                    ),
+                    Expanded(
+                      child: Text(
+                        'Giỏ hàng',
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontStyle: FontStyle.normal,
+                            color: Colors.black),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
+              child: TextButton(
+                style: const ButtonStyle(alignment: Alignment.bottomLeft),
                 onPressed: () async {
                   final updatedUser = await Navigator.push(
                       context,
@@ -228,7 +262,7 @@ class _ProfileLoggedState extends State<ProfileLogged> {
                     ),
                     const Expanded(
                       child: Text(
-                        'Đơn hàng của tôi',
+                        'Theo dõi đơn hàng',
                         style: TextStyle(
                             fontSize: 20,
                             fontStyle: FontStyle.normal,

@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_app/models/book.dart';
+import 'package:simple_app/pagesRoute/pape_route_transition.dart';
 import 'package:simple_app/screens/logged/cart_confirm.dart';
 import 'package:simple_app/shared/book_detail.dart';
 
@@ -183,9 +184,8 @@ class CustomeListTile extends StatelessWidget {
                         );
                         Navigator.push(
                             context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    BookDetailWidget(book: currentBook)));
+                            SlideToLeftRoute(
+                                page: BookDetailWidget(book: currentBook)));
                       },
                       child: Image.network(
                         documentSnapshot['biaSach'],
@@ -218,9 +218,8 @@ class CustomeListTile extends StatelessWidget {
                         );
                         Navigator.push(
                             context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    BookDetailWidget(book: currentBook)));
+                            SlideToLeftRoute(
+                                page: BookDetailWidget(book: currentBook)));
                       },
                       child: Row(
                         children: [

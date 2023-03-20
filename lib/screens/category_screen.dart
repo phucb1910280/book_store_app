@@ -4,7 +4,8 @@ import 'package:provider/provider.dart';
 import 'package:simple_app/shared/book_of_category.dart';
 
 import '../models/cart_provider.dart';
-import 'cart_screen_controller.dart';
+import '../pagesRoute/cart_screen_controller.dart';
+import '../pagesRoute/pape_route_transition.dart';
 
 class CategoryScreen extends StatefulWidget {
   const CategoryScreen({super.key});
@@ -59,9 +60,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
             child: IconButton(
                 onPressed: () {
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const CartScreen()));
+                      context, SlideUpRoute(page: const CartScreen()));
                 },
                 icon: Icon(
                   Icons.shopping_cart_outlined,

@@ -2,10 +2,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:simple_app/pages/auth_page.dart';
 
 import '../models/book.dart';
 import '../models/cart_provider.dart';
-import '../screens/cart_screen_controller.dart';
+import '../pages/home_page.dart';
+import '../pagesRoute/cart_screen_controller.dart';
+import '../pagesRoute/pape_route_transition.dart';
 
 class BookDetailWidget extends StatefulWidget {
   final Book? book;
@@ -16,6 +19,13 @@ class BookDetailWidget extends StatefulWidget {
 }
 
 class _BookDetailWidgetState extends State<BookDetailWidget> {
+  @override
+  void initState() {
+    super.initState();
+    checkExistOnFav(widget.book!.id.toString());
+    checkExistOnCart(widget.book!.id.toString());
+  }
+
   Future addToCart(int soLuongSp) async {
     final FirebaseAuth auth = FirebaseAuth.instance;
     var currentUser = auth.currentUser;
@@ -79,6 +89,70 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
     );
   }
 
+  bool exitsOnFavCollection = false;
+  bool exitsOnCartCollection = false;
+  void checkExistOnFav(String docID) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('userFavItems')
+          .doc(FirebaseAuth.instance.currentUser!.email)
+          .collection('favItems')
+          .doc(widget.book!.id)
+          .get()
+          .then((value) {
+        setState(() {
+          exitsOnFavCollection = value.exists;
+        });
+      });
+    } catch (e) {
+      setState(() {
+        exitsOnFavCollection = false;
+      });
+    }
+  }
+
+  void checkExistOnCart(String docID) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('userCartItems')
+          .doc(FirebaseAuth.instance.currentUser!.email)
+          .collection('cartItems')
+          .doc(widget.book!.id)
+          .get()
+          .then((value) {
+        setState(() {
+          exitsOnCartCollection = value.exists;
+        });
+      });
+    } catch (e) {
+      setState(() {
+        exitsOnCartCollection = false;
+      });
+    }
+  }
+
+  Future removeFav() async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('userFavItems')
+          .doc(FirebaseAuth.instance.currentUser!.email)
+          .collection('favItems')
+          .doc(widget.book!.id)
+          .delete()
+          .then(
+            (value) => ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: const Text('Đã xóa khỏi Danh sách yêu thích'),
+                backgroundColor: (Colors.cyan[800]),
+                duration: const Duration(seconds: 1),
+              ),
+            ),
+          );
+    } catch (e) {
+      return false;
+    }
+  }
+
   List<Book> favBookList = [];
   int soLuong = 1;
 
@@ -113,12 +187,9 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Hero(
-                        tag: 'hero',
-                        child: Image.network(
-                          widget.book!.biaSach.toString(),
-                          fit: BoxFit.contain,
-                        ),
+                      Image.network(
+                        widget.book!.biaSach.toString(),
+                        fit: BoxFit.contain,
                       ),
                     ],
                   ),
@@ -167,11 +238,8 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
                         textColor: Colors.cyan[800],
                         child: IconButton(
                             onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const CartScreen()));
+                              Navigator.push(context,
+                                  SlideUpRoute(page: const CartScreen()));
                             },
                             icon: Icon(
                               Icons.shopping_cart_outlined,
@@ -210,8 +278,11 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
             Padding(
               padding: const EdgeInsets.only(left: 20, right: 20),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
+                  const SizedBox(
+                    width: 10,
+                  ),
                   Text(
                     '${widget.book!.giaBan}₫',
                     style: TextStyle(
@@ -220,37 +291,75 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.cyan[800],
-                      ),
-                      onPressed: () async {
-                        if (FirebaseAuth.instance.currentUser != null) {
+                  const Expanded(child: SizedBox()),
+                  IconButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.cyan[800],
+                    ),
+                    onPressed: () async {
+                      if (FirebaseAuth.instance.currentUser != null) {
+                        if (!exitsOnFavCollection) {
                           await addToFav(soLuong);
+                          setState(() {
+                            exitsOnFavCollection = true;
+                          });
                         } else {
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content: const Text(
-                              'Vui lòng đăng nhập để tiếp tục!',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                            backgroundColor: Colors.cyan[800],
-                            duration: const Duration(seconds: 1),
-                          ));
+                          removeFav();
+                          setState(() {
+                            exitsOnFavCollection = false;
+                          });
                         }
-                      },
-                      child: const Text('Yêu thích')),
+                      } else {
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              shape: const RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20))),
+                              content: const Text(
+                                  'Vui lòng đăng nhập để thêm danh sách yêu thích!'),
+                              actions: [
+                                TextButton(
+                                    onPressed: () {
+                                      Navigator.pushAndRemoveUntil(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (contex) =>
+                                                const AuthPage()),
+                                        (route) => false,
+                                      );
+                                    },
+                                    child: const Text('Đăng nhập')),
+                              ],
+                            );
+                          },
+                        );
+                      }
+                    },
+                    icon: Icon(
+                      exitsOnFavCollection
+                          ? Icons.favorite
+                          : Icons.favorite_border,
+                      color: Colors.red[700],
+                      size: 35,
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 15,
+                  ),
                 ],
               ),
             ),
             const SizedBox(
-              height: 20,
+              height: 10,
             ),
             Container(
               decoration: BoxDecoration(
                 color: Colors.teal[50],
-                borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(45),
-                    topRight: Radius.circular(45)),
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(40),
+                ),
               ),
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(20, 30, 20, 5),
@@ -397,9 +506,15 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
                         ),
                       ),
                     ),
+                    const SizedBox(
+                      height: 20,
+                    ),
                   ],
                 ),
               ),
+            ),
+            const SizedBox(
+              height: 20,
             ),
           ],
         ),
@@ -461,18 +576,49 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
                     ),
                     onPressed: () async {
                       if (FirebaseAuth.instance.currentUser != null) {
-                        await addToCart(soLuong);
-                        cartCounter.updateCartCount();
-                        cartCounter.updateCartTotal();
+                        if (!exitsOnCartCollection) {
+                          await addToCart(soLuong);
+                          setState(() {
+                            exitsOnCartCollection = true;
+                          });
+                          cartCounter.updateCartCount();
+                          cartCounter.updateCartTotal();
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: const Text(
+                                  'Sản phẩm đã tồn tại trong Giỏ hàng'),
+                              backgroundColor: (Colors.cyan[800]),
+                              duration: const Duration(seconds: 1),
+                            ),
+                          );
+                        }
                       } else {
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          content: const Text(
-                            'Vui lòng đăng nhập để tiếp tục!',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          backgroundColor: Colors.cyan[800],
-                          duration: const Duration(seconds: 1),
-                        ));
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              shape: const RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20))),
+                              content: const Text(
+                                  'Vui lòng đăng nhập để thêm sách vào giỏ hàng!'),
+                              actions: [
+                                TextButton(
+                                    onPressed: () {
+                                      Navigator.pushAndRemoveUntil(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (contex) =>
+                                                HomePage(outFromIndex: 3)),
+                                        (route) => false,
+                                      );
+                                    },
+                                    child: const Text('Đăng nhập')),
+                              ],
+                            );
+                          },
+                        );
                       }
                     },
                     child: const Text('Thêm vào giỏ hàng')),

@@ -1,7 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_app/screens/logged/fav_logged.dart';
-import 'not_logged_in/fav_not_logged.dart';
+
+import '../screens/not_logged_in/fav_not_logged.dart';
 
 class FavoriteScreen extends StatefulWidget {
   const FavoriteScreen({super.key});

@@ -1,7 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'logged/cart_logged.dart';
-import 'not_logged_in/cart_not_logged.dart';
+
+import '../screens/logged/cart_logged.dart';
+import '../screens/not_logged_in/cart_not_logged.dart';
 
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
