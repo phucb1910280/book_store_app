@@ -82,7 +82,7 @@ class HomePageState extends State<HomePage> {
         child: BottomNavigationBar(
           elevation: 8,
           backgroundColor: Colors.white,
-          type: BottomNavigationBarType.fixed,
+          type: BottomNavigationBarType.shifting,
           showUnselectedLabels: false,
           showSelectedLabels: true,
           selectedItemColor: Colors.cyan[800],

@@ -85,11 +85,11 @@ class _CategoryScreenState extends State<CategoryScreen> {
                       onPressed: () {
                         Navigator.push(
                             context,
-                            MaterialPageRoute(
-                                builder: (context) => const BookOfCategory(
-                                      theLoaiSach: 'vanhoc',
-                                      tenTheLoaiSach: 'Sách Văn học',
-                                    )));
+                            SlideToLeftRoute(
+                                page: const BookOfCategory(
+                              theLoaiSach: 'vanhoc',
+                              tenTheLoaiSach: 'Sách Văn học',
+                            )));
                       },
                       child: customeText('Sách Văn học')),
                 ),
@@ -104,11 +104,11 @@ class _CategoryScreenState extends State<CategoryScreen> {
                       onPressed: () {
                         Navigator.push(
                             context,
-                            MaterialPageRoute(
-                                builder: (context) => const BookOfCategory(
-                                      theLoaiSach: 'kinhte',
-                                      tenTheLoaiSach: 'Sách Kinh tế',
-                                    )));
+                            SlideToLeftRoute(
+                                page: const BookOfCategory(
+                              theLoaiSach: 'kinhte',
+                              tenTheLoaiSach: 'Sách Kinh tế',
+                            )));
                       },
                       child: customeText('Sách Kinh tế')),
                 ),
@@ -121,13 +121,11 @@ class _CategoryScreenState extends State<CategoryScreen> {
                   child: TextButton(
                       style: const ButtonStyle(alignment: Alignment.bottomLeft),
                       onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const BookOfCategory(
-                                      theLoaiSach: 'thamkhao',
-                                      tenTheLoaiSach: 'Sách Tham khảo',
-                                    )));
+                        SlideToLeftRoute(
+                            page: const BookOfCategory(
+                          theLoaiSach: 'thamkhao',
+                          tenTheLoaiSach: 'Sách Tham khảo',
+                        ));
                       },
                       child: customeText('Sách Tham khảo')),
                 ),
@@ -140,13 +138,11 @@ class _CategoryScreenState extends State<CategoryScreen> {
                   child: TextButton(
                       style: const ButtonStyle(alignment: Alignment.bottomLeft),
                       onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const BookOfCategory(
-                                      theLoaiSach: 'kynang',
-                                      tenTheLoaiSach: 'Sách Kỹ năng sống',
-                                    )));
+                        SlideToLeftRoute(
+                            page: const BookOfCategory(
+                          theLoaiSach: 'kynang',
+                          tenTheLoaiSach: 'Sách Kỹ năng sống',
+                        ));
                       },
                       child: customeText('Sách Kỹ năng sống')),
                 ),
@@ -161,11 +157,11 @@ class _CategoryScreenState extends State<CategoryScreen> {
                       onPressed: () {
                         Navigator.push(
                             context,
-                            MaterialPageRoute(
-                                builder: (context) => const BookOfCategory(
-                                      theLoaiSach: 'nuoicon',
-                                      tenTheLoaiSach: 'Sách Nuôi dạy con',
-                                    )));
+                            SlideToLeftRoute(
+                                page: const BookOfCategory(
+                              theLoaiSach: 'nuoicon',
+                              tenTheLoaiSach: 'Sách Nuôi dạy con',
+                            )));
                       },
                       child: customeText('Sách Nuôi dạy con')),
                 ),
@@ -178,13 +174,11 @@ class _CategoryScreenState extends State<CategoryScreen> {
                   child: TextButton(
                       style: const ButtonStyle(alignment: Alignment.bottomLeft),
                       onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const BookOfCategory(
-                                      theLoaiSach: 'thieunhi',
-                                      tenTheLoaiSach: 'Sách Thiếu nhi',
-                                    )));
+                        SlideToLeftRoute(
+                            page: const BookOfCategory(
+                          theLoaiSach: 'thieunhi',
+                          tenTheLoaiSach: 'Sách Thiếu nhi',
+                        ));
                       },
                       child: customeText('Sách Thiếu nhi')),
                 ),
@@ -197,13 +191,11 @@ class _CategoryScreenState extends State<CategoryScreen> {
                   child: TextButton(
                       style: const ButtonStyle(alignment: Alignment.bottomLeft),
                       onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const BookOfCategory(
-                                      theLoaiSach: 'tieusu',
-                                      tenTheLoaiSach: 'Sách Tiểu sử',
-                                    )));
+                        SlideToLeftRoute(
+                            page: const BookOfCategory(
+                          theLoaiSach: 'tieusu',
+                          tenTheLoaiSach: 'Sách Tiểu sử',
+                        ));
                       },
                       child: customeText('Sách Tiểu sử')),
                 ),

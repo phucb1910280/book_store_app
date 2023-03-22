@@ -90,7 +90,7 @@ class _ProfileLoggedState extends State<ProfileLogged> {
                 child: Column(
                   children: [
                     const SizedBox(
-                      height: 130,
+                      height: 140,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -123,7 +123,7 @@ class _ProfileLoggedState extends State<ProfileLogged> {
                       ],
                     ),
                     const SizedBox(
-                      height: 50,
+                      height: 30,
                     ),
                   ],
                 ),

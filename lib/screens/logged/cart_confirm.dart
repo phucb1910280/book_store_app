@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_app/pages/home_page.dart';
+import 'package:simple_app/screens/logged/order_success.dart';
 
 import '../../models/cart_provider.dart';
 import '../../models/user.dart';
@@ -55,27 +56,28 @@ class _CartConfirmState extends State<CartConfirm> {
   bool checkPaymentInfo(String phoneNumber, String address) {
     if (phoneNumber.isEmpty || address.isEmpty) {
       showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(20))),
-              content: const Text(
-                  'Vui lòng cập nhật số điện thoại/ địa chỉ giao hàng.'),
-              actions: [
-                TextButton(
-                    onPressed: () {
-                      Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                            builder: (contex) => HomePage(outFromIndex: 3)),
-                        (route) => false,
-                      );
-                    },
-                    child: const Text('Cập nhật thông tin')),
-              ],
-            );
-          });
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(20))),
+            content: const Text(
+                'Vui lòng cập nhật số điện thoại/ địa chỉ giao hàng.'),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                          builder: (contex) => HomePage(outFromIndex: 3)),
+                      (route) => false,
+                    );
+                  },
+                  child: const Text('Cập nhật thông tin')),
+            ],
+          );
+        },
+      );
       return false;
     }
     return true;
@@ -96,7 +98,7 @@ class _CartConfirmState extends State<CartConfirm> {
   }
 
   int choice = 1;
-  String? payOption;
+  String payOption = 'Thanh toán khi nhận hàng';
   Widget paymentOption(String content, int orderChoice) {
     return ListTile(
       title: Text(
@@ -291,15 +293,14 @@ class _CartConfirmState extends State<CartConfirm> {
                                       backgroundColor: Colors.cyan[800],
                                       foregroundColor: Colors.white),
                                   onPressed: () {
-                                    if (payOption != null) {
-                                      cartCounter
-                                          .addOrderCollection(payOption!);
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  HomePage()));
-                                    }
+                                    cartCounter.addOrderCollection(payOption);
+                                    Navigator.pushAndRemoveUntil(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (contex) =>
+                                              const OrderSuccess()),
+                                      (route) => false,
+                                    );
                                   },
                                   child: const Text(
                                     'Đặt hàng',

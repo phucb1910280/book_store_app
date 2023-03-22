@@ -53,47 +53,94 @@ class _RegisterPageState extends State<RegisterPage> {
             password: passwordController.text.trim());
         addUserDetail(
             fullNameController.text, '', emailController.text.trim(), '', '');
-        // ignore: use_build_context_synchronously
-        // var helper = Provider.of<Helper>(context, listen: false);
-        // helper.outToIn();
         if (FirebaseAuth.instance.currentUser != null) {
-          // ignore: use_build_context_synchronously
-          // var cart = Provider.of<CartProvider>(context, listen: false);
-          // cart.getCartData();
           // ignore: use_build_context_synchronously
           Navigator.pushAndRemoveUntil(context,
               MaterialPageRoute(builder: (_) => HomePage()), (route) => false);
         }
       } else {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          content: Text('Mật khẩu không trùng khớp'),
-          backgroundColor: Colors.red,
-          duration: Duration(seconds: 1),
-        ));
+        showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(20))),
+              content: const Text('Mật khẩu không trùng khớp'),
+              actions: [
+                TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text('OK')),
+              ],
+            );
+          },
+        );
       }
+      // ignore: unused_catch_clause
     } on FirebaseAuthException catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text(e.toString()),
-        backgroundColor: Colors.red,
-        duration: const Duration(seconds: 1),
-      ));
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(20))),
+            title: const Text('Có lỗi xảy ra.\nVui lòng thử lại sau.'),
+            // content:
+            //     const Text('Vui lòng đăng nhập để thêm sách vào giỏ hàng!'),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text('OK')),
+            ],
+          );
+        },
+      );
     }
   }
 
   checkRegisterForm() {
     if (fullNameController.text.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text('Vui lòng nhập họ tên'),
-        backgroundColor: Colors.red,
-        duration: Duration(seconds: 1),
-      ));
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(20))),
+            // title: const Text('Sai Email/ Mật khẩu'),
+            content: const Text('Vui lòng điền họ tên'),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text('OK')),
+            ],
+          );
+        },
+      );
     }
     if (passwordController.text.length < 8) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text('Mật khẩu phải dài hơn 8 ký tự'),
-        backgroundColor: Colors.red,
-        duration: Duration(seconds: 1),
-      ));
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(20))),
+            // title: const Text('Sai Email/ Mật khẩu'),
+            content: const Text('Mật khẩu phải dài hơn 8 ký tự'),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text('OK')),
+            ],
+          );
+        },
+      );
     }
   }
 

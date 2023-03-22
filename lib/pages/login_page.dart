@@ -14,20 +14,14 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-  bool showPW = true;
+  bool hidePW = true;
 
   Future login() async {
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: emailController.text.trim(),
           password: passwordController.text.trim());
-      // ignore: use_build_context_synchronously
-      // var helper = Provider.of<Helper>(context, listen: false);
-      // helper.outToIn();
       if (FirebaseAuth.instance.currentUser != null) {
-        // ignore: use_build_context_synchronously
-        // var cart = Provider.of<CartProvider>(context, listen: false);
-        // cart.getCartData();
         // ignore: use_build_context_synchronously
         Navigator.pushAndRemoveUntil(
           context,
@@ -37,11 +31,30 @@ class _LoginPageState extends State<LoginPage> {
       }
       // ignore: unused_catch_clause
     } on FirebaseAuthException catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text('Email hoặc mật khẩu không hợp lệ!'),
-        backgroundColor: Colors.red,
-        duration: Duration(seconds: 1),
-      ));
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(20))),
+            title: const Text('Sai Email/ Mật khẩu'),
+            // content:
+            //     const Text('Vui lòng đăng nhập để thêm sách vào giỏ hàng!'),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text('OK')),
+            ],
+          );
+        },
+      );
+      // ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+      //   content: Text('Email hoặc mật khẩu không hợp lệ!'),
+      //   backgroundColor: Colors.red,
+      //   duration: Duration(seconds: 1),
+      // ));
     }
   }
 
@@ -130,7 +143,7 @@ class _LoginPageState extends State<LoginPage> {
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: TextField(
                         controller: passwordController,
-                        obscureText: showPW,
+                        obscureText: hidePW,
                         cursorColor: Colors.cyan[800],
                         decoration: InputDecoration(
                           enabledBorder: OutlineInputBorder(
@@ -158,10 +171,10 @@ class _LoginPageState extends State<LoginPage> {
                       child: IconButton(
                         onPressed: () {
                           setState(() {
-                            showPW = !showPW;
+                            hidePW = !hidePW;
                           });
                         },
-                        icon: showPW
+                        icon: hidePW
                             ? Image.asset(
                                 'assets/icons/showPass.png',
                                 color: Colors.cyan[800],

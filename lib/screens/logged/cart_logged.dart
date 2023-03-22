@@ -93,16 +93,21 @@ class _CartLoggedState extends State<CartLogged> {
             const Expanded(child: SizedBox()),
             GestureDetector(
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const CartConfirm()),
-                );
+                cartCounter.getCartTotal() == 0
+                    ? null
+                    : Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const CartConfirm()),
+                      );
               },
               child: Container(
                 margin: const EdgeInsets.only(bottom: 10),
                 height: 60,
                 decoration: BoxDecoration(
-                  color: Colors.cyan[800],
+                  color: cartCounter.getCartTotal() == 0
+                      ? Colors.grey
+                      : Colors.cyan[800],
                   borderRadius: const BorderRadius.all(Radius.circular(20)),
                 ),
                 child: Row(

@@ -62,23 +62,25 @@ class _OrderDetailState extends State<OrderDetail> {
                       customeText(widget.documentSnapshot['id'], isBold: true),
                     ],
                   ),
-                  const SizedBox(
-                    height: 10,
+                  SizedBox(
+                    width: 300,
+                    height: 30,
+                    child: Divider(color: Colors.black.withOpacity(.2)),
                   ),
                   Row(
                     children: [
-                      customeText('Trạng thái', isBold: false),
+                      customeText('Trạng thái:', isBold: false),
                       const Expanded(
                         child: SizedBox(),
                       ),
                       customeText(widget.documentSnapshot['trangThaiDonHang'],
-                          isBold: false),
+                          isBold: false, isCyanColor: true),
                     ],
                   ),
-                  const SizedBox(
+                  SizedBox(
                     width: 300,
                     height: 30,
-                    child: Divider(color: Colors.black),
+                    child: Divider(color: Colors.black.withOpacity(.2)),
                   ),
                   Row(
                     children: [
@@ -103,8 +105,10 @@ class _OrderDetailState extends State<OrderDetail> {
                           isBold: false),
                     ],
                   ),
-                  const SizedBox(
-                    height: 10,
+                  SizedBox(
+                    width: 300,
+                    height: 30,
+                    child: Divider(color: Colors.black.withOpacity(.2)),
                   ),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -120,9 +124,7 @@ class _OrderDetailState extends State<OrderDetail> {
                   SizedBox(
                     width: 300,
                     height: 30,
-                    child: Divider(
-                      color: Colors.black.withOpacity(.5),
-                    ),
+                    child: Divider(color: Colors.black.withOpacity(.2)),
                   ),
                   Row(
                     children: [
@@ -139,8 +141,8 @@ class _OrderDetailState extends State<OrderDetail> {
                   // ),
                   SizedBox(
                     width: 300,
-                    height: 50,
-                    child: Divider(color: Colors.black.withOpacity(.5)),
+                    height: 30,
+                    child: Divider(color: Colors.black.withOpacity(.2)),
                   ),
                   Row(
                     children: [

@@ -6,7 +6,6 @@ import 'package:simple_app/pages/auth_page.dart';
 
 import '../models/book.dart';
 import '../models/cart_provider.dart';
-import '../pages/home_page.dart';
 import '../pagesRoute/cart_screen_controller.dart';
 import '../pagesRoute/pape_route_transition.dart';
 
@@ -50,7 +49,12 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
     }).then(
       (value) => ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: const Text('Đã thêm vào Giỏ hàng'),
+          content: const Text(
+            'Đã thêm vào Giỏ hàng',
+            style: TextStyle(
+              fontSize: 20,
+            ),
+          ),
           backgroundColor: (Colors.cyan[800]),
           duration: const Duration(seconds: 1),
         ),
@@ -81,7 +85,12 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
     }).then(
       (value) => ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: const Text('Đã thêm vào Danh sách yêu thích'),
+          content: const Text(
+            'Đã thêm vào Danh sách yêu thích',
+            style: TextStyle(
+              fontSize: 20,
+            ),
+          ),
           backgroundColor: (Colors.cyan[800]),
           duration: const Duration(seconds: 1),
         ),
@@ -142,7 +151,12 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
           .then(
             (value) => ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: const Text('Đã xóa khỏi Danh sách yêu thích'),
+                content: const Text(
+                  'Đã xóa khỏi Danh sách yêu thích',
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
                 backgroundColor: (Colors.cyan[800]),
                 duration: const Duration(seconds: 1),
               ),
@@ -318,7 +332,11 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(20))),
                               content: const Text(
-                                  'Vui lòng đăng nhập để thêm danh sách yêu thích!'),
+                                'Vui lòng đăng nhập để thêm danh sách yêu thích!',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                ),
+                              ),
                               actions: [
                                 TextButton(
                                     onPressed: () {
@@ -330,7 +348,12 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
                                         (route) => false,
                                       );
                                     },
-                                    child: const Text('Đăng nhập')),
+                                    child: const Text(
+                                      'Đăng nhập',
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                      ),
+                                    )),
                               ],
                             );
                           },
@@ -587,7 +610,11 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               content: const Text(
-                                  'Sản phẩm đã tồn tại trong Giỏ hàng'),
+                                'Sản phẩm đã tồn tại trong Giỏ hàng',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                ),
+                              ),
                               backgroundColor: (Colors.cyan[800]),
                               duration: const Duration(seconds: 1),
                             ),
@@ -602,7 +629,11 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(20))),
                               content: const Text(
-                                  'Vui lòng đăng nhập để thêm sách vào giỏ hàng!'),
+                                'Vui lòng đăng nhập để thêm vào giỏ hàng!',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                ),
+                              ),
                               actions: [
                                 TextButton(
                                     onPressed: () {
@@ -610,18 +641,28 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (contex) =>
-                                                HomePage(outFromIndex: 3)),
+                                                const AuthPage()),
                                         (route) => false,
                                       );
                                     },
-                                    child: const Text('Đăng nhập')),
+                                    child: const Text(
+                                      'Đăng nhập',
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                      ),
+                                    )),
                               ],
                             );
                           },
                         );
                       }
                     },
-                    child: const Text('Thêm vào giỏ hàng')),
+                    child: const Text(
+                      'Thêm vào giỏ hàng',
+                      style: TextStyle(
+                        fontSize: 20,
+                      ),
+                    )),
               ),
             ),
             const SizedBox(
