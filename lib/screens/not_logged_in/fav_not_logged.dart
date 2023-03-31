@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:simple_app/models/notification_provider.dart';
 import '../../models/cart_provider.dart';
 import '../../pages/auth_page.dart';
 import '../../pagesRoute/cart_screen_controller.dart';
@@ -12,6 +13,7 @@ class FavoriteNotLogged extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cartCounter = Provider.of<CartProvider>(context);
+    final notificationCount = Provider.of<NotificationProvider>(context);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -26,6 +28,31 @@ class FavoriteNotLogged extends StatelessWidget {
         foregroundColor: Colors.black,
         elevation: 0,
         actions: [
+          Badge(
+            textStyle: const TextStyle(
+              fontSize: 20,
+            ),
+            largeSize: 22,
+            smallSize: 20,
+            alignment: const AlignmentDirectional(35, 13),
+            label: FirebaseAuth.instance.currentUser != null
+                ? Text(notificationCount.getNotificationCount().toString())
+                : const Text(''),
+            backgroundColor: Colors.white,
+            textColor: Colors.pink,
+            child: IconButton(
+                onPressed: () {
+                  Navigator.push(
+                      context, SlideUpRoute(page: const CartScreen()));
+                },
+                icon: const Icon(
+                  Icons.notifications_outlined,
+                  color: Colors.pink,
+                )),
+          ),
+          const SizedBox(
+            width: 10,
+          ),
           Badge(
             textStyle: const TextStyle(
               fontSize: 20,

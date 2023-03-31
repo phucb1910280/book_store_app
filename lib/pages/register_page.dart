@@ -46,40 +46,49 @@ class _RegisterPageState extends State<RegisterPage> {
 
   Future signUp() async {
     try {
-      checkRegisterForm();
-      if (confirmedPW()) {
-        await FirebaseAuth.instance.createUserWithEmailAndPassword(
-            email: emailController.text.trim(),
-            password: passwordController.text.trim());
-        addUserDetail(
-            fullNameController.text, '', emailController.text.trim(), '', '');
-        if (FirebaseAuth.instance.currentUser != null) {
-          // ignore: use_build_context_synchronously
-          Navigator.pushAndRemoveUntil(context,
-              MaterialPageRoute(builder: (_) => HomePage()), (route) => false);
+      if (checkName() && checkEmail() && checkPw() && checkConfPw()) {
+        if (confirmedPW()) {
+          await FirebaseAuth.instance.createUserWithEmailAndPassword(
+              email: emailController.text.trim(),
+              password: passwordController.text.trim());
+          addUserDetail(
+              fullNameController.text, '', emailController.text.trim(), '', '');
+          if (FirebaseAuth.instance.currentUser != null) {
+            createNotification(
+                title: 'Chào mừng đến với αBookStore',
+                content:
+                    'Hãy cập nhật thông tin để chúng tôi có thể giao hàng đến bạn!');
+            // ignore: use_build_context_synchronously
+            Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (_) => HomePage()),
+                (route) => false);
+          }
+        } else {
+          showDialog(
+            barrierColor: Colors.teal,
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20))),
+                content: const Text('Mật khẩu không trùng khớp'),
+                actions: [
+                  TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Text('OK')),
+                ],
+              );
+            },
+          );
         }
-      } else {
-        showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(20))),
-              content: const Text('Mật khẩu không trùng khớp'),
-              actions: [
-                TextButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: const Text('OK')),
-              ],
-            );
-          },
-        );
       }
       // ignore: unused_catch_clause
     } on FirebaseAuthException catch (e) {
       showDialog(
+        barrierColor: Colors.teal,
         context: context,
         builder: (context) {
           return AlertDialog(
@@ -101,15 +110,38 @@ class _RegisterPageState extends State<RegisterPage> {
     }
   }
 
-  checkRegisterForm() {
-    if (fullNameController.text.isEmpty) {
+  Future createNotification({String? title, String? content}) async {
+    var currentDay = DateTime.now();
+    String notificationID =
+        '${currentDay.day}${currentDay.month}${currentDay.year}${currentDay.hour}${currentDay.minute}';
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    var currentUser = auth.currentUser;
+    CollectionReference collectionRef =
+        FirebaseFirestore.instance.collection('userNotification');
+    return collectionRef
+        .doc(currentUser!.email)
+        .collection('notifications')
+        .doc(notificationID)
+        .set({
+      'id': notificationID,
+      'title': title,
+      'content': content,
+      'isRead': 'unread',
+      'dateTime':
+          '${currentDay.hour}:${currentDay.minute}, ${currentDay.day}/${currentDay.month}',
+      'isWelcomeNotification': 'yes',
+    });
+  }
+
+  bool checkName() {
+    if (fullNameController.text.isEmpty || fullNameController.text.length < 5) {
       showDialog(
+        barrierColor: Colors.teal,
         context: context,
         builder: (context) {
           return AlertDialog(
             shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(20))),
-            // title: const Text('Sai Email/ Mật khẩu'),
             content: const Text('Vui lòng điền họ tên'),
             actions: [
               TextButton(
@@ -121,15 +153,47 @@ class _RegisterPageState extends State<RegisterPage> {
           );
         },
       );
+      return false;
     }
-    if (passwordController.text.length < 8) {
+    return true;
+  }
+
+  bool checkEmail() {
+    if (!emailController.text.contains('@') ||
+        emailController.text.length < 10 ||
+        emailController.text.isEmpty) {
       showDialog(
+        barrierColor: Colors.teal,
         context: context,
         builder: (context) {
           return AlertDialog(
             shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(20))),
-            // title: const Text('Sai Email/ Mật khẩu'),
+            content: const Text('Vui lòng nhập email hợp lệ!'),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text('OK')),
+            ],
+          );
+        },
+      );
+      return false;
+    }
+    return true;
+  }
+
+  bool checkPw() {
+    if (passwordController.text.length < 8 || passwordController.text.isEmpty) {
+      showDialog(
+        barrierColor: Colors.teal,
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(20))),
             content: const Text('Mật khẩu phải dài hơn 8 ký tự'),
             actions: [
               TextButton(
@@ -141,7 +205,35 @@ class _RegisterPageState extends State<RegisterPage> {
           );
         },
       );
+      return false;
     }
+    return true;
+  }
+
+  bool checkConfPw() {
+    if (repasswordController.text.length < 8 ||
+        repasswordController.text.isEmpty) {
+      showDialog(
+        barrierColor: Colors.teal,
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(20))),
+            content: const Text('Vui lòng xác nhận mật khẩu'),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text('OK')),
+            ],
+          );
+        },
+      );
+      return false;
+    }
+    return true;
   }
 
   bool confirmedPW() {
@@ -304,7 +396,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: TextField(
                     controller: repasswordController,
-                    obscureText: true,
+                    obscureText: showPW,
                     cursorColor: Colors.cyan[800],
                     decoration: InputDecoration(
                       enabledBorder: OutlineInputBorder(
@@ -335,7 +427,9 @@ class _RegisterPageState extends State<RegisterPage> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: GestureDetector(
-                    onTap: signUp,
+                    onTap: () {
+                      signUp();
+                    },
                     child: Container(
                       padding: const EdgeInsets.all(15),
                       decoration: BoxDecoration(

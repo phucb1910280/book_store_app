@@ -60,7 +60,7 @@ class _CartLoggedState extends State<CartLogged> {
                 },
               );
             } else {
-              return const Center(child: Text('Đang tải'));
+              return const Center(child: CircularProgressIndicator());
             }
           },
         ),
@@ -259,7 +259,6 @@ class CustomeListTile extends StatelessWidget {
                       children: [
                         IconButton(
                           onPressed: () async {
-                            // int t = documentSnapshot['soLuong'] - 1;
                             if (documentSnapshot['soLuong'] > 1) {
                               var document = FirebaseFirestore.instance
                                   .collection('userCartItems')
@@ -283,7 +282,7 @@ class CustomeListTile extends StatelessWidget {
                           width: 5,
                         ),
                         SizedBox(
-                          width: 20,
+                          width: 30,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -300,17 +299,19 @@ class CustomeListTile extends StatelessWidget {
                         ),
                         IconButton(
                           onPressed: () {
-                            int t = documentSnapshot['soLuong'] + 1;
-                            var document = FirebaseFirestore.instance
-                                .collection('userCartItems')
-                                .doc(FirebaseAuth.instance.currentUser!.email)
-                                .collection('cartItems')
-                                .doc(docID);
-                            document.update({
-                              'soLuong': t,
-                            });
-                            cartCounter.updateCartCount();
-                            cartCounter.updateCartTotal();
+                            if (documentSnapshot['soLuong'] < 10) {
+                              int t = documentSnapshot['soLuong'] + 1;
+                              var document = FirebaseFirestore.instance
+                                  .collection('userCartItems')
+                                  .doc(FirebaseAuth.instance.currentUser!.email)
+                                  .collection('cartItems')
+                                  .doc(docID);
+                              document.update({
+                                'soLuong': t,
+                              });
+                              cartCounter.updateCartCount();
+                              cartCounter.updateCartTotal();
+                            }
                           },
                           icon: const Icon(Icons.add, color: Colors.black),
                         ),

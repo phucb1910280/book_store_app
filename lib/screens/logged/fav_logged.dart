@@ -3,9 +3,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:simple_app/screens/logged/user_notification_screen.dart';
 
 import '../../models/book.dart';
 import '../../models/cart_provider.dart';
+import '../../models/notification_provider.dart';
 import '../../pagesRoute/cart_screen_controller.dart';
 import '../../pagesRoute/pape_route_transition.dart';
 import '../../shared/book_detail.dart';
@@ -21,6 +23,7 @@ class _FavoriteLoggedState extends State<FavoriteLogged> {
   @override
   Widget build(BuildContext context) {
     final cartCounter = Provider.of<CartProvider>(context);
+    final notificationCount = Provider.of<NotificationProvider>(context);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -43,6 +46,36 @@ class _FavoriteLoggedState extends State<FavoriteLogged> {
             smallSize: 20,
             alignment: const AlignmentDirectional(35, 13),
             label: FirebaseAuth.instance.currentUser != null
+                ? Text(notificationCount.getNotificationCount().toString())
+                : const Text(''),
+            backgroundColor: Colors.white,
+            textColor: Colors.pink,
+            child: IconButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      SlideUpRoute(page: const UserNotificationScreen()));
+                },
+                icon: notificationCount.getNotificationCount() != 0
+                    ? const Icon(
+                        Icons.notifications_active,
+                        color: Colors.pink,
+                      )
+                    : const Icon(
+                        Icons.notifications_none_outlined,
+                        color: Colors.pink,
+                      )),
+          ),
+          const SizedBox(
+            width: 10,
+          ),
+          Badge(
+            textStyle: const TextStyle(
+              fontSize: 20,
+            ),
+            largeSize: 22,
+            smallSize: 20,
+            alignment: const AlignmentDirectional(35, 13),
+            label: FirebaseAuth.instance.currentUser != null
                 ? Text(cartCounter.getCartCount().toString())
                 : const Text(''),
             backgroundColor: Colors.white,
@@ -52,10 +85,15 @@ class _FavoriteLoggedState extends State<FavoriteLogged> {
                   Navigator.push(
                       context, SlideUpRoute(page: const CartScreen()));
                 },
-                icon: Icon(
-                  Icons.shopping_cart_outlined,
-                  color: Colors.cyan[800],
-                )),
+                icon: cartCounter.getCartCount() != 0
+                    ? Icon(
+                        Icons.shopping_cart_sharp,
+                        color: Colors.cyan[800],
+                      )
+                    : Icon(
+                        Icons.shopping_cart_outlined,
+                        color: Colors.teal[800],
+                      )),
           ),
           const SizedBox(
             width: 20,
@@ -87,7 +125,7 @@ class _FavoriteLoggedState extends State<FavoriteLogged> {
                 },
               );
             } else {
-              return const Center(child: Text('Đang tải'));
+              return const Center(child: CircularProgressIndicator());
             }
           },
         ),

@@ -82,20 +82,7 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
       'thuocTheLoai': widget.book!.thuocTheLoai,
       'theLoai': widget.book!.theLoai,
       'moTa': widget.book!.moTa,
-    }).then(
-      (value) => ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: const Text(
-            'Đã thêm vào Danh sách yêu thích',
-            style: TextStyle(
-              fontSize: 20,
-            ),
-          ),
-          backgroundColor: (Colors.cyan[800]),
-          duration: const Duration(seconds: 1),
-        ),
-      ),
-    );
+    });
   }
 
   bool exitsOnFavCollection = false;
@@ -147,21 +134,7 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
           .doc(FirebaseAuth.instance.currentUser!.email)
           .collection('favItems')
           .doc(widget.book!.id)
-          .delete()
-          .then(
-            (value) => ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: const Text(
-                  'Đã xóa khỏi Danh sách yêu thích',
-                  style: TextStyle(
-                    fontSize: 20,
-                  ),
-                ),
-                backgroundColor: (Colors.cyan[800]),
-                duration: const Duration(seconds: 1),
-              ),
-            ),
-          );
+          .delete();
     } catch (e) {
       return false;
     }
@@ -172,7 +145,9 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
 
   void increaseSL() {
     setState(() {
-      soLuong++;
+      if (soLuong < 10) {
+        soLuong++;
+      }
     });
   }
 
@@ -607,17 +582,34 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
                           cartCounter.updateCartCount();
                           cartCounter.updateCartTotal();
                         } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: const Text(
-                                'Sản phẩm đã tồn tại trong Giỏ hàng',
-                                style: TextStyle(
-                                  fontSize: 20,
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                shape: const RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(20))),
+                                content: const Text(
+                                  'Sản phẩm đã tồn tại trong giỏ hàng!',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                  ),
                                 ),
-                              ),
-                              backgroundColor: (Colors.cyan[800]),
-                              duration: const Duration(seconds: 1),
-                            ),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: const Text(
+                                      'OK',
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              );
+                            },
                           );
                         }
                       } else {

@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:simple_app/models/notification_provider.dart';
 
 import 'package:simple_app/screens/category_screen.dart';
 import 'package:simple_app/screens/home_screen.dart';
@@ -34,22 +35,34 @@ class HomePage extends StatefulWidget {
 class HomePageState extends State<HomePage> {
   SharedPreferences? prefs;
   int selectedIndex = 0;
-  static const List<Widget> page = <Widget>[
+  static const List<Widget> page = [
     HomeScreen(),
     CategoryScreen(),
     FavoriteScreen(),
     ProfileScreen(),
   ];
 
-  void loadRef() async {
+  @override
+  void initState() {
+    super.initState();
+    if (widget.myIndex != 0) {
+      _onItemTapped(widget.myIndex);
+    }
+    loadUserData();
+  }
+
+  void loadUserData() async {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       var cartCounter = Provider.of<CartProvider>(context, listen: false);
+      var notificationsCounter =
+          Provider.of<NotificationProvider>(context, listen: false);
       if (FirebaseAuth.instance.currentUser != null) {
-        // cartCounter.getCartData();
         cartCounter.updateCartCount();
         cartCounter.updateCartTotal();
+        notificationsCounter.loadNotificationCounnt();
       } else {
         cartCounter.resetCartCount();
+        notificationsCounter.clearData();
       }
     });
   }
@@ -58,15 +71,6 @@ class HomePageState extends State<HomePage> {
     setState(() {
       selectedIndex = index;
     });
-  }
-
-  @override
-  void initState() {
-    if (widget.myIndex != 0) {
-      _onItemTapped(widget.myIndex);
-    }
-    loadRef();
-    super.initState();
   }
 
   @override

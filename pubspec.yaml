@@ -54,7 +54,7 @@ flutter_icons:
   image_path: "assets/images/appIcon.png"
 
 flutter_native_splash:
-  image: "assets/images/appSplashScreen2.jpg"
+  image: "assets/images/appSplashScreen3.jpg"
   color: "#000000"
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

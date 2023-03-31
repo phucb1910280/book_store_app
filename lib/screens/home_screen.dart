@@ -3,7 +3,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:simple_app/models/notification_provider.dart';
 import 'package:simple_app/pagesRoute/pape_route_transition.dart';
+import 'package:simple_app/screens/logged/user_notification_screen.dart';
 import 'package:simple_app/shared/book_detail.dart';
 import 'package:simple_app/shared/list_book_widget.dart';
 import 'package:simple_app/models/book.dart';
@@ -23,8 +25,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
-    fetchRecord();
     super.initState();
+    fetchRecord();
   }
 
   void fetchRecord() async {
@@ -57,6 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final cartCounter = Provider.of<CartProvider>(context);
+    final notificationCount = Provider.of<NotificationProvider>(context);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -74,7 +77,36 @@ class _HomeScreenState extends State<HomeScreen> {
         foregroundColor: Colors.black,
         elevation: 0,
         actions: [
-          // helper.getLogStatus()
+          Badge(
+            textStyle: const TextStyle(
+              fontSize: 20,
+            ),
+            largeSize: 22,
+            smallSize: 20,
+            alignment: const AlignmentDirectional(35, 13),
+            label: FirebaseAuth.instance.currentUser != null
+                ? Text(notificationCount.getNotificationCount().toString())
+                : const Text(''),
+            backgroundColor: Colors.white,
+            textColor: Colors.pink,
+            child: IconButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      SlideUpRoute(page: const UserNotificationScreen()));
+                },
+                icon: notificationCount.getNotificationCount() != 0
+                    ? const Icon(
+                        Icons.notifications_active,
+                        color: Colors.pink,
+                      )
+                    : const Icon(
+                        Icons.notifications_none_outlined,
+                        color: Colors.pink,
+                      )),
+          ),
+          const SizedBox(
+            width: 10,
+          ),
           Badge(
             textStyle: const TextStyle(
               fontSize: 20,
@@ -92,12 +124,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   Navigator.push(
                       context, SlideUpRoute(page: const CartScreen()));
                 },
-                icon: Icon(
-                  Icons.shopping_cart_outlined,
-                  color: Colors.cyan[800],
-                )),
+                icon: cartCounter.getCartCount() != 0
+                    ? Icon(
+                        Icons.shopping_cart_sharp,
+                        color: Colors.cyan[800],
+                      )
+                    : Icon(
+                        Icons.shopping_cart_outlined,
+                        color: Colors.teal[800],
+                      )),
           ),
-
           const SizedBox(
             width: 20,
           ),

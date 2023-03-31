@@ -83,6 +83,29 @@ class _CartConfirmState extends State<CartConfirm> {
     return true;
   }
 
+  Future createNotification({String? title, String? content}) async {
+    var currentDay = DateTime.now();
+    String notificationID =
+        '${currentDay.day}${currentDay.month}${currentDay.year}${currentDay.hour}${currentDay.minute}';
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    var currentUser = auth.currentUser;
+    CollectionReference collectionRef =
+        FirebaseFirestore.instance.collection('userNotification');
+    return collectionRef
+        .doc(currentUser!.email)
+        .collection('notifications')
+        .doc(notificationID)
+        .set({
+      'id': notificationID,
+      'title': title,
+      'content': content,
+      'isRead': 'unread',
+      'dateTime':
+          '${currentDay.hour}:${currentDay.minute}, ${currentDay.day}/${currentDay.month}',
+      'isWelcomeNotification': 'no',
+    });
+  }
+
   Widget customeText(String content, bool isBold,
       {bool? isItalic, double? size, bool? isCyanColor}) {
     return Text(
@@ -292,8 +315,14 @@ class _CartConfirmState extends State<CartConfirm> {
                                   style: ElevatedButton.styleFrom(
                                       backgroundColor: Colors.cyan[800],
                                       foregroundColor: Colors.white),
-                                  onPressed: () {
-                                    cartCounter.addOrderCollection(payOption);
+                                  onPressed: () async {
+                                    // cartCounter.addOrderCollection(payOption);
+                                    String s = await cartCounter
+                                        .addOrderCollection(payOption);
+                                    createNotification(
+                                        title: 'Đặt hàng thành công',
+                                        content: 'Mã đơn hàng: $s');
+                                    // ignore: use_build_context_synchronously
                                     Navigator.pushAndRemoveUntil(
                                       context,
                                       MaterialPageRoute(

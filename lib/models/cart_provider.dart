@@ -21,48 +21,20 @@ class CartProvider extends ChangeNotifier {
   //     .doc(FirebaseAuth.instance.currentUser!.email)
   //     .collection('orderItems');
 
-  void getCartData() async {
-    // SharedPreferences prefs = await SharedPreferences.getInstance();
+  Future<String> addOrderCollection(String hinhThucThanhToan) async {
     if (FirebaseAuth.instance.currentUser != null) {
+      var curDay = DateTime.now();
+      String id =
+          '${curDay.day}${curDay.month}${curDay.year}${curDay.hour}${curDay.minute}';
+      String orderDay =
+          '${curDay.hour}:${curDay.minute}, ${curDay.day}/${curDay.month}/${curDay.year}';
+      String receiveDay = '${curDay.day + 2}/${curDay.month}/${curDay.year}';
       var cartCollectionRef = FirebaseFirestore.instance
           .collection('userCartItems')
           .doc(FirebaseAuth.instance.currentUser!.email)
           .collection('cartItems');
       QuerySnapshot querySnapshot = await cartCollectionRef.get();
       if (querySnapshot.docs.isNotEmpty) {
-        _cartCount = 0;
-        _cartTotal = 0;
-        int sl = 0;
-        int giaban = 0;
-        for (var i = 0; i < querySnapshot.docs.length; i++) {
-          _cartCount += querySnapshot.docs[i]['soLuong'] as int;
-          notifyListeners();
-          sl = querySnapshot.docs[i]['soLuong'];
-          giaban = querySnapshot.docs[i]['giaBan'];
-          _cartTotal += sl * giaban;
-        }
-        notifyListeners();
-      } else {
-        _cartCount = 0;
-        notifyListeners();
-      }
-    }
-  }
-
-  void addOrderCollection(String hinhThucThanhToan) async {
-    if (FirebaseAuth.instance.currentUser != null) {
-      var cartCollectionRef = FirebaseFirestore.instance
-          .collection('userCartItems')
-          .doc(FirebaseAuth.instance.currentUser!.email)
-          .collection('cartItems');
-      QuerySnapshot querySnapshot = await cartCollectionRef.get();
-      if (querySnapshot.docs.isNotEmpty) {
-        var curDay = DateTime.now();
-        String id =
-            '${curDay.day}${curDay.month}${curDay.year}${curDay.hour}${curDay.minute}';
-        String orderDay =
-            '${curDay.hour}:${curDay.minute}, ${curDay.day}/${curDay.month}/${curDay.year}';
-        String receiveDay = '${curDay.day + 2}/${curDay.month}/${curDay.year}';
         var userCollectionRef = FirebaseFirestore.instance
             .collection('user')
             .doc(FirebaseAuth.instance.currentUser!.email);
@@ -106,6 +78,9 @@ class CartProvider extends ChangeNotifier {
         updateCartCount();
         updateCartTotal();
       }
+      return Future.value(id);
+    } else {
+      return '';
     }
   }
 

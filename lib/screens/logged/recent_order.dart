@@ -80,7 +80,7 @@ class _RecentOrderState extends State<RecentOrder> {
               },
             );
           } else {
-            return const Center(child: Text('Đang tải'));
+            return const Center(child: CircularProgressIndicator());
           }
         },
       ),

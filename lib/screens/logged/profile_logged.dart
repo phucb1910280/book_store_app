@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:simple_app/models/user.dart';
 import 'package:simple_app/screens/logged/about_me.dart';
 import 'package:simple_app/screens/logged/profile_info.dart';
+import 'package:simple_app/screens/logged/user_notification_screen.dart';
 
 import '../../pages/home_page.dart';
 import '../../pagesRoute/cart_screen_controller.dart';
@@ -149,7 +150,7 @@ class _ProfileLoggedState extends State<ProfileLogged> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: const [
                     Icon(
-                      Icons.person,
+                      Icons.person_outline,
                       color: Colors.black,
                     ),
                     SizedBox(
@@ -158,39 +159,6 @@ class _ProfileLoggedState extends State<ProfileLogged> {
                     Expanded(
                       child: Text(
                         'Thông tin của tôi',
-                        style: TextStyle(
-                            fontSize: 20,
-                            fontStyle: FontStyle.normal,
-                            color: Colors.black),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
-              child: TextButton(
-                style: const ButtonStyle(alignment: Alignment.bottomLeft),
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const CartScreen()));
-                },
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: const [
-                    Icon(
-                      Icons.shopping_cart,
-                      color: Colors.black,
-                    ),
-                    SizedBox(
-                      width: 15,
-                    ),
-                    Expanded(
-                      child: Text(
-                        'Giỏ hàng',
                         style: TextStyle(
                             fontSize: 20,
                             fontStyle: FontStyle.normal,
@@ -220,7 +188,7 @@ class _ProfileLoggedState extends State<ProfileLogged> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: const [
                     Icon(
-                      Icons.edit,
+                      Icons.drive_file_rename_outline,
                       color: Colors.black,
                     ),
                     SizedBox(
@@ -245,6 +213,73 @@ class _ProfileLoggedState extends State<ProfileLogged> {
                 style: const ButtonStyle(alignment: Alignment.bottomLeft),
                 onPressed: () {
                   Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const CartScreen()));
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: const [
+                    Icon(
+                      Icons.shopping_cart_outlined,
+                      color: Colors.black,
+                    ),
+                    SizedBox(
+                      width: 15,
+                    ),
+                    Expanded(
+                      child: Text(
+                        'Giỏ hàng',
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontStyle: FontStyle.normal,
+                            color: Colors.black),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
+              child: TextButton(
+                style: const ButtonStyle(alignment: Alignment.bottomLeft),
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              const UserNotificationScreen()));
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: const [
+                    Icon(
+                      Icons.notifications_none_outlined,
+                      color: Colors.black,
+                    ),
+                    SizedBox(
+                      width: 15,
+                    ),
+                    Expanded(
+                      child: Text(
+                        'Thông báo',
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontStyle: FontStyle.normal,
+                            color: Colors.black),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
+              child: TextButton(
+                style: const ButtonStyle(alignment: Alignment.bottomLeft),
+                onPressed: () {
+                  Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => const RecentOrder()),
@@ -252,15 +287,19 @@ class _ProfileLoggedState extends State<ProfileLogged> {
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Image.asset(
-                      'assets/icons/myorder.png',
-                      height: 25,
+                  children: const [
+                    // Image.asset(
+                    //   'assets/icons/myorder.png',
+                    //   height: 25,
+                    // ),
+                    Icon(
+                      Icons.delivery_dining_outlined,
+                      color: Colors.black,
                     ),
-                    const SizedBox(
+                    SizedBox(
                       width: 15,
                     ),
-                    const Expanded(
+                    Expanded(
                       child: Text(
                         'Theo dõi đơn hàng',
                         style: TextStyle(
@@ -326,7 +365,7 @@ class _ProfileLoggedState extends State<ProfileLogged> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: const [
                     Text(
-                      'Phiên bản: bookstore.2.2.0',
+                      'bookstore.2.2.2',
                       style: TextStyle(
                           fontSize: 20,
                           fontStyle: FontStyle.italic,
