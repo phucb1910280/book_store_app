@@ -2,6 +2,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_app/pages/home_page.dart';
 import 'package:simple_app/screens/logged/order_success.dart';
@@ -243,20 +244,22 @@ class _CartConfirmState extends State<CartConfirm> {
                           padding: const EdgeInsets.symmetric(horizontal: 10),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.end,
-                            children: const [
+                            children: [
                               // SizedBox(
                               //   width: 20,
                               // ),
-                              Text(
+                              const Text(
                                 'Phí vận chuyển: ',
                                 style: TextStyle(
                                   fontSize: 22,
                                 ),
                               ),
-                              Expanded(child: SizedBox()),
+                              const Expanded(child: SizedBox()),
                               Text(
-                                '0 VND',
-                                style: TextStyle(
+                                NumberFormat.simpleCurrency(
+                                        locale: 'vi-VN', decimalDigits: 0)
+                                    .format(0),
+                                style: const TextStyle(
                                     fontSize: 22,
                                     fontWeight: FontWeight.normal),
                               ),
@@ -279,7 +282,9 @@ class _CartConfirmState extends State<CartConfirm> {
                               ),
                               const Expanded(child: SizedBox()),
                               Text(
-                                '${cartCounter.getCartTotal().toString()} VND',
+                                NumberFormat.simpleCurrency(
+                                        locale: 'vi-VN', decimalDigits: 0)
+                                    .format(cartCounter.getCartTotal()),
                                 style: const TextStyle(
                                     fontSize: 25, fontWeight: FontWeight.bold),
                               ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import '../models/book.dart';
 
 class ListOfBookWidget extends StatelessWidget {
@@ -51,7 +52,9 @@ class ListOfBookWidget extends StatelessWidget {
                     child: Row(
                       children: [
                         Text(
-                          '${book!.giaBan.toString()}₫',
+                          NumberFormat.simpleCurrency(
+                                  locale: 'vi-VN', decimalDigits: 0)
+                              .format(book!.giaBan),
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 17,

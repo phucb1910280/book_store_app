@@ -2,6 +2,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_app/screens/logged/user_notification_screen.dart';
 
@@ -247,7 +248,9 @@ class CustomeListTile extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        '${documentSnapshot['giaBan']}₫',
+                        NumberFormat.simpleCurrency(
+                                locale: 'vi-VN', decimalDigits: 0)
+                            .format(documentSnapshot['giaBan']),
                         style: TextStyle(
                           fontSize: 20,
                           color: Colors.cyan[800],

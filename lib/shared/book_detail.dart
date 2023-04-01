@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_app/pages/auth_page.dart';
 
@@ -273,7 +274,9 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
                     width: 10,
                   ),
                   Text(
-                    '${widget.book!.giaBan}₫',
+                    NumberFormat.simpleCurrency(
+                            locale: 'vi-VN', decimalDigits: 0)
+                        .format(widget.book!.giaBan),
                     style: TextStyle(
                       fontSize: 25,
                       color: Colors.cyan[800],

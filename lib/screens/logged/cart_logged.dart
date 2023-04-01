@@ -2,6 +2,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_app/models/book.dart';
 import 'package:simple_app/pagesRoute/pape_route_transition.dart';
@@ -82,7 +83,8 @@ class _CartLoggedState extends State<CartLogged> {
                   width: 10,
                 ),
                 Text(
-                  '${cartCounter.getCartTotal()} VND',
+                  NumberFormat.simpleCurrency(locale: 'vi-VN', decimalDigits: 0)
+                      .format(cartCounter.getCartTotal()),
                   style: const TextStyle(
                       color: Colors.black,
                       fontSize: 25,
@@ -103,12 +105,12 @@ class _CartLoggedState extends State<CartLogged> {
               },
               child: Container(
                 margin: const EdgeInsets.only(bottom: 10),
-                height: 60,
+                height: 50,
                 decoration: BoxDecoration(
                   color: cartCounter.getCartTotal() == 0
                       ? Colors.grey
                       : Colors.cyan[800],
-                  borderRadius: const BorderRadius.all(Radius.circular(20)),
+                  borderRadius: const BorderRadius.all(Radius.circular(50)),
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -244,7 +246,9 @@ class CustomeListTile extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        '${documentSnapshot['giaBan']}₫',
+                        NumberFormat.simpleCurrency(
+                                locale: 'vi-VN', decimalDigits: 0)
+                            .format(documentSnapshot['giaBan']),
                         style: TextStyle(
                           fontSize: 20,
                           color: Colors.cyan[800],

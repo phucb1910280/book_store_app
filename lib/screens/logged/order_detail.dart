@@ -2,6 +2,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class OrderDetail extends StatefulWidget {
   final DocumentSnapshot documentSnapshot;
@@ -165,8 +166,13 @@ class _OrderDetailState extends State<OrderDetail> {
                       const Expanded(
                         child: SizedBox(),
                       ),
-                      customeText('${widget.documentSnapshot['tongHoaDon']}₫',
-                          isBold: true, isCyanColor: true, size: 25),
+                      customeText(
+                          NumberFormat.simpleCurrency(
+                                  locale: 'vi-VN', decimalDigits: 0)
+                              .format(widget.documentSnapshot['tongHoaDon']),
+                          isBold: true,
+                          isCyanColor: true,
+                          size: 25),
                     ],
                   ),
                 ],
@@ -303,8 +309,9 @@ class CustomeListTile extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        //
-                        '${totalPrice().toString()}₫',
+                        NumberFormat.simpleCurrency(
+                                locale: 'vi-VN', decimalDigits: 0)
+                            .format(totalPrice().toString()),
                         style: TextStyle(
                           fontSize: 20,
                           color: Colors.cyan[800],
