@@ -52,7 +52,7 @@ class CartProvider extends ChangeNotifier {
           'phoneNumber': documentSnapshot['phoneNumber'],
           'address': documentSnapshot['address'],
           //
-          'tongHoaDon': getCartTotal().toString(),
+          'tongHoaDon': getCartTotal(),
           'hinhThucThanhToan': hinhThucThanhToan,
           //
           'trangThaiDonHang': 'Đã tiếp nhận',

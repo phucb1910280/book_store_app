@@ -311,7 +311,7 @@ class CustomeListTile extends StatelessWidget {
                       Text(
                         NumberFormat.simpleCurrency(
                                 locale: 'vi-VN', decimalDigits: 0)
-                            .format(totalPrice().toString()),
+                            .format(totalPrice()),
                         style: TextStyle(
                           fontSize: 20,
                           color: Colors.cyan[800],
