@@ -22,7 +22,7 @@ class _LoginPageState extends State<LoginPage> {
           email: emailController.text.trim(),
           password: passwordController.text.trim());
       if (FirebaseAuth.instance.currentUser != null) {
-        // ignore: use_build_context_synchronously
+        if (context.mounted) {}
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(builder: (_) => HomePage()),
@@ -38,8 +38,6 @@ class _LoginPageState extends State<LoginPage> {
             shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(20))),
             title: const Text('Sai Email/ Mật khẩu'),
-            // content:
-            //     const Text('Vui lòng đăng nhập để thêm sách vào giỏ hàng!'),
             actions: [
               TextButton(
                   onPressed: () {
@@ -50,11 +48,6 @@ class _LoginPageState extends State<LoginPage> {
           );
         },
       );
-      // ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-      //   content: Text('Email hoặc mật khẩu không hợp lệ!'),
-      //   backgroundColor: Colors.red,
-      //   duration: Duration(seconds: 1),
-      // ));
     }
   }
 

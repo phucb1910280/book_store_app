@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_app/pages/auth_page.dart';
-
 import '../models/book.dart';
 import '../models/cart_provider.dart';
 import '../pagesRoute/cart_screen_controller.dart';
 import '../pagesRoute/pape_route_transition.dart';
+import 'list_book_widget.dart';
 
 class BookDetailWidget extends StatefulWidget {
   final Book? book;
@@ -24,6 +24,39 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
     super.initState();
     checkExistOnFav(widget.book!.id.toString());
     checkExistOnCart(widget.book!.id.toString());
+    fetchRecord();
+  }
+
+  List<Book> suggestBook = [];
+
+  void fetchRecord() async {
+    var records = await FirebaseFirestore.instance
+        .collection('books')
+        .where('theLoai', isEqualTo: widget.book!.theLoai.toString())
+        // .where('id', isNotEqualTo: widget.book!.id.toString())
+        .get();
+    mapRecords(records);
+  }
+
+  mapRecords(QuerySnapshot<Map<String, dynamic>> records) {
+    var list = records.docs
+        .map((books) => Book(
+              id: books['id'],
+              tenSach: books['tenSach'],
+              biaSach: books['biaSach'],
+              tacGia: books['tacGia'],
+              giaBan: books['giaBan'],
+              soTrang: books['soTrang'],
+              loaiBia: books['loaiBia'],
+              theLoai: books['theLoai'],
+              thuocTheLoai: books['thuocTheLoai'],
+              moTa: books['moTa'],
+            ))
+        .toList();
+    setState(() {
+      suggestBook = list;
+      suggestBook.removeWhere((element) => element.id == widget.book!.id);
+    });
   }
 
   Future addToCart(int soLuongSp) async {
@@ -168,6 +201,8 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
       body: Padding(
         padding: const EdgeInsets.only(top: 10, bottom: 0),
         child: ListView(
+          scrollDirection: Axis.vertical,
+          shrinkWrap: false,
           children: [
             SizedBox(
               height: 300,
@@ -242,7 +277,7 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
               ),
             ),
             const SizedBox(
-              height: 10,
+              height: 5,
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
@@ -514,9 +549,38 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
                 ),
               ),
             ),
-            const SizedBox(
-              height: 20,
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Row(
+                children: [
+                  Text(
+                    'Sách cùng thể loại',
+                    style: TextStyle(
+                        color: Colors.cyan[800],
+                        fontSize: 25,
+                        fontStyle: FontStyle.italic),
+                  ),
+                ],
+              ),
             ),
+            SizedBox(
+              height: 200,
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: suggestBook.isEmpty ? 0 : suggestBook.length,
+                scrollDirection: Axis.horizontal,
+                physics: const ClampingScrollPhysics(),
+                itemBuilder: (context, index) {
+                  return SizedBox(
+                    height: 300,
+                    width: 150,
+                    child: GestureDetector(
+                        onTap: () {},
+                        child: ListOfBookWidget(book: suggestBook[index])),
+                  );
+                },
+              ),
+            )
           ],
         ),
       ),

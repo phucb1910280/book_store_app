@@ -63,14 +63,14 @@ class _UserNotificationScreenState extends State<UserNotificationScreen> {
                             style: const TextStyle(fontSize: 20)),
                     leading: snapshot.data!.docs[index]['isRead'] == 'unread'
                         ? const Icon(
-                            Icons.circle,
-                            size: 16,
+                            Icons.mark_email_unread_outlined,
+                            size: 25,
                             color: Colors.red,
                           )
                         : const Icon(
-                            Icons.done,
+                            Icons.mark_email_read_outlined,
                             color: Colors.teal,
-                            size: 16,
+                            size: 25,
                           ),
                   ),
                 );

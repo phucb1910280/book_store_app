@@ -18,9 +18,9 @@ class ListOfBookWidget extends StatelessWidget {
         ),
         child: Column(
           children: [
-            const SizedBox(
-              height: 10,
-            ),
+            // const SizedBox(
+            //   height: 10,
+            // ),
             Expanded(
               flex: 3,
               child: Image.network(
@@ -30,11 +30,11 @@ class ListOfBookWidget extends StatelessWidget {
             ),
             Expanded(
               flex: 2,
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    Row(
                       children: [
                         Flexible(
                           child: Text(
@@ -45,11 +45,11 @@ class ListOfBookWidget extends StatelessWidget {
                         ),
                       ],
                     ),
-                  ),
-                  const Expanded(child: SizedBox()),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
+                    const Expanded(child: SizedBox()),
+                    // const SizedBox(
+                    //   height: 15,
+                    // ),
+                    Row(
                       children: [
                         Text(
                           NumberFormat.simpleCurrency(
@@ -62,9 +62,9 @@ class ListOfBookWidget extends StatelessWidget {
                           ),
                         ),
                       ],
-                    ),
-                  )
-                ],
+                    )
+                  ],
+                ),
               ),
             ),
           ],

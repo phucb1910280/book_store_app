@@ -150,7 +150,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   crossAxisCount: 2,
                   crossAxisSpacing: 1.0,
                   mainAxisSpacing: 1.0,
-                  childAspectRatio: 2.3 / 3,
+                  childAspectRatio: 2 / 2.5,
                 ),
                 itemCount: bookList.length,
                 itemBuilder: ((context, index) {

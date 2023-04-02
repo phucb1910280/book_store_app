@@ -58,7 +58,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 title: 'Chào mừng đến với αBookStore',
                 content:
                     'Hãy cập nhật thông tin để chúng tôi có thể giao hàng đến bạn!');
-            // ignore: use_build_context_synchronously
+            if (context.mounted) {}
             Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(builder: (_) => HomePage()),
@@ -95,8 +95,6 @@ class _RegisterPageState extends State<RegisterPage> {
             shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(20))),
             title: const Text('Có lỗi xảy ra.\nVui lòng thử lại sau.'),
-            // content:
-            //     const Text('Vui lòng đăng nhập để thêm sách vào giỏ hàng!'),
             actions: [
               TextButton(
                   onPressed: () {
