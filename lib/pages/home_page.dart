@@ -2,7 +2,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:simple_app/models/notification_provider.dart';
 
 import 'package:simple_app/screens/category_screen.dart';
@@ -33,7 +32,6 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State<HomePage> {
-  SharedPreferences? prefs;
   int selectedIndex = 0;
   static const List<Widget> page = [
     HomeScreen(),
@@ -59,7 +57,7 @@ class HomePageState extends State<HomePage> {
       if (FirebaseAuth.instance.currentUser != null) {
         cartCounter.updateCartCount();
         cartCounter.updateCartTotal();
-        notificationsCounter.loadNotificationCounnt();
+        notificationsCounter.loadNotificationCount();
       } else {
         cartCounter.resetCartCount();
         notificationsCounter.clearData();

@@ -12,6 +12,8 @@ import 'models/cart_provider.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
+  await Future.delayed(const Duration(seconds: 1));
   runApp(
     const MyApp(),
   );
@@ -33,9 +35,6 @@ class MyApp extends StatelessWidget {
         title: 'BookStore',
         theme: ThemeData(
           primarySwatch: Colors.teal,
-          appBarTheme: const AppBarTheme(
-            systemOverlayStyle: SystemUiOverlayStyle.dark,
-          ),
         ),
         home: HomePage(),
       ),

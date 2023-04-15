@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_app/screens/not_logged_in/profile_not_logged.dart';
-import 'package:simple_app/screens/logged/profile_logged.dart';
+import 'package:simple_app/screens/logged/user_profile.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});

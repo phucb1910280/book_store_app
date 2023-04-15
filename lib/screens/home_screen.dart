@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_app/models/notification_provider.dart';
 import 'package:simple_app/pagesRoute/pape_route_transition.dart';
-import 'package:simple_app/screens/logged/user_notification_screen.dart';
+import 'package:simple_app/screens/logged/user_notification.dart';
 import 'package:simple_app/shared/book_detail.dart';
 import 'package:simple_app/shared/list_book_widget.dart';
 import 'package:simple_app/models/book.dart';
@@ -61,7 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final cartCounter = Provider.of<CartProvider>(context);
     final notificationCount = Provider.of<NotificationProvider>(context);
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.teal[50],
       appBar: AppBar(
         systemOverlayStyle: const SystemUiOverlayStyle(
           statusBarColor: Colors.transparent,
@@ -141,7 +141,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: Column(
         children: [
-          searchForm(),
+          // searchForm(),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.only(top: 5, left: 5, right: 5),

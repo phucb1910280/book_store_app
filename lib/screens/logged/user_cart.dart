@@ -133,7 +133,7 @@ class _CartLoggedState extends State<CartLogged> {
   }
 }
 
-class CustomeListTile extends StatelessWidget {
+class CustomeListTile extends StatefulWidget {
   final DocumentSnapshot documentSnapshot;
   final String docID;
   const CustomeListTile({
@@ -142,13 +142,18 @@ class CustomeListTile extends StatelessWidget {
     required this.docID,
   }) : super(key: key);
 
+  @override
+  State<CustomeListTile> createState() => _CustomeListTileState();
+}
+
+class _CustomeListTileState extends State<CustomeListTile> {
   Future deleteData() async {
     try {
       await FirebaseFirestore.instance
           .collection('userCartItems')
           .doc(FirebaseAuth.instance.currentUser!.email)
           .collection('cartItems')
-          .doc(docID)
+          .doc(widget.docID)
           .delete();
     } catch (e) {
       return false;
@@ -178,16 +183,16 @@ class CustomeListTile extends StatelessWidget {
                     child: GestureDetector(
                       onTap: () {
                         var currentBook = Book(
-                          id: documentSnapshot['id'],
-                          tenSach: documentSnapshot['tenSach'],
-                          biaSach: documentSnapshot['biaSach'],
-                          tacGia: documentSnapshot['tacGia'],
-                          giaBan: documentSnapshot['giaBan'],
-                          soTrang: documentSnapshot['soTrang'],
-                          loaiBia: documentSnapshot['loaiBia'],
-                          theLoai: documentSnapshot['theLoai'],
-                          thuocTheLoai: documentSnapshot['thuocTheLoai'],
-                          moTa: documentSnapshot['moTa'],
+                          id: widget.documentSnapshot['id'],
+                          tenSach: widget.documentSnapshot['tenSach'],
+                          biaSach: widget.documentSnapshot['biaSach'],
+                          tacGia: widget.documentSnapshot['tacGia'],
+                          giaBan: widget.documentSnapshot['giaBan'],
+                          soTrang: widget.documentSnapshot['soTrang'],
+                          loaiBia: widget.documentSnapshot['loaiBia'],
+                          theLoai: widget.documentSnapshot['theLoai'],
+                          thuocTheLoai: widget.documentSnapshot['thuocTheLoai'],
+                          moTa: widget.documentSnapshot['moTa'],
                         );
                         Navigator.push(
                             context,
@@ -195,7 +200,7 @@ class CustomeListTile extends StatelessWidget {
                                 page: BookDetailWidget(book: currentBook)));
                       },
                       child: Image.network(
-                        documentSnapshot['biaSach'],
+                        widget.documentSnapshot['biaSach'],
                         fit: BoxFit.contain,
                       ),
                     ),
@@ -212,16 +217,16 @@ class CustomeListTile extends StatelessWidget {
                     child: GestureDetector(
                       onTap: () {
                         var currentBook = Book(
-                          id: documentSnapshot['id'],
-                          tenSach: documentSnapshot['tenSach'],
-                          biaSach: documentSnapshot['biaSach'],
-                          tacGia: documentSnapshot['tacGia'],
-                          giaBan: documentSnapshot['giaBan'],
-                          soTrang: documentSnapshot['soTrang'],
-                          loaiBia: documentSnapshot['loaiBia'],
-                          theLoai: documentSnapshot['theLoai'],
-                          thuocTheLoai: documentSnapshot['thuocTheLoai'],
-                          moTa: documentSnapshot['moTa'],
+                          id: widget.documentSnapshot['id'],
+                          tenSach: widget.documentSnapshot['tenSach'],
+                          biaSach: widget.documentSnapshot['biaSach'],
+                          tacGia: widget.documentSnapshot['tacGia'],
+                          giaBan: widget.documentSnapshot['giaBan'],
+                          soTrang: widget.documentSnapshot['soTrang'],
+                          loaiBia: widget.documentSnapshot['loaiBia'],
+                          theLoai: widget.documentSnapshot['theLoai'],
+                          thuocTheLoai: widget.documentSnapshot['thuocTheLoai'],
+                          moTa: widget.documentSnapshot['moTa'],
                         );
                         Navigator.push(
                             context,
@@ -232,7 +237,7 @@ class CustomeListTile extends StatelessWidget {
                         children: [
                           Flexible(
                             child: Text(
-                              documentSnapshot['tenSach'],
+                              widget.documentSnapshot['tenSach'],
                               overflow: TextOverflow.ellipsis,
                               style: const TextStyle(
                                 fontSize: 20,
@@ -248,7 +253,7 @@ class CustomeListTile extends StatelessWidget {
                       Text(
                         NumberFormat.simpleCurrency(
                                 locale: 'vi-VN', decimalDigits: 0)
-                            .format(documentSnapshot['giaBan']),
+                            .format(widget.documentSnapshot['giaBan']),
                         style: TextStyle(
                           fontSize: 20,
                           color: Colors.cyan[800],
@@ -263,14 +268,15 @@ class CustomeListTile extends StatelessWidget {
                       children: [
                         IconButton(
                           onPressed: () async {
-                            if (documentSnapshot['soLuong'] > 1) {
+                            if (widget.documentSnapshot['soLuong'] > 1) {
                               var document = FirebaseFirestore.instance
                                   .collection('userCartItems')
                                   .doc(FirebaseAuth.instance.currentUser!.email)
                                   .collection('cartItems')
-                                  .doc(docID);
-                              document.update({
-                                'soLuong': documentSnapshot['soLuong'] - 1,
+                                  .doc(widget.docID);
+                              await document.update({
+                                'soLuong':
+                                    widget.documentSnapshot['soLuong'] - 1,
                               });
                               cartCounter.updateCartCount();
                               cartCounter.updateCartTotal();
@@ -291,7 +297,7 @@ class CustomeListTile extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                documentSnapshot['soLuong'].toString(),
+                                widget.documentSnapshot['soLuong'].toString(),
                                 style: const TextStyle(
                                     fontSize: 18, fontWeight: FontWeight.bold),
                               ),
@@ -302,15 +308,15 @@ class CustomeListTile extends StatelessWidget {
                           width: 5,
                         ),
                         IconButton(
-                          onPressed: () {
-                            if (documentSnapshot['soLuong'] < 10) {
-                              int t = documentSnapshot['soLuong'] + 1;
+                          onPressed: () async {
+                            if (widget.documentSnapshot['soLuong'] < 10) {
+                              int t = widget.documentSnapshot['soLuong'] + 1;
                               var document = FirebaseFirestore.instance
                                   .collection('userCartItems')
                                   .doc(FirebaseAuth.instance.currentUser!.email)
                                   .collection('cartItems')
-                                  .doc(docID);
-                              document.update({
+                                  .doc(widget.docID);
+                              await document.update({
                                 'soLuong': t,
                               });
                               cartCounter.updateCartCount();

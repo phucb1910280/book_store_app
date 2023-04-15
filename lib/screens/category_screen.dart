@@ -7,7 +7,7 @@ import '../models/cart_provider.dart';
 import '../models/notification_provider.dart';
 import '../pagesRoute/cart_screen_controller.dart';
 import '../pagesRoute/pape_route_transition.dart';
-import 'logged/user_notification_screen.dart';
+import 'logged/user_notification.dart';
 
 class CategoryScreen extends StatefulWidget {
   const CategoryScreen({super.key});

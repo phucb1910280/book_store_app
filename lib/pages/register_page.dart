@@ -285,14 +285,14 @@ class _RegisterPageState extends State<RegisterPage> {
                         borderSide: const BorderSide(
                           color: Colors.white,
                         ),
-                        borderRadius: BorderRadius.circular(25),
+                        borderRadius: BorderRadius.circular(90),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                           width: 2,
                           color: Colors.cyan[800]!,
                         ),
-                        borderRadius: BorderRadius.circular(25),
+                        borderRadius: BorderRadius.circular(90),
                       ),
                       hintText: 'Họ tên',
                       fillColor: Colors.grey[100],
@@ -314,14 +314,14 @@ class _RegisterPageState extends State<RegisterPage> {
                         borderSide: const BorderSide(
                           color: Colors.white,
                         ),
-                        borderRadius: BorderRadius.circular(25),
+                        borderRadius: BorderRadius.circular(90),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                           width: 2,
                           color: Colors.cyan[800]!,
                         ),
-                        borderRadius: BorderRadius.circular(25),
+                        borderRadius: BorderRadius.circular(90),
                       ),
                       hintText: 'Email',
                       fillColor: Colors.grey[100],
@@ -347,14 +347,14 @@ class _RegisterPageState extends State<RegisterPage> {
                             borderSide: const BorderSide(
                               color: Colors.white,
                             ),
-                            borderRadius: BorderRadius.circular(25),
+                            borderRadius: BorderRadius.circular(90),
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                               width: 2,
                               color: Colors.cyan[800]!,
                             ),
-                            borderRadius: BorderRadius.circular(25),
+                            borderRadius: BorderRadius.circular(90),
                           ),
                           hintText: 'Mật khẩu',
                           fillColor: Colors.grey[100],
@@ -401,14 +401,14 @@ class _RegisterPageState extends State<RegisterPage> {
                         borderSide: const BorderSide(
                           color: Colors.white,
                         ),
-                        borderRadius: BorderRadius.circular(25),
+                        borderRadius: BorderRadius.circular(90),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                           width: 2,
                           color: Colors.cyan[800]!,
                         ),
-                        borderRadius: BorderRadius.circular(25),
+                        borderRadius: BorderRadius.circular(90),
                       ),
                       hintText: 'Nhập lại mật khẩu',
                       fillColor: Colors.grey[100],
@@ -432,7 +432,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       padding: const EdgeInsets.all(15),
                       decoration: BoxDecoration(
                           color: Colors.cyan[800],
-                          borderRadius: BorderRadius.circular(25)),
+                          borderRadius: BorderRadius.circular(90)),
                       child: const Center(
                         child: Text(
                           'Đăng ký',

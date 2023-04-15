@@ -9,18 +9,6 @@ class CartProvider extends ChangeNotifier {
   getCartCount() => _cartCount;
   getCartTotal() => _cartTotal;
 
-  // var userCollectionRef = FirebaseFirestore.instance
-  //     .collection('user')
-  //     .doc(FirebaseAuth.instance.currentUser!.email);
-  // var cartCollectionRef = FirebaseFirestore.instance
-  //     .collection('userCartItems')
-  //     .doc(FirebaseAuth.instance.currentUser!.email)
-  //     .collection('cartItems');
-  // var orderCollectionRef = FirebaseFirestore.instance
-  //     .collection('userOrder')
-  //     .doc(FirebaseAuth.instance.currentUser!.email)
-  //     .collection('orderItems');
-
   Future<String> addOrderCollection(String hinhThucThanhToan) async {
     if (FirebaseAuth.instance.currentUser != null) {
       var curDay = DateTime.now();
@@ -120,8 +108,7 @@ class CartProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> updateCartCount() async {
-    // SharedPreferences prefs = await SharedPreferences.getInstance();
+  void updateCartCount() async {
     if (FirebaseAuth.instance.currentUser != null) {
       var cartCollectionRef = FirebaseFirestore.instance
           .collection('userCartItems')
@@ -130,9 +117,11 @@ class CartProvider extends ChangeNotifier {
       QuerySnapshot querySnapshot = await cartCollectionRef.get();
       if (querySnapshot.docs.isNotEmpty) {
         _cartCount = 0;
+        var t = 0;
         for (var i = 0; i < querySnapshot.docs.length; i++) {
-          _cartCount += querySnapshot.docs[i]['soLuong'] as int;
+          t += querySnapshot.docs[i]['soLuong'] as int;
         }
+        _cartCount = t;
         notifyListeners();
       } else {
         _cartCount = 0;
@@ -141,7 +130,7 @@ class CartProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> updateCartTotal() async {
+  void updateCartTotal() async {
     // SharedPreferences prefs = await SharedPreferences.getInstance();
     if (FirebaseAuth.instance.currentUser != null) {
       var cartCollectionRef = FirebaseFirestore.instance
@@ -151,13 +140,15 @@ class CartProvider extends ChangeNotifier {
       QuerySnapshot querySnapshot = await cartCollectionRef.get();
       if (querySnapshot.docs.isNotEmpty) {
         _cartTotal = 0;
+        int sum = 0;
         int sl;
         int giaban;
         for (var i = 0; i < querySnapshot.docs.length; i++) {
           sl = querySnapshot.docs[i]['soLuong'];
           giaban = querySnapshot.docs[i]['giaBan'];
-          _cartTotal += sl * giaban;
+          sum += sl * giaban;
         }
+        _cartTotal = sum;
         notifyListeners();
       } else {
         _cartTotal = 0;

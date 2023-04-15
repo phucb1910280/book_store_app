@@ -110,14 +110,14 @@ class _LoginPageState extends State<LoginPage> {
                         borderSide: const BorderSide(
                           color: Colors.white,
                         ),
-                        borderRadius: BorderRadius.circular(25),
+                        borderRadius: BorderRadius.circular(90),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                           width: 2,
                           color: Colors.cyan[800]!,
                         ),
-                        borderRadius: BorderRadius.circular(25),
+                        borderRadius: BorderRadius.circular(90),
                       ),
                       hintText: 'Email',
                       fillColor: Colors.grey[100],
@@ -143,14 +143,14 @@ class _LoginPageState extends State<LoginPage> {
                             borderSide: const BorderSide(
                               color: Colors.white,
                             ),
-                            borderRadius: BorderRadius.circular(25),
+                            borderRadius: BorderRadius.circular(90),
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(
                               width: 2,
                               color: Colors.cyan[800]!,
                             ),
-                            borderRadius: BorderRadius.circular(25),
+                            borderRadius: BorderRadius.circular(90),
                           ),
                           hintText: 'Mật khẩu',
                           fillColor: Colors.grey[100],
@@ -194,7 +194,7 @@ class _LoginPageState extends State<LoginPage> {
                       padding: const EdgeInsets.all(15),
                       decoration: BoxDecoration(
                           color: Colors.cyan[800],
-                          borderRadius: BorderRadius.circular(25)),
+                          borderRadius: BorderRadius.circular(90)),
                       child: const Center(
                         child: Text(
                           'Đăng nhập',

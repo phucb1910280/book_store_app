@@ -33,7 +33,6 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
     var records = await FirebaseFirestore.instance
         .collection('books')
         .where('theLoai', isEqualTo: widget.book!.theLoai.toString())
-        // .where('id', isNotEqualTo: widget.book!.id.toString())
         .get();
     mapRecords(records);
   }
@@ -575,7 +574,13 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
                     height: 300,
                     width: 150,
                     child: GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => BookDetailWidget(
+                                      book: suggestBook[index])));
+                        },
                         child: ListOfBookWidget(book: suggestBook[index])),
                   );
                 },

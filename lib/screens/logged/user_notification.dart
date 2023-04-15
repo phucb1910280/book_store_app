@@ -47,7 +47,10 @@ class _UserNotificationScreenState extends State<UserNotificationScreen> {
                   child: ListTile(
                     isThreeLine: true,
                     onTap: () {
-                      notificationCount.markRead(snapshot.data!.docs[index].id);
+                      snapshot.data!.docs[index]['isRead'] == 'unread'
+                          ? notificationCount
+                              .markRead(snapshot.data!.docs[index].id)
+                          : null;
                     },
                     title: Text(
                       snapshot.data!.docs[index]['title'],

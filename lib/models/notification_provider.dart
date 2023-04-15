@@ -7,7 +7,7 @@ class NotificationProvider extends ChangeNotifier {
 
   getNotificationCount() => _notificationsCount;
 
-  loadNotificationCounnt() async {
+  loadNotificationCount() async {
     try {
       final QuerySnapshot qSnap = await FirebaseFirestore.instance
           .collection('userNotification')

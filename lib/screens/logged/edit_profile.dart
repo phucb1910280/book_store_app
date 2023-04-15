@@ -30,15 +30,15 @@ class _EditProfileState extends State<EditProfile> {
   }
 
   bool checkUserName(String name) {
-    if (name.length < 5) {
+    if (name.length < 5 || name.contains('"') || name.contains("'")) {
       showDialog(
         context: context,
         builder: (context) {
           return AlertDialog(
             shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(20))),
-            content: const Text(
-              'Vui lòng nhập đầy đủ họ tên!',
+            title: const Text(
+              'Họ tên không hợp lệ',
               style: TextStyle(
                 fontSize: 20,
               ),
@@ -71,8 +71,8 @@ class _EditProfileState extends State<EditProfile> {
           return AlertDialog(
             shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(20))),
-            content: const Text(
-              'Vui lòng nhập số điện thoại hợp lệ!',
+            title: const Text(
+              'Số ĐT không hợp lệ!',
               style: TextStyle(
                 fontSize: 20,
               ),
@@ -98,14 +98,17 @@ class _EditProfileState extends State<EditProfile> {
   }
 
   bool checkUserAddress(String address) {
-    if (address.length < 10) {
+    if (address.length < 10 ||
+        address.contains('@') ||
+        address.contains('"') ||
+        address.contains("'")) {
       showDialog(
         context: context,
         builder: (context) {
           return AlertDialog(
             shape: const RoundedRectangleBorder(
                 borderRadius: BorderRadius.all(Radius.circular(20))),
-            content: const Text(
+            title: const Text(
               'Vui lòng địa chỉ chi tiết!',
               style: TextStyle(
                 fontSize: 20,

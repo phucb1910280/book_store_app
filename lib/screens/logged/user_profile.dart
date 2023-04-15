@@ -3,13 +3,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_app/models/user.dart';
 import 'package:simple_app/screens/logged/about_me.dart';
-import 'package:simple_app/screens/logged/profile_info.dart';
-import 'package:simple_app/screens/logged/user_notification_screen.dart';
+import 'package:simple_app/screens/logged/user_profile_info.dart';
+import 'package:simple_app/screens/logged/user_notification.dart';
 
 import '../../pages/home_page.dart';
 import '../../pagesRoute/cart_screen_controller.dart';
 import 'edit_profile.dart';
-import 'recent_order.dart';
+import 'user_recent_order.dart';
 
 class ProfileLogged extends StatefulWidget {
   const ProfileLogged({super.key});
