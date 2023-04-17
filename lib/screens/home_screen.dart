@@ -60,6 +60,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final cartCounter = Provider.of<CartProvider>(context);
     final notificationCount = Provider.of<NotificationProvider>(context);
+    var shortestSide = MediaQuery.of(context).size.shortestSide;
+    final bool useMobileLayout = shortestSide < 600;
     return Scaffold(
       backgroundColor: Colors.teal[50],
       appBar: AppBar(
@@ -146,8 +148,8 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Padding(
               padding: const EdgeInsets.only(top: 5, left: 5, right: 5),
               child: GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: useMobileLayout ? 2 : 3,
                   crossAxisSpacing: 1.0,
                   mainAxisSpacing: 1.0,
                   childAspectRatio: 2 / 2.5,

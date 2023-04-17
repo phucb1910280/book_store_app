@@ -195,6 +195,9 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
   @override
   Widget build(BuildContext context) {
     final cartCounter = Provider.of<CartProvider>(context);
+    var shortestSide = MediaQuery.of(context).size.shortestSide;
+    final bool useMobileLayout = shortestSide < 600;
+    var s = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.white,
       body: Padding(
@@ -204,7 +207,7 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
           shrinkWrap: false,
           children: [
             SizedBox(
-              height: 300,
+              height: s * 0.8,
               width: double.infinity,
               child: Stack(
                 children: [
@@ -563,7 +566,7 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
               ),
             ),
             SizedBox(
-              height: 200,
+              height: useMobileLayout ? s * 0.6 : s * 0.45,
               child: ListView.builder(
                 shrinkWrap: true,
                 itemCount: suggestBook.isEmpty ? 0 : suggestBook.length,
@@ -571,8 +574,8 @@ class _BookDetailWidgetState extends State<BookDetailWidget> {
                 physics: const ClampingScrollPhysics(),
                 itemBuilder: (context, index) {
                   return SizedBox(
-                    height: 300,
-                    width: 150,
+                    height: useMobileLayout ? s * 0.5 : s * 0.4,
+                    width: useMobileLayout ? s * 0.45 : s * 0.3,
                     child: GestureDetector(
                         onTap: () {
                           Navigator.push(

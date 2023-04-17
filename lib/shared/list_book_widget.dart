@@ -9,8 +9,9 @@ class ListOfBookWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var s = MediaQuery.of(context).size.width;
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: EdgeInsets.all(s * 0.01),
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white,
@@ -18,9 +19,6 @@ class ListOfBookWidget extends StatelessWidget {
         ),
         child: Column(
           children: [
-            // const SizedBox(
-            //   height: 10,
-            // ),
             Expanded(
               flex: 3,
               child: Image.network(
@@ -31,7 +29,7 @@ class ListOfBookWidget extends StatelessWidget {
             Expanded(
               flex: 2,
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(s * 0.018),
                 child: Column(
                   children: [
                     Row(
@@ -41,14 +39,14 @@ class ListOfBookWidget extends StatelessWidget {
                             book!.tenSach.toString(),
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
+                            style: const TextStyle(
+                              fontSize: 18,
+                            ),
                           ),
                         ),
                       ],
                     ),
                     const Expanded(child: SizedBox()),
-                    // const SizedBox(
-                    //   height: 15,
-                    // ),
                     Row(
                       children: [
                         Text(
@@ -57,12 +55,13 @@ class ListOfBookWidget extends StatelessWidget {
                               .format(book!.giaBan),
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 17,
+                            fontSize: 18,
                             color: Colors.cyan[800],
                           ),
                         ),
                       ],
-                    )
+                    ),
+                    const Expanded(child: SizedBox()),
                   ],
                 ),
               ),
