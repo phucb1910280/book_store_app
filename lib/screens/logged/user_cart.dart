@@ -23,7 +23,7 @@ class _CartLoggedState extends State<CartLogged> {
   Widget build(BuildContext context) {
     final cartCounter = Provider.of<CartProvider>(context);
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.teal[50],
       appBar: AppBar(
         title: Text(
           'Giỏ hàng (${cartCounter.getCartCount()})',

@@ -206,8 +206,22 @@ class _CartConfirmState extends State<CartConfirm> {
             child: customeText('Hình thức thanh toán:', false,
                 size: 29, isCyanColor: true),
           ),
-          paymentOption('Thanh toán khi nhận hàng', 1),
-          paymentOption('Thanh toán qua thẻ ATM', 2),
+          GestureDetector(
+              onTap: () {
+                setState(() {
+                  payOption = 'Thanh toán khi nhận hàng';
+                  choice = 1;
+                });
+              },
+              child: paymentOption('Thanh toán khi nhận hàng', 1)),
+          // GestureDetector(
+          //     onTap: () {
+          //       setState(() {
+          //         payOption = 'Thanh toán qua thẻ ATM';
+          //         choice = 2;
+          //       });
+          //     },
+          //     child: paymentOption('Thanh toán qua thẻ ATM', 2)),
           // const Expanded(child: SizedBox()),
         ],
       ),

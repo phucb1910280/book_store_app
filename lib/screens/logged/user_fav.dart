@@ -26,7 +26,7 @@ class _FavoriteLoggedState extends State<FavoriteLogged> {
     final cartCounter = Provider.of<CartProvider>(context);
     final notificationCount = Provider.of<NotificationProvider>(context);
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.teal[50],
       appBar: AppBar(
         title: const Text(
           'Danh sách yêu thích',

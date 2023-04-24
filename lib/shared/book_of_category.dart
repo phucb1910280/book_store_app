@@ -63,8 +63,10 @@ class _BookOfCategoryState extends State<BookOfCategory> {
   @override
   Widget build(BuildContext context) {
     final cartCounter = Provider.of<CartProvider>(context);
+    var shortestSide = MediaQuery.of(context).size.shortestSide;
+    final bool useMobileLayout = shortestSide < 600;
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.teal[50],
       appBar: AppBar(
         elevation: 0,
         title: Text(
@@ -110,11 +112,11 @@ class _BookOfCategoryState extends State<BookOfCategory> {
             child: Padding(
               padding: const EdgeInsets.only(top: 10, left: 5, right: 5),
               child: GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: useMobileLayout ? 2 : 3,
                   crossAxisSpacing: 1.0,
                   mainAxisSpacing: 1.0,
-                  childAspectRatio: 2 / 3,
+                  childAspectRatio: 2 / 2.5,
                 ),
                 itemCount: bookList.length,
                 itemBuilder: ((context, index) {

@@ -175,14 +175,14 @@ class _EditProfileState extends State<EditProfile> {
                     borderSide: const BorderSide(
                       color: Colors.white,
                     ),
-                    borderRadius: BorderRadius.circular(25),
+                    borderRadius: BorderRadius.circular(90),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderSide: const BorderSide(
                       width: 2,
                       color: Colors.black,
                     ),
-                    borderRadius: BorderRadius.circular(25),
+                    borderRadius: BorderRadius.circular(90),
                   ),
                   hintText: 'Họ tên',
                   fillColor: Colors.grey[100],
@@ -205,14 +205,14 @@ class _EditProfileState extends State<EditProfile> {
                     borderSide: const BorderSide(
                       color: Colors.white,
                     ),
-                    borderRadius: BorderRadius.circular(25),
+                    borderRadius: BorderRadius.circular(90),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderSide: const BorderSide(
                       width: 2,
                       color: Colors.black,
                     ),
-                    borderRadius: BorderRadius.circular(25),
+                    borderRadius: BorderRadius.circular(90),
                   ),
                   hintText: 'Số điện thoại',
                   fillColor: Colors.grey[100],
@@ -234,14 +234,14 @@ class _EditProfileState extends State<EditProfile> {
                     borderSide: const BorderSide(
                       color: Colors.white,
                     ),
-                    borderRadius: BorderRadius.circular(25),
+                    borderRadius: BorderRadius.circular(90),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderSide: const BorderSide(
                       width: 2,
                       color: Colors.black,
                     ),
-                    borderRadius: BorderRadius.circular(25),
+                    borderRadius: BorderRadius.circular(90),
                   ),
                   hintText: 'Địa chỉ',
                   fillColor: Colors.grey[100],
@@ -290,7 +290,7 @@ class _EditProfileState extends State<EditProfile> {
                             padding: const EdgeInsets.all(15),
                             decoration: BoxDecoration(
                                 color: Colors.cyan[800],
-                                borderRadius: BorderRadius.circular(25)),
+                                borderRadius: BorderRadius.circular(90)),
                             child: const Center(
                               child: Text(
                                 'Xong',
@@ -323,7 +323,7 @@ class _EditProfileState extends State<EditProfile> {
                                 border: Border.all(
                                     color: Colors.cyan[800]!, width: 2),
                                 color: Colors.white,
-                                borderRadius: BorderRadius.circular(25)),
+                                borderRadius: BorderRadius.circular(90)),
                             child: Center(
                               child: Text(
                                 'Hủy',
