@@ -1,6 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -19,6 +18,18 @@ class OrderDetail extends StatefulWidget {
 }
 
 class _OrderDetailState extends State<OrderDetail> {
+  String ttdh = '';
+  late bool ttdhThayDoi;
+
+  @override
+  void initState() {
+    super.initState();
+    ttdh = widget.documentSnapshot['trangThaiDonHang'];
+    widget.documentSnapshot['trangThaiDonHang'] == 'Đã tiếp nhận'
+        ? ttdhThayDoi = false
+        : ttdhThayDoi = true;
+  }
+
   Widget customeText(String text,
       {double? size, bool? isBold, bool? isCyanColor}) {
     return Text(
@@ -74,8 +85,7 @@ class _OrderDetailState extends State<OrderDetail> {
                       const Expanded(
                         child: SizedBox(),
                       ),
-                      customeText(widget.documentSnapshot['trangThaiDonHang'],
-                          isBold: false, isCyanColor: true),
+                      customeText(ttdh, isBold: false, isCyanColor: true),
                     ],
                   ),
                   SizedBox(
@@ -175,6 +185,57 @@ class _OrderDetailState extends State<OrderDetail> {
                           size: 25),
                     ],
                   ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      foregroundColor: Colors.black,
+                      // backgroundColor: Colors.white,
+                    ),
+                    onPressed: () async {
+                      widget.documentSnapshot['trangThaiDonHang'] ==
+                              'Đã tiếp nhận'
+                          ? await FirebaseFirestore.instance
+                              .collection('Orders')
+                              .doc(widget.documentSnapshot.id)
+                              .update({
+                              'trangThaiDonHang': 'Đã hủy',
+                            }).then((value) => {
+                                    setState(() {
+                                      ttdh = 'Đã hủy';
+                                      ttdhThayDoi = true;
+                                    })
+                                  })
+                          : null;
+                    },
+                    child: Container(
+                      height: 50,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(50),
+                        border: Border.all(
+                          color: ttdhThayDoi ? Colors.grey : Colors.cyan[800]!,
+                          width: 2,
+                          style: BorderStyle.solid,
+                          strokeAlign: BorderSide.strokeAlignCenter,
+                        ),
+                      ),
+                      child: Row(
+                        children: [
+                          const Expanded(child: SizedBox()),
+                          Text(
+                            'Hủy đơn',
+                            style: TextStyle(
+                              fontSize: 20,
+                              color:
+                                  ttdhThayDoi ? Colors.grey : Colors.cyan[800]!,
+                            ),
+                          ),
+                          const Expanded(child: SizedBox()),
+                        ],
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -201,11 +262,9 @@ class BookOrdered extends StatelessWidget {
     return SizedBox(
       child: StreamBuilder(
         stream: FirebaseFirestore.instance
-            .collection('userOrder')
-            .doc(FirebaseAuth.instance.currentUser!.email)
-            .collection('orderItems')
+            .collection('Orders')
             .doc(docId)
-            .collection('cacSanpham')
+            .collection('orderItems')
             .snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasData) {

@@ -26,28 +26,32 @@ class CartProvider extends ChangeNotifier {
         var userCollectionRef = FirebaseFirestore.instance
             .collection('user')
             .doc(FirebaseAuth.instance.currentUser!.email);
-        var documentSnapshot = await userCollectionRef.get();
-        var orderCollectionRef = FirebaseFirestore.instance
-            .collection('userOrder')
-            .doc(FirebaseAuth.instance.currentUser!.email)
-            .collection('orderItems');
-        var document = await orderCollectionRef.add({
+        var userDoc = await userCollectionRef.get();
+        var orderCollectionRef =
+            FirebaseFirestore.instance.collection('Orders').doc(id);
+        int t = 0;
+        for (var i = 0; i < querySnapshot.docs.length; i++) {
+          t += querySnapshot.docs[i]['soLuong'] as int;
+        }
+        await orderCollectionRef.set({
           'id': id,
           'ngayDat': orderDay,
           'ngayGiaoDuKien': receiveDay,
           //
-          'fullName': documentSnapshot['fullName'],
-          'phoneNumber': documentSnapshot['phoneNumber'],
-          'address': documentSnapshot['address'],
+          'email': FirebaseAuth.instance.currentUser!.email,
+          'fullName': userDoc['fullName'],
+          'phoneNumber': userDoc['phoneNumber'],
+          'address': userDoc['address'],
           //
           'tongHoaDon': getCartTotal(),
           'hinhThucThanhToan': hinhThucThanhToan,
           //
           'trangThaiDonHang': 'Đã tiếp nhận',
+          'soSachBan': t,
         });
         for (var i = 0; i < querySnapshot.docs.length; i++) {
           addOrderSubCollection(
-              document.id,
+              id,
               querySnapshot.docs[i]['id'],
               querySnapshot.docs[i]['biaSach'],
               querySnapshot.docs[i]['tenSach'],
@@ -87,12 +91,9 @@ class CartProvider extends ChangeNotifier {
     String moTa,
   ) async {
     if (FirebaseAuth.instance.currentUser != null) {
-      var orderCollectionRef = FirebaseFirestore.instance
-          .collection('userOrder')
-          .doc(FirebaseAuth.instance.currentUser!.email)
-          .collection('orderItems');
+      var orderCollectionRef = FirebaseFirestore.instance.collection('Orders');
       var subCollection = orderCollectionRef;
-      subCollection.doc(docId).collection('cacSanpham').add({
+      subCollection.doc(docId).collection('orderItems').add({
         'id': id,
         'biaSach': biaSach,
         'tenSach': tenSach,

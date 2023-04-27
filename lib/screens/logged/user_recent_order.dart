@@ -30,10 +30,9 @@ class _RecentOrderState extends State<RecentOrder> {
       ),
       body: StreamBuilder(
         stream: FirebaseFirestore.instance
-            .collection('userOrder')
-            .doc(FirebaseAuth.instance.currentUser!.email)
-            .collection('orderItems')
-            .orderBy('id', descending: true)
+            .collection('Orders')
+            .where('email',
+                isEqualTo: FirebaseAuth.instance.currentUser!.email.toString())
             .snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasData) {
@@ -60,13 +59,14 @@ class _RecentOrderState extends State<RecentOrder> {
                     child: SizedBox(
                       height: 80,
                       child: ListTile(
+                        isThreeLine: true,
                         title: Text(
                           'Mã đơn: ${documentSnapshot['id']}',
                           style:
                               TextStyle(color: Colors.cyan[800], fontSize: 20),
                         ),
                         subtitle: Text(
-                          'Ngày đặt: ${documentSnapshot['ngayDat']}',
+                          '${documentSnapshot['trangThaiDonHang']}\nNgày đặt: ${documentSnapshot['ngayDat']}',
                           style: const TextStyle(fontSize: 18),
                         ),
                         trailing: Icon(

@@ -93,8 +93,10 @@ class _HomeScreenState extends State<HomeScreen> {
             textColor: Colors.pink,
             child: IconButton(
                 onPressed: () {
-                  Navigator.push(context,
-                      SlideUpRoute(page: const UserNotificationScreen()));
+                  FirebaseAuth.instance.currentUser != null
+                      ? Navigator.push(context,
+                          SlideUpRoute(page: const UserNotificationScreen()))
+                      : null;
                 },
                 icon: notificationCount.getNotificationCount() != 0
                     ? const Icon(

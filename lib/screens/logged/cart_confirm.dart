@@ -92,6 +92,8 @@ class _CartConfirmState extends State<CartConfirm> {
     var currentUser = auth.currentUser;
     CollectionReference collectionRef =
         FirebaseFirestore.instance.collection('userNotification');
+    CollectionReference collectionRef2 =
+        FirebaseFirestore.instance.collection('adminNotifications');
     return collectionRef
         .doc(currentUser!.email)
         .collection('notifications')
@@ -104,7 +106,16 @@ class _CartConfirmState extends State<CartConfirm> {
       'dateTime':
           '${currentDay.hour}:${currentDay.minute}, ${currentDay.day}/${currentDay.month}',
       'isWelcomeNotification': 'no',
-    });
+    }).then((value) => {
+              collectionRef2.doc(notificationID).set({
+                'id': notificationID,
+                'title': 'Có đơn hàng mới',
+                'content': 'Cập nhật thông tin ở phần Đơn hàng',
+                'isRead': 'unread',
+                'dateTime':
+                    '${currentDay.hour}:${currentDay.minute}, ${currentDay.day}/${currentDay.month}',
+              })
+            });
   }
 
   Widget customeText(String content, bool isBold,

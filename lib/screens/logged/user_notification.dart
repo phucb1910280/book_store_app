@@ -34,7 +34,7 @@ class _UserNotificationScreenState extends State<UserNotificationScreen> {
             .collection('userNotification')
             .doc(FirebaseAuth.instance.currentUser!.email)
             .collection('notifications')
-            .orderBy('id', descending: false)
+            .orderBy('id', descending: true)
             .snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasData) {

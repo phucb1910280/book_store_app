@@ -116,6 +116,8 @@ class _RegisterPageState extends State<RegisterPage> {
     var currentUser = auth.currentUser;
     CollectionReference collectionRef =
         FirebaseFirestore.instance.collection('userNotification');
+    CollectionReference collectionRef2 =
+        FirebaseFirestore.instance.collection('adminNotifications');
     return collectionRef
         .doc(currentUser!.email)
         .collection('notifications')
@@ -128,7 +130,16 @@ class _RegisterPageState extends State<RegisterPage> {
       'dateTime':
           '${currentDay.hour}:${currentDay.minute}, ${currentDay.day}/${currentDay.month}',
       'isWelcomeNotification': 'yes',
-    });
+    }).then((value) => {
+              collectionRef2.doc(notificationID).set({
+                'id': notificationID,
+                'title': 'Vừa có người dùng mới',
+                'content': 'Xem thông tin ở phần Quản lý người dùng',
+                'isRead': 'unread',
+                'dateTime':
+                    '${currentDay.hour}:${currentDay.minute}, ${currentDay.day}/${currentDay.month}',
+              })
+            });
   }
 
   bool checkName() {
